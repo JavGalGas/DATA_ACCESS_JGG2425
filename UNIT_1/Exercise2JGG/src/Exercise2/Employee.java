@@ -1,14 +1,16 @@
 package Exercise2;
 
 public class Employee extends Person{
-    private double _sueldoBruto;
+    private double grossSalary;
 
-    public double SueldoBruto {
-        get => _sueldoBruto;
-        set {
-            if (value < 0)
-                throw new ArgumentException(SUELDO_NO_VALIDO);
-            sueldoBruto = value;
-        }
+    public double getGrossSalary() {
+        return grossSalary;
     }
+
+    public void setGrossSalary(double grossSalary) throws IllegalArgumentException {
+        if (grossSalary < 0)
+            throw new IllegalArgumentException(SUELDO_NO_VALIDO);
+        this.grossSalary = grossSalary;
+    }
+
 }

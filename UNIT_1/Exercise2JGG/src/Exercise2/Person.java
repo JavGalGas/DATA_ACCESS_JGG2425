@@ -1,20 +1,35 @@
 package Exercise2;
 
-public class Person {
-    //
-    private string _nombre;
-    private DateTime _fechaNacimiento;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.Period;
 
-    public string Nombre { get => _nombre; set => _nombre = value; }
-    public DateTime FechaNacimiento {
-        get => _fechaNacimiento;
-        set {
-            if (value > DateTime.Today)
-                throw new ArgumentException(FECHA_NACIMIENTO_NO_VALIDA);
-            _fechaNacimiento= value;
-        }
+public class Person {
+
+
+    //
+    private String name;
+    private LocalDate birthDate;
+
+    public String getName() {
+        return name;
     }
 
-    public int Edad  => (DateTime.Today - FechaNacimiento).Days / 365);
-}
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public LocalDate getBirthDate() {
+        return birthDate;
+    }
+
+    public void setBirthDate(LocalDate birthDate) throws IllegalArgumentException {
+        if (birthDate.isAfter(LocalDate.now()))
+            throw new IllegalArgumentException(FECHA_NACIMIENTO_NO_VALIDA);
+        this.birthDate = birthDate;
+    }
+
+    public int getAge(){
+        return Period.between(birthDate, LocalDate.now()).getYears();
+    }
 }
