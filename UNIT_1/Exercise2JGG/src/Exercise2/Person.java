@@ -1,12 +1,11 @@
 package Exercise2;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.Period;
 
 public class Person {
 
-
+    final String NOT_VALID_BIRTH_DATE = "Birth date is not valid.";
     //
     private String name;
     private LocalDate birthDate;
@@ -25,7 +24,7 @@ public class Person {
 
     public void setBirthDate(LocalDate birthDate) throws IllegalArgumentException {
         if (birthDate.isAfter(LocalDate.now()))
-            throw new IllegalArgumentException(FECHA_NACIMIENTO_NO_VALIDA);
+            throw new IllegalArgumentException(NOT_VALID_BIRTH_DATE);
         this.birthDate = birthDate;
     }
 

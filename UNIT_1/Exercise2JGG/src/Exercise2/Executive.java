@@ -19,11 +19,19 @@ public class Executive extends Employee{
         }
         return null;
     }
+
     public void addEmployee(Employee employee) throws IllegalArgumentException{
         if (employee == null || employee.getName() == null || employee.getName().isEmpty()) {
             throw new IllegalArgumentException("Employee or employee name cannot be null or empty.");
         }
         supervises.add(employee);
+    }
+
+    public void deleteEmployee(Employee employee) throws IllegalArgumentException{
+        if (employee == null || employee.getName() == null || employee.getName().isEmpty()) {
+            throw new IllegalArgumentException("Employee or employee name cannot be null or empty.");
+        }
+        supervises.removeIf(emply -> emply.equals(employee));
     }
 
     public String getCategory() {

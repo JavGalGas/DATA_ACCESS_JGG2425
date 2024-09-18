@@ -1,12 +1,25 @@
 package Exercise2;
 
+import java.util.HashSet;
+
 public class Company {
     //
-    private string _nombre;
-    private Set<Empleado> _plantilla = new Set<Empleado>();
-    private Set<Cliente> _carteraDeClientes = new Set<Cliente>();
+    private String name;
+    private HashSet<Employee> template = new HashSet<>();
+    private HashSet<Client> clientPortfolio = new HashSet<>();
 
-    public string Nombre { get => _nombre; set => _nombre = value; }
-    public int ClientesTotales => _carteraDeClientes.Count;
-    public int EmpleadosTotales => _plantilla.Count;
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public int getTotalClients(){
+        return clientPortfolio.size();
+    }
+    public int getTotalEmployees(){
+        return template.size();
+    }
 }

@@ -1,6 +1,7 @@
 package Exercise2;
 
 public class Employee extends Person{
+    final String NOT_VALID_SALARY = "Salary is not valid.";
     private double grossSalary;
 
     public double getGrossSalary() {
@@ -9,7 +10,7 @@ public class Employee extends Person{
 
     public void setGrossSalary(double grossSalary) throws IllegalArgumentException {
         if (grossSalary < 0)
-            throw new IllegalArgumentException(SUELDO_NO_VALIDO);
+            throw new IllegalArgumentException(NOT_VALID_SALARY);
         this.grossSalary = grossSalary;
     }
 
