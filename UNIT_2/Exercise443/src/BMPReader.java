@@ -33,6 +33,7 @@ public class BMPReader {
 
     BMPReader(String filePath) {
         this.filePath = filePath;
+
     }
 
     public int getFileSize() {
@@ -87,7 +88,7 @@ public class BMPReader {
         FileInputStream bmpFile = new FileInputStream("");
         byte[] header = new byte[56];
         try {
-            bmpFile = new FileInputStream(filePath);
+            bmpFile = new FileInputStream("C:\\Users\\javgalgas\\Desktop\\DATA_ACCESS_JGG2425\\UNIT_2\\" + filePath);
             bmpFile.read(header);
             if (isBMP(header))
             {
