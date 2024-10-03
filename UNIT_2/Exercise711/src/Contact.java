@@ -1,17 +1,17 @@
 import java.io.Serializable;
 
 public class Contact implements Serializable {
-    private String name;
-    private String surname;
-    private String e_mail;
-    private String phone_number;
-    private String description;
+    private final String name;
+    private final String surname;
+    private final String email;
+    private final String phoneNumber;
+    private final String description;
 
     public Contact (String name, String surname, String e_mail, String phone_number, String description) {
         this.name = name;
         this.surname = surname;
-        this.e_mail = e_mail;
-        this.phone_number = phone_number;
+        this.email = e_mail;
+        this.phoneNumber = phone_number;
         this.description = description;
     }
 
@@ -23,15 +23,25 @@ public class Contact implements Serializable {
         return surname;
     }
 
-    public String getE_mail() {
-        return e_mail;
+    public String getFullName() {
+        return name + " " + surname;
     }
 
-    public String getPhone_number() {
-        return phone_number;
+    public String getEmail() {
+        return email;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
     }
 
     public String getDescription() {
         return description;
+    }
+
+    @Override
+    public String toString() {
+        return "Name: " + name + " " + surname + "\nEmail: " + email +
+                "\nPhone: " + phoneNumber + "\nDescription: " + description;
     }
 }
