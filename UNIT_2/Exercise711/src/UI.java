@@ -17,4 +17,13 @@ public class UI {
         description = scanner.nextLine();
         return new Contact(name, surname,email,phoneNumber, description);
     }
+
+    public static void showMenuOptions() {
+        System.out.println("\n--- Contact List Menu ---");
+        System.out.println("1. Add New Contact");
+        System.out.println("2. Show All Contacts");
+        System.out.println("3. Search Contact");
+        System.out.println("4. Exit");
+        System.out.print("Choose an option: ");
+    }
 }

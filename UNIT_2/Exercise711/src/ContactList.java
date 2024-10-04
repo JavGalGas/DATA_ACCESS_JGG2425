@@ -65,15 +65,9 @@ public class ContactList {
     public void start() {
         Scanner scanner = new Scanner(System.in);
         while (true) {
-            System.out.println("\n--- Contact List Menu ---");
-            System.out.println("1. Add New Contact");
-            System.out.println("2. Show All Contacts");
-            System.out.println("3. Search Contact");
-            System.out.println("4. Exit");
-            System.out.print("Choose an option: ");
-
+            UI.showMenuOptions();
             int choice = scanner.nextInt();
-            scanner.nextLine();  // Consume newline
+            scanner.nextLine();
 
             switch (choice) {
                 case 1:
