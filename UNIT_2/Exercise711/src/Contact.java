@@ -7,11 +7,11 @@ public class Contact implements Serializable {
     private final String phoneNumber;
     private final String description;
 
-    public Contact (String name, String surname, String e_mail, String phone_number, String description) {
-        this.name = name;
-        this.surname = surname;
-        this.email = e_mail;
-        this.phoneNumber = phone_number;
+    public Contact (String name, String surname, String email, String phoneNumber, String description) {
+        this.name = (name.isEmpty()) ? "DefaultName" : name;
+        this.surname = (surname.isEmpty()) ? "DefaultSurname" : surname;
+        this.email = (email.isEmpty()) ? "DefaultEmail@gmail.com" : email;
+        this.phoneNumber = (phoneNumber.isEmpty()) ? "+00 000000000" : phoneNumber;
         this.description = description;
     }
 

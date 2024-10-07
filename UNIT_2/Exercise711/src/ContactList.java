@@ -5,7 +5,7 @@ import java.util.Scanner;
 
 public class ContactList {
 
-    private List<Contact> contacts;
+    private final List<Contact> contacts;
     private static final String FILE_NAME = "contacts.obj";
 
     public ContactList() {
@@ -26,7 +26,7 @@ public class ContactList {
         }
     }
 
-    public void saveContacts() {
+    public void saveContacts(){
         try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(FILE_NAME))) {
             oos.writeObject(contacts);
         } catch (IOException e) {
@@ -34,20 +34,9 @@ public class ContactList {
         }
     }
 
-    public void addContact(Contact contact) {
+    private void addContact(Contact contact) {
         contacts.add(contact);
         saveContacts();
-    }
-
-    public void showContacts() {
-        if (contacts.isEmpty()) {
-            System.out.println("No contacts available.");
-        } else {
-            for (Contact contact : contacts) {
-                System.out.println(contact);
-                System.out.println("---------------------------");
-            }
-        }
     }
 
     public Contact searchContact(String query) {
@@ -63,43 +52,32 @@ public class ContactList {
     }
 
     public void start() {
-        Scanner scanner = new Scanner(System.in);
         while (true) {
-            UI.showMenuOptions();
-            int choice = scanner.nextInt();
-            scanner.nextLine();
+            int choice = UI.askForOption();
 
             switch (choice) {
                 case 1:
                     Contact newContact = UI.askForContact();
                     addContact(newContact);
-                    System.out.println("Contact added successfully!");
+                    UI.showMessage(0);
                     break;
 
                 case 2:
-                    System.out.println("\n--- Contact List ---");
-                    showContacts();
+                    UI.showContacts(contacts);
                     break;
 
                 case 3:
-                    System.out.print("Enter parameter to search: ");
-                    String searchQuery = scanner.nextLine();
+                    String searchQuery = UI.askForParameter();
                     Contact foundContact = searchContact(searchQuery);
-                    if (foundContact != null) {
-                        System.out.println("\nContact found:");
-                        System.out.println(foundContact);
-                    } else {
-                        System.out.println("Contact not found.");
-                    }
+                    UI.showContact(foundContact);
                     break;
 
                 case 4:
-                    System.out.println("Exiting...");
-                    scanner.close();
+                    UI.closeScanner();
                     return;
 
                 default:
-                    System.out.println("Invalid option, please try again.");
+                    UI.showMessage(1);
             }
         }
     }
