@@ -68,10 +68,10 @@ public class UI {
         scanner.close();
     }
 
-    public static void showMessage(int i) throws IndexOutOfBoundsException{
-        if (i < 0 || i >= messages.length) {
+    public static void showMessage(int index) throws IndexOutOfBoundsException{
+        if (index < 0 || index >= messages.length) {
             throw new IndexOutOfBoundsException();
         }
-        System.out.println(messages[i]);
+        System.out.println(messages[index]);
     }
 }

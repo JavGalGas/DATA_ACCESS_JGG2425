@@ -15,14 +15,6 @@ public class Contact implements Serializable {
         this.description = description;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public String getSurname() {
-        return surname;
-    }
-
     public String getFullName() {
         return name + " " + surname;
     }

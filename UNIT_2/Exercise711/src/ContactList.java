@@ -18,8 +18,8 @@ public class ContactList {
             return new ArrayList<>();
         }
 
-        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(file))) {
-            return (List<Contact>) ois.readObject();
+        try (ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream(file))) {
+            return (List<Contact>) objectInputStream.readObject();
         } catch (IOException | ClassNotFoundException exception) {
             exception.printStackTrace();
             return new ArrayList<>();
@@ -27,8 +27,8 @@ public class ContactList {
     }
 
     public void saveContacts(){
-        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(FILE_NAME))) {
-            oos.writeObject(contacts);
+        try (ObjectOutputStream objectOutputStream = new ObjectOutputStream(new FileOutputStream(FILE_NAME))) {
+            objectOutputStream.writeObject(contacts);
         } catch (IOException e) {
             e.printStackTrace();
         }
