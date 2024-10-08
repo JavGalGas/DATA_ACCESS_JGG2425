@@ -18,9 +18,31 @@ public class ContactList {
         }
 
         try (ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream(file))) {
-            return (List<Contact>) objectInputStream.readObject();
-        } catch (IOException | ClassNotFoundException exception) {
-            exception.printStackTrace();
+            Object deserializedObject = objectInputStream.readObject();
+            return processDeserializedList(deserializedObject);
+        } catch (IOException ioException) {
+            UI.showError(0, ioException.getMessage());
+        } catch (ClassNotFoundException exception) {
+            UI.showError(1);
+        }
+        return new ArrayList<>();
+    }
+
+    private List<Contact> processDeserializedList(Object deserializedObject) {
+        if (deserializedObject instanceof List<?> tempList) {
+            List<Contact> contactList = new ArrayList<>();
+
+            for (Object item : tempList) {
+                if (item instanceof Contact) {
+                    contactList.add((Contact) item);
+                } else {
+                    UI.showError(3);
+                    return new ArrayList<>();
+                }
+            }
+            return contactList;
+        } else {
+            UI.showError(4);
             return new ArrayList<>();
         }
     }
@@ -28,8 +50,8 @@ public class ContactList {
     public void saveContacts(){
         try (ObjectOutputStream objectOutputStream = new ObjectOutputStream(new FileOutputStream(FILE_NAME))) {
             objectOutputStream.writeObject(contacts);
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (IOException exception) {
+            UI.showError(2, exception.getMessage());
         }
     }
 
@@ -39,7 +61,7 @@ public class ContactList {
     }
 
     public Contact searchContact(String query) {
-        for (Contact contact : contacts) {
+        for (Contact contact : contacts) { /*equalsIgnoreCase()*/
             if (contact.getFullName().toLowerCase().contains(query.toLowerCase()) ||
                     contact.getPhoneNumber().contains(query) ||
                     contact.getEmail().toLowerCase().contains(query.toLowerCase()) ||
@@ -51,7 +73,8 @@ public class ContactList {
     }
 
     public void start() {
-        while (true) {
+        boolean isRunning = true;
+        while (isRunning) {
             int choice = UI.askForOption();
 
             switch (choice) {
@@ -73,7 +96,8 @@ public class ContactList {
 
                 case 4:
                     UI.closeScanner();
-                    return;
+                    isRunning = false;
+                    break;
 
                 default:
                     UI.showMessage(1);

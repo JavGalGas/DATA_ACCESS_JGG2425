@@ -8,19 +8,27 @@ public class UI {
             "Contact added successfully!",
             "Invalid option, please try again."
     };
+
+    private static final String[] errorMessages = {
+            "I/O error loading contacts",
+            "Could not find Contact class while loading contacts",
+            "Error while saving contacts",
+            "The list contains an element that is not of type Contact.",
+            "The deserialized object is not a list."
+    };
     public static Contact askForContact() {
-        String name, surname, email, phoneNumber, description;
+        Contact contact = new Contact();
         System.out.print("Enter name: ");
-        name = scanner.nextLine();
+        contact.setName(scanner.nextLine());
         System.out.print("Enter surname: ");
-        surname = scanner.nextLine();
+        contact.setSurname(scanner.nextLine());
         System.out.print("Enter email: ");
-        email = scanner.nextLine();
+        contact.setEmail(scanner.nextLine());
         System.out.print("Enter phone number: ");
-        phoneNumber = scanner.nextLine();
+        contact.setPhoneNumber(scanner.nextLine());
         System.out.print("Enter description: ");
-        description = scanner.nextLine();
-        return new Contact(name, surname,email,phoneNumber, description);
+        contact.setDescription(scanner.nextLine());
+        return contact;
     }
 
     public static int askForOption() {
@@ -72,5 +80,19 @@ public class UI {
             throw new IndexOutOfBoundsException();
         }
         System.out.println(messages[index]);
+    }
+
+    public static void showError(int index, String message) throws IndexOutOfBoundsException {
+        if (index < 0 || index >= errorMessages.length) {
+            throw new IndexOutOfBoundsException();
+        }
+        System.out.println("Error: "+ errorMessages[index] + ": " + message);
+    }
+
+    public static void showError(int index) throws IndexOutOfBoundsException {
+        if (index < 0 || index >= errorMessages.length) {
+            throw new IndexOutOfBoundsException();
+        }
+        System.out.println("Error: " + errorMessages[index]);
     }
 }
