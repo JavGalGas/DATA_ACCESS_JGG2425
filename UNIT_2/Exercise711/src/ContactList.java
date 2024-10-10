@@ -8,11 +8,11 @@ public class ContactList {
     private static final String FILE_NAME = "contacts.obj";
 
     public ContactList() {
-        contacts = loadContacts();
+        contacts = loadContacts(FILE_NAME);
     }
 
-    private List<Contact> loadContacts() {
-        File file = new File(FILE_NAME);
+    public List<Contact> loadContacts(String filename) {
+        File file = new File(filename);
         if (!file.exists()) {
             return new ArrayList<>();
         }
@@ -47,8 +47,8 @@ public class ContactList {
         }
     }
 
-    public void saveContacts(){
-        try (ObjectOutputStream objectOutputStream = new ObjectOutputStream(new FileOutputStream(FILE_NAME))) {
+    public void saveContacts(String filename, List<Contact> contacts) {
+        try (ObjectOutputStream objectOutputStream = new ObjectOutputStream(new FileOutputStream(filename))) {
             objectOutputStream.writeObject(contacts);
         } catch (IOException exception) {
             UI.showError(2, exception.getMessage());
@@ -57,7 +57,7 @@ public class ContactList {
 
     private void addContact(Contact contact) {
         contacts.add(contact);
-        saveContacts();
+        saveContacts(FILE_NAME, contacts);
     }
 
     public Contact searchContact(String query) {

@@ -1,0 +1,30 @@
+<contactList>
+    <contact>
+        <name></name>
+        <surname></surname>
+        <email></email>
+        <phone></phone>
+        <description></description>
+    </contact>
+    <contact>
+        <name>Javier</name>
+        <surname>Galan Gascon</surname>
+        <email>jgg986@gmail.com</email>
+        <phone>+34 601148456</phone>
+        <description>Yo</description>
+    </contact>
+    <contact>
+        <name>Roberto</name>
+        <surname>Triolo Gonzalez</surname>
+        <email>robtrigon@alu.edu.gva.es</email>
+        <phone>+34 845962515</phone>
+        <description>Hey</description>
+    </contact>
+    <contact>
+        <name>Alejandra</name>
+        <surname>García Costa</surname>
+        <email>alegarcos@gmail.com</email>
+        <phone>+34 512849565</phone>
+        <description>Funciona por favor</description>
+    </contact>
+</contactList>

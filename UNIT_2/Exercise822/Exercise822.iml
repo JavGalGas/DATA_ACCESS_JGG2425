@@ -10,7 +10,7 @@
     <orderEntry type="module-library" exported="">
       <library>
         <CLASSES>
-          <root url="jar://$MODULE_DIR$/../Exercise711/out/artifacts/XMLContactList_jar/Exercise711.jar!/" />
+          <root url="jar://$MODULE_DIR$/../Exercise711/out/artifacts/Exercise711_jar/Exercise711.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />

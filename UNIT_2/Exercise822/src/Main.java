@@ -9,9 +9,9 @@ public class Main {
         int choice = scanner.nextInt();
 
         if (choice == 1) {
-            FileFormatConverter.convertObjToXml("contacts.obj", "contacts.xml");
+            FileFormatConverter.convertObjToXml();
         } else if (choice == 2) {
-            FileFormatConverter.convertXmlToObj("contacts.xml", "contacts.obj");
+            FileFormatConverter.convertXmlToObj();
         } else {
             System.out.println("Invalid choice");
         }
