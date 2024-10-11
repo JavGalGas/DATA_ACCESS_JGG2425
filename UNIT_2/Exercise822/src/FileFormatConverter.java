@@ -23,6 +23,8 @@ public class FileFormatConverter {
 
     public static void convertXmlToObj() {
         List<Contact> contacts = new ArrayList<>();
+        String contactTag = "contact", nameTag = "name", surnameTag = "surname", emailTag = "email",
+                phoneTag = "phone", descriptionTag = "description";
         try {
             SAXParserFactory factory = SAXParserFactory.newInstance();
             SAXParser saxParser = factory.newSAXParser();
@@ -32,15 +34,15 @@ public class FileFormatConverter {
                 boolean isName, isSurname, isEmail, isPhone, isDescription;
 
                 public void startElement(String uri, String localName, String qName, Attributes attributes) {
-                    if (qName.equalsIgnoreCase("name")) {
+                    if (qName.equalsIgnoreCase(nameTag)) {
                         isName = true;
-                    } else if (qName.equalsIgnoreCase("surname")) {
+                    } else if (qName.equalsIgnoreCase(surnameTag)) {
                         isSurname = true;
-                    } else if (qName.equalsIgnoreCase("email")) {
+                    } else if (qName.equalsIgnoreCase(emailTag)) {
                         isEmail = true;
-                    } else if (qName.equalsIgnoreCase("phone")) {
+                    } else if (qName.equalsIgnoreCase(phoneTag)) {
                         isPhone = true;
-                    } else if (qName.equalsIgnoreCase("description")) {
+                    } else if (qName.equalsIgnoreCase(descriptionTag)) {
                         isDescription = true;
                     }
                 }
@@ -66,7 +68,7 @@ public class FileFormatConverter {
                 }
 
                 public void endElement(String uri, String localName, String qName) {
-                    if (qName.equalsIgnoreCase("contact")) {
+                    if (qName.equalsIgnoreCase(contactTag)) {
                         Contact contact = new Contact();
                         contact.setName(name);
                         contact.setSurname(surname);
@@ -89,20 +91,49 @@ public class FileFormatConverter {
 
     private static void saveContactsToXml(List<Contact> contacts) {
         try (PrintWriter printWriter = new PrintWriter(new BufferedWriter(new FileWriter(xmlFile, false)))) {
-            printWriter.println("<contactList>");
+            printWriter.println(FileFormatConverterUI.getTagAt(0));
             for (Contact contact : contacts) {
-                printWriter.println("    <contact>");
-                printWriter.println("        <name>" + contact.getName() + "</name>");
-                printWriter.println("        <surname>" + contact.getSurname() + "</surname>");
-                printWriter.println("        <email>" + contact.getEmail() + "</email>");
-                printWriter.println("        <phone>" + contact.getPhoneNumber() + "</phone>");
-                printWriter.println("        <description>" + contact.getDescription() + "</description>");
-                printWriter.println("    </contact>");
+                printWriter.println(FileFormatConverterUI.getTagAt(1));
+                printWriter.println(FileFormatConverterUI.getTagAt(2) + contact.getName()
+                        + FileFormatConverterUI.getTagAt(3));
+                printWriter.println(FileFormatConverterUI.getTagAt(4) + contact.getSurname()
+                        + FileFormatConverterUI.getTagAt(5));
+                printWriter.println(FileFormatConverterUI.getTagAt(6) + contact.getEmail()
+                        + FileFormatConverterUI.getTagAt(7));
+                printWriter.println(FileFormatConverterUI.getTagAt(8) + contact.getPhoneNumber()
+                        + FileFormatConverterUI.getTagAt(9));
+                printWriter.println(FileFormatConverterUI.getTagAt(10) + contact.getDescription()
+                        + FileFormatConverterUI.getTagAt(11));
+                printWriter.println(FileFormatConverterUI.getTagAt(12));
             }
-            printWriter.println("</contactList>");
+            printWriter.println(FileFormatConverterUI.getTagAt(13));
         }
         catch ( IOException exception) {
             UI.showError(2, exception.getMessage());
+        }
+    }
+
+    public static void start() {
+        boolean isRunning = true;
+
+        while (isRunning) {
+            int choice = FileFormatConverterUI.askForConverterOption();
+
+            switch (choice) {
+                case 1:
+                    convertObjToXml();
+                    break;
+                case 2:
+                    convertXmlToObj();
+                    break;
+                case 3:
+                    FileFormatConverterUI.closeScanner();
+                    isRunning = false;
+                    break;
+                default:
+                    UI.showMessage(1);
+                    break;
+            }
         }
     }
 }
