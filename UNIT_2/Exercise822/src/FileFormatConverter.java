@@ -11,10 +11,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FileFormatConverter {
-//Modify the fuctions
     private static final ContactList contactList = new ContactList();
     private static final String xmlFile = "contacts.xml";
     private static final String objFile = "../Exercise711/contacts.obj";
+    private static final String contactTag = "contact";
+    private static final String nameTag = "name";
+    private static final String surnameTag = "surname";
+    private static final String emailTag = "email";
+    private static final String phoneTag = "phone";
+    private static final String descriptionTag = "description";
 
     public static void convertObjToXml() {
         List<Contact> contacts = contactList.loadContacts(objFile);
@@ -23,64 +28,44 @@ public class FileFormatConverter {
 
     public static void convertXmlToObj() {
         List<Contact> contacts = new ArrayList<>();
-        String contactTag = "contact", nameTag = "name", surnameTag = "surname", emailTag = "email",
-                phoneTag = "phone", descriptionTag = "description";
         try {
             SAXParserFactory factory = SAXParserFactory.newInstance();
             SAXParser saxParser = factory.newSAXParser();
             DefaultHandler handler = new DefaultHandler() {
-
-                String name, surname, email, phoneNumber, description;
-                boolean isName, isSurname, isEmail, isPhone, isDescription;
-
+                Contact contact;
+                String content;
                 public void startElement(String uri, String localName, String qName, Attributes attributes) {
-                    if (qName.equalsIgnoreCase(nameTag)) {
-                        isName = true;
-                    } else if (qName.equalsIgnoreCase(surnameTag)) {
-                        isSurname = true;
-                    } else if (qName.equalsIgnoreCase(emailTag)) {
-                        isEmail = true;
-                    } else if (qName.equalsIgnoreCase(phoneTag)) {
-                        isPhone = true;
-                    } else if (qName.equalsIgnoreCase(descriptionTag)) {
-                        isDescription = true;
+                    if (qName.equalsIgnoreCase(contactTag)) {
+                        contact = new Contact();
                     }
                 }
 
                 public void characters(char[] ch, int start, int length) {
-                    String content = new String(ch, start, length);
-                    if (isName) {
-                        name = content;
-                        isName = false;
-                    } else if (isSurname) {
-                        surname = content;
-                        isSurname = false;
-                    } else if (isEmail) {
-                        email = content;
-                        isEmail = false;
-                    } else if (isPhone) {
-                        phoneNumber = content;
-                        isPhone = false;
-                    } else if (isDescription) {
-                        description = content;
-                        isDescription = false;
-                    }
+                    content = new String(ch, start, length);
                 }
 
                 public void endElement(String uri, String localName, String qName) {
-                    if (qName.equalsIgnoreCase(contactTag)) {
-                        Contact contact = new Contact();
-                        contact.setName(name);
-                        contact.setSurname(surname);
-                        contact.setEmail(email);
-                        contact.setPhoneNumber(phoneNumber);
-                        contact.setDescription(description);
 
+                    if (qName.equalsIgnoreCase(nameTag)) {
+                        contact.setName(content);
+                    }
+                    else if(qName.equalsIgnoreCase(surnameTag)) {
+                        contact.setSurname(content);
+                    }
+                    else if(qName.equalsIgnoreCase(emailTag)) {
+                        contact.setEmail(content);
+                    }
+                    else if(qName.equalsIgnoreCase(phoneTag)) {
+                        contact.setPhoneNumber(content);
+                    }
+                    else if(qName.equalsIgnoreCase(descriptionTag)) {
+                        contact.setDescription(content);
+                    }
+                    else if (qName.equalsIgnoreCase(contactTag)) {
                         contacts.add(contact);
                     }
                 }
             };
-
             saxParser.parse(xmlFile, handler);
 
         } catch (Exception e) {
