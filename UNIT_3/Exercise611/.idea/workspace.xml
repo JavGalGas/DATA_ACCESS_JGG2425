@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="41ce2d67-49d6-41c5-97b2-10f34e63404d" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/../Exercise411/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Exercise411/.idea/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Exercise411/.idea/.name" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Exercise411/.idea/dataSources.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Exercise411/.idea/encodings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Exercise411/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Exercise411/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Exercise411/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Exercise411/src/main/java/org/jgg2425da/Main.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Exercise412/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Exercise412/.idea/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Exercise412/.idea/encodings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Exercise412/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Exercise412/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Exercise412/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Exercise412/src/main/java/org/jgg2425da/Main.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Exercise413/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Exercise413/.idea/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Exercise413/.idea/encodings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Exercise413/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Exercise413/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Exercise413/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Exercise413/src/main/java/org/jgg2425da/Main.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Exercise531/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Exercise531/.idea/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Exercise531/.idea/encodings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Exercise531/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Exercise531/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Exercise531/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Exercise531/src/main/java/org/Exercise411/Main.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Exercise531/src/main/java/org/Exercise412/Main.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Exercise531/src/main/java/org/Exercise413/Main.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/jgg2425da/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../VThisTute/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../VThisTute/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../VThisTute/.idea/.name" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../VThisTute/.idea/dataSources.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../VThisTute/.idea/encodings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../VThisTute/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../VThisTute/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../VThisTute/pom.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../VThisTute/src/main/java/org/jgg2425da/Main.java" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
+  </component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "associatedIndex": 2
+}]]></component>
+  <component name="ProjectId" id="2nWzMhKLommLFm9mKVAT1hfaAfR" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "git-widget-placeholder": "main",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="41ce2d67-49d6-41c5-97b2-10f34e63404d" name="Changes" comment="" />
+      <created>1729103576971</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1729103576971</updated>
+      <workItem from="1729103578073" duration="869000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>
