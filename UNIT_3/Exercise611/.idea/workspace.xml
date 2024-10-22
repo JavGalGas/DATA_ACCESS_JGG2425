@@ -5,55 +5,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="41ce2d67-49d6-41c5-97b2-10f34e63404d" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/../Exercise411/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Exercise411/.idea/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Exercise411/.idea/.name" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Exercise411/.idea/dataSources.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Exercise411/.idea/encodings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Exercise411/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Exercise411/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Exercise411/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Exercise411/src/main/java/org/jgg2425da/Main.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Exercise412/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Exercise412/.idea/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Exercise412/.idea/encodings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Exercise412/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Exercise412/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Exercise412/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Exercise412/src/main/java/org/jgg2425da/Main.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Exercise413/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Exercise413/.idea/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Exercise413/.idea/encodings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Exercise413/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Exercise413/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Exercise413/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Exercise413/src/main/java/org/jgg2425da/Main.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Exercise531/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Exercise531/.idea/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Exercise531/.idea/encodings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Exercise531/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Exercise531/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Exercise531/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Exercise531/src/main/java/org/Exercise411/Main.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Exercise531/src/main/java/org/Exercise412/Main.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Exercise531/src/main/java/org/Exercise413/Main.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/jgg2425da/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../VThisTute/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../VThisTute/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../VThisTute/.idea/.name" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../VThisTute/.idea/dataSources.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../VThisTute/.idea/encodings.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../VThisTute/.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../VThisTute/.idea/vcs.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../VThisTute/pom.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../VThisTute/src/main/java/org/jgg2425da/Main.java" beforeDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Exercise744/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Exercise744/.idea/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Exercise744/.idea/encodings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Exercise744/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Exercise744/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Exercise744/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Exercise744/src/main/java/org/example/FunctionCaller.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Exercise744/src/main/java/org/example/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../UNIT_1/Ejercicio1_JGG/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../UNIT_1/Ejercicio1_JGG/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/jgg2425da/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/jgg2425da/Main.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -63,28 +25,48 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 2
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 2
+}</component>
   <component name="ProjectId" id="2nWzMhKLommLFm9mKVAT1hfaAfR" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "main",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
+  <component name="RunManager">
+    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="org.jgg2425da.Main" />
+      <module name="Exercise611" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.jgg2425da.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.Main" />
+      </list>
+    </recent_temporary>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -94,6 +76,9 @@
       <option name="presentableId" value="Default" />
       <updated>1729103576971</updated>
       <workItem from="1729103578073" duration="869000" />
+      <workItem from="1729522848335" duration="1433000" />
+      <workItem from="1729616782902" duration="2125000" />
+      <workItem from="1729622238548" duration="408000" />
     </task>
     <servers />
   </component>
