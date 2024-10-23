@@ -1,26 +1,19 @@
 package org.example;
 
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.util.Scanner;
 import java.sql.*;
 
 public class FunctionCaller {
-    Scanner scanner = new Scanner(System.in);
-    final String URL = "jdbc:postgresql://localhost:5432/JavierGGdb";
-    final String USER = "postgres";
-    final String PASS = "postgres";
-    boolean isRunning = true;
-    public void start() {
+    static final String URL = "jdbc:postgresql://localhost:5432/JavierGGdb";
+    static final String USER = "postgres";
+    static final String PASS = "postgres";
+    static boolean isRunning = true;
+    public static void run() {
         while (isRunning) {
-            System.out.println("~~FUNCTIONS~~");
-            System.out.println("1   Select employees by job");
-            System.out.println("2   Select employees by department number");
-            System.out.println("3   Select employees by name");
-            System.out.println("4   Power off");
-            System.out.println("Please select a function:");
-            int option = scanner.nextInt();
+            int option = UI.selectMenuOption();
             switch (option) {
                 case 1:
                     getEmployeesByJob();
@@ -32,66 +25,46 @@ public class FunctionCaller {
                     getEmployeesByName();
                     break;
                 case 4:
-                    System.out.println("Shutting...");
+                    UI.closeScanner();
                     isRunning = false;
                     break;
                 default:
-                    System.out.println("Wrong input. Please try again.");
+                    UI.showMessageError();
                     break;
             }
         }
     }
 
-    private void getEmployeesByName() {
+    private static void getEmployeesByName() {
         try (Connection connection = DriverManager.getConnection(URL, USER, PASS)) {
-            Statement statement = connection.createStatement();
-            String SQLsentence = "SELECT code, name, year FROM subjects ORDER BY code";
-            ResultSet rs = statement.executeQuery(SQLsentence);
-            System.out.println("Code" + "\t" + "Name" + "\t" + "Year");
-            System.out.println("-----------------------------------------");
-            while (rs.next()) {
-                System.out.println(rs.getString(1) + "\t " +
-                        rs.getString(2) + "\t" + rs.getString(3));
-            }
+            CallableStatement statement = connection.prepareCall("{call employees_list_by_name(?)}");
+            statement.setString(1, UI.getStringParameter(0));
+            UI.showResult(statement);
         }
         catch(SQLException exception) {
             System.out.println(exception.getMessage());
         }
     }
 
-    private void getEmployeesByDeptNo() {
+    private static void getEmployeesByDeptNo() {
         try (Connection connection = DriverManager.getConnection(URL, USER, PASS)) {
-            Statement statement = connection.createStatement();
-            String SQLsentence = "SELECT code, name, year FROM subjects ORDER BY code";
-            ResultSet rs = statement.executeQuery(SQLsentence);
-            System.out.println("Code" + "\t" + "Name" + "\t" + "Year");
-            System.out.println("-----------------------------------------");
-            while (rs.next()) {
-                System.out.println(rs.getString(1) + "\t " +
-                        rs.getString(2) + "\t" + rs.getString(3));
-            }
+            CallableStatement statement = connection.prepareCall("{call employees_list_by_dept(?)}");
+            statement.setInt(1, UI.getDeptNoParameter());
+            UI.showResult(statement);
         }
         catch(SQLException exception) {
             System.out.println(exception.getMessage());
         }
     }
 
-    private void getEmployeesByJob(){
+    private static void getEmployeesByJob(){
         try (Connection connection = DriverManager.getConnection(URL, USER, PASS)) {
-            Statement statement = connection.createStatement();
-            String SQLsentence = "SELECT code, name, year FROM subjects ORDER BY code";
-            ResultSet rs = statement.executeQuery(SQLsentence);
-            System.out.println("Code" + "\t" + "Name" + "\t" + "Year");
-            System.out.println("-----------------------------------------");
-            while (rs.next()) {
-                System.out.println(rs.getString(1) + "\t " +
-                        rs.getString(2) + "\t" + rs.getString(3));
-            }
+            CallableStatement statement = connection.prepareCall("{call employees_list_by_job(?)}");
+            statement.setString(1, UI.getStringParameter(1));
+            UI.showResult(statement);
         }
         catch(SQLException exception) {
             System.out.println(exception.getMessage());
         }
     }
-
-
 }
