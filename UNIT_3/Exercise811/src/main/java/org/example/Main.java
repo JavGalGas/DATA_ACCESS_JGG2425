@@ -11,10 +11,10 @@ public class Main {
     static final String PASS = "postgres";
     static boolean isRunning = true;
 
-    static int deptNo;
     static int empNo;
     static String eName;
     static String job;
+    static int deptNo;
     static String dName;
     static String loc;
     static Scanner scanner = new Scanner(System.in);
@@ -25,9 +25,12 @@ public class Main {
             conn.setAutoCommit(false);
             try {
                 //Set employee parameters
-                System.out.println("Provide a employee number: ");
+                System.out.println("Provide an employee number: ");
                 empNo = scanner.nextInt();
-                System.out.println("");
+                System.out.println("Provide an employee name: ");
+                eName = scanner.next();
+                System.out.println("Provide an employee job: ");
+                job = scanner.next();
                 //Check if deptno exists
                 PreparedStatement checkDeptNo = conn.prepareStatement("SELECT 1 FROM dept WHERE deptno = ?");
                 checkDeptNo.setInt(1, 40);
