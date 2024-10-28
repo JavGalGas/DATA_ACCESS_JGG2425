@@ -11,6 +11,7 @@ public class InsertTranCaller {
                     break;
                 case 2:
                     isRunning = false;
+                    UI.close();
                     break;
                 default:
                     UI.showErrorMessage();

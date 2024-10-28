@@ -18,6 +18,7 @@ public class UI {
         System.out.println("~~OPTIONS~~");
         System.out.println("1   Run the transaction.");
         System.out.println("2   Exit the program.");
+        System.out.println("Insert an option: ");
         int option = scanner.nextInt();
         scanner.nextLine();
         return option;
