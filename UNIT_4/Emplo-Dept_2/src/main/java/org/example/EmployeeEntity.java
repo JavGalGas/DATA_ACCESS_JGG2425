@@ -17,6 +17,9 @@ public class EmployeeEntity {
     @Basic
     @Column(name = "job")
     private String job;
+    @ManyToOne
+    @JoinColumn(name = "deptno", referencedColumnName = "deptno")
+    private DeptEntity department;
 
     public int getEmpno() {
         return empno;
@@ -53,5 +56,13 @@ public class EmployeeEntity {
     @Override
     public int hashCode() {
         return Objects.hash(empno, ename, job);
+    }
+
+    public DeptEntity getDepartment() {
+        return department;
+    }
+
+    public void setDepartment(DeptEntity department) {
+        this.department = department;
     }
 }
