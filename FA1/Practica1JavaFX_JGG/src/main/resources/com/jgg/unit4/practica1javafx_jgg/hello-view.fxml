@@ -37,12 +37,12 @@
                      <stops>
                         <Stop>
                            <color>
-                              <Color />
+                              <Color red="0.1568627506494522" green="0.21176470816135406" blue="0.16078431904315948" />
                            </color>
                         </Stop>
                         <Stop offset="1.0">
                            <color>
-                              <Color green="1.0" blue="0.15000000596046448" />
+                              <Color red="0.29411765933036804" green="0.7490196228027344" blue="0.3137255012989044" />
                            </color>
                         </Stop>
                      </stops>
@@ -57,17 +57,17 @@
                <stops>
                   <Stop>
                      <color>
-                        <Color red="0.9333333373069763" green="0.9333333373069763" blue="0.9333333373069763" />
+                        <Color red="0.29411765933036804" green="0.7490196228027344" blue="0.3137255012989044" />
                      </color>
                   </Stop>
-                  <Stop offset="0.5067346052059876">
+                  <Stop offset="0.5029031875814665">
                      <color>
-                        <Color red="0.6666666865348816" green="0.6666666865348816" blue="0.6666666865348816" />
+                        <Color red="0.3450980484485626" green="0.6274510025978088" blue="0.3607843220233917" />
                      </color>
                   </Stop>
                   <Stop offset="1.0">
                      <color>
-                        <Color red="0.9333333373069763" green="0.9333333373069763" blue="0.9333333373069763" />
+                        <Color red="0.29411765933036804" green="0.7490196228027344" blue="0.3137255012989044" />
                      </color>
                   </Stop>
                </stops>
@@ -75,19 +75,7 @@
          </fill></Rectangle>
       <VBox alignment="CENTER" prefHeight="225.0" prefWidth="600.0" AnchorPane.bottomAnchor="95.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="80.0">
          <children>
-            <Label contentDisplay="RIGHT" graphicTextGap="100.0" prefHeight="33.0" prefWidth="600.0" text="User:">
-               <graphic>
-                  <PasswordField alignment="CENTER" prefHeight="33.0" prefWidth="400.0" style="-fx-background-radius: 15;" />
-               </graphic>
-               <font>
-                  <Font name="Broadway" size="20.0" />
-               </font>
-               <VBox.margin>
-                  <Insets left="20.0" />
-               </VBox.margin>
-            </Label>
-            <Separator prefHeight="50.0" prefWidth="600.0" visible="false" />
-            <Label contentDisplay="RIGHT" graphicTextGap="50.0" prefHeight="33.0" prefWidth="600.0" text="Password: ">
+            <Label contentDisplay="RIGHT" graphicTextGap="80.0" prefHeight="35.0" prefWidth="600.0" text="User:" textFill="#283629">
                <graphic>
                   <PasswordField prefHeight="33.0" prefWidth="400.0" style="-fx-background-radius: 15;" />
                </graphic>
@@ -95,10 +83,31 @@
                   <Font name="Broadway" size="20.0" />
                </font>
                <VBox.margin>
-                  <Insets left="20.0" />
+                  <Insets left="30.0" />
                </VBox.margin>
             </Label>
+            <Separator prefHeight="50.0" prefWidth="600.0" visible="false" />
+            <Label contentDisplay="RIGHT" graphicTextGap="20.0" prefHeight="35.0" prefWidth="600.0" text="Password: " textFill="#283629">
+               <graphic>
+                  <PasswordField prefHeight="33.0" prefWidth="400.0" style="-fx-background-radius: 15;" />
+               </graphic>
+               <font>
+                  <Font name="Broadway" size="20.0" />
+               </font>
+               <VBox.margin>
+                  <Insets left="30.0" />
+               </VBox.margin>
+            </Label>
+            <Separator prefHeight="25.0" prefWidth="600.0" visible="false" />
+            <Label text="Username and Password cannot be empty" textAlignment="CENTER" textFill="#ff0064">
+               <font>
+                  <Font name="Broadway" size="16.0" />
+               </font>
+            </Label>
          </children>
+         <padding>
+            <Insets top="25.0" />
+         </padding>
       </VBox>
       <Rectangle arcHeight="5.0" arcWidth="5.0" height="95.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="305.0">
          <fill>
@@ -119,7 +128,7 @@
          </fill></Rectangle>
       <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="305.0">
          <children>
-            <Button alignment="CENTER" mnemonicParsing="false" style="-fx-background-color: linear-gradient(to bottom, #454545,#b0b0b0, #454545);" text="Login" textAlignment="CENTER" textFill="WHITE">
+            <Button alignment="CENTER" mnemonicParsing="false" style="-fx-background-color: linear-gradient(to bottom, #547556,#58A05C, #547556);" text="Login" textAlignment="CENTER" textFill="WHITE">
                <font>
                   <Font name="Broadway" size="24.0" />
                </font>
