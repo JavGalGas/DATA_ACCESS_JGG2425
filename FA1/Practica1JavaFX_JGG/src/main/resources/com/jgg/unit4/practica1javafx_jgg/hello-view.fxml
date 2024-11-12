@@ -4,29 +4,11 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.paint.*?>
-<?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="400.0" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.jgg.unit4.practica1javafx_jgg.LoginController">
    <children>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" height="80.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="600.0" AnchorPane.bottomAnchor="320.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-         <fill>
-            <LinearGradient endX="1.0" endY="0.48815165876777256" startX="1.0">
-               <stops>
-                  <Stop>
-                     <color>
-                        <Color red="0.3294117748737335" green="0.4588235318660736" blue="0.33725491166114807" />
-                     </color>
-                  </Stop>
-                  <Stop offset="1.0">
-                     <color>
-                        <Color red="0.3450980484485626" green="0.6274510025978088" blue="0.3607843220233917" />
-                     </color>
-                  </Stop>
-               </stops>
-            </LinearGradient>
-         </fill></Rectangle>
-      <VBox alignment="CENTER" prefHeight="80.0" prefWidth="600.0" AnchorPane.bottomAnchor="320.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <VBox alignment="CENTER" prefHeight="80.0" prefWidth="600.0" style="-fx-background-color: linear-gradient(to bottom, #547556,#58a05c,#58a05c);" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
          <children>
             <Text strokeType="OUTSIDE" strokeWidth="0.0" text="WELCOME" textAlignment="CENTER">
                <font>
@@ -51,29 +33,7 @@
             </Text>
          </children>
       </VBox>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" height="225.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="600.0" AnchorPane.bottomAnchor="320.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="80.0">
-         <fill>
-            <LinearGradient endX="1.0" endY="1.0" startX="1.0">
-               <stops>
-                  <Stop>
-                     <color>
-                        <Color red="0.9333333373069763" green="0.9333333373069763" blue="0.9333333373069763" />
-                     </color>
-                  </Stop>
-                  <Stop offset="0.5029031875814665">
-                     <color>
-                        <Color red="0.6666666865348816" green="0.6666666865348816" blue="0.6666666865348816" />
-                     </color>
-                  </Stop>
-                  <Stop offset="1.0">
-                     <color>
-                        <Color red="0.9333333373069763" green="0.9333333373069763" blue="0.9333333373069763" />
-                     </color>
-                  </Stop>
-               </stops>
-            </LinearGradient>
-         </fill></Rectangle>
-      <VBox alignment="CENTER" prefHeight="225.0" prefWidth="600.0" AnchorPane.bottomAnchor="95.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="80.0">
+      <VBox alignment="CENTER" prefHeight="225.0" prefWidth="600.0" style="-fx-background-color: linear-gradient(to bottom, #eeeeee,#aaaaaa,#eeeeee);" AnchorPane.bottomAnchor="95.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="80.0">
          <children>
             <Label contentDisplay="RIGHT" graphicTextGap="80.0" prefHeight="35.0" prefWidth="600.0" text="User:" textFill="#283629">
                <graphic>
@@ -109,26 +69,9 @@
             <Insets top="25.0" />
          </padding>
       </VBox>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" height="95.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="305.0">
-         <fill>
-            <LinearGradient endX="1.0" endY="1.0" startX="1.0" startY="0.4786729857819905">
-               <stops>
-                  <Stop>
-                     <color>
-                        <Color red="0.3450980484485626" green="0.6274510025978088" blue="0.3607843220233917" />
-                     </color>
-                  </Stop>
-                  <Stop offset="1.0">
-                     <color>
-                        <Color red="0.3294117748737335" green="0.4588235318660736" blue="0.33725491166114807" />
-                     </color>
-                  </Stop>
-               </stops>
-            </LinearGradient>
-         </fill></Rectangle>
-      <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="305.0">
+      <VBox alignment="CENTER" prefHeight="95.0" prefWidth="600.0" style="-fx-background-color: linear-gradient(to top, #547556,#58a05c,#58a05c);" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
          <children>
-            <Button alignment="CENTER" mnemonicParsing="false" style="-fx-background-color: linear-gradient(to bottom, #aaaaaa,#eeeeee, #aaaaaa);" text="Login" textAlignment="CENTER" textFill="#4bbf50">
+            <Button fx:id="loginButton" onAction="#onLoginButtonClick" alignment="CENTER" mnemonicParsing="false" style="-fx-background-color: linear-gradient(to bottom, #aaaaaa,#eeeeee, #aaaaaa);" text="Login" textAlignment="CENTER" textFill="#4bbf50">
                <font>
                   <Font name="Broadway" size="24.0" />
                </font>
