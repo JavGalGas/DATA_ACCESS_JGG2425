@@ -37,7 +37,7 @@
          <children>
             <Label contentDisplay="RIGHT" graphicTextGap="80.0" prefHeight="35.0" prefWidth="600.0" text="User:" textFill="#283629">
                <graphic>
-                  <PasswordField prefHeight="33.0" prefWidth="400.0" style="-fx-background-radius: 15;" />
+                  <PasswordField fx:id="userText" prefHeight="33.0" prefWidth="400.0" style="-fx-background-radius: 15;" />
                </graphic>
                <font>
                   <Font name="Broadway" size="20.0" />
@@ -49,7 +49,7 @@
             <Separator prefHeight="50.0" prefWidth="600.0" visible="false" />
             <Label contentDisplay="RIGHT" graphicTextGap="20.0" prefHeight="35.0" prefWidth="600.0" text="Password: " textFill="#283629">
                <graphic>
-                  <PasswordField prefHeight="33.0" prefWidth="400.0" style="-fx-background-radius: 15;" />
+                  <PasswordField fx:id="passwdText" prefHeight="33.0" prefWidth="400.0" style="-fx-background-radius: 15;" />
                </graphic>
                <font>
                   <Font name="Broadway" size="20.0" />

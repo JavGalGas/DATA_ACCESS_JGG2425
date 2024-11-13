@@ -65,7 +65,7 @@
                         <id>default-cli</id>
                         <configuration>
                             <mainClass>
-                                com.jgg.unit4.practica1javafx_jgg/com.jgg.unit4.practica1javafx_jgg.HelloApplication
+                                com.jgg.unit4.practica1javafx_jgg/com.jgg.unit4.practica1javafx_jgg.SellerAppApplication
                             </mainClass>
                             <launcher>app</launcher>
                             <jlinkZipName>app</jlinkZipName>

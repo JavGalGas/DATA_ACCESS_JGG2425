@@ -8,6 +8,15 @@
     <property name="connection.driver_class">org.postgresql.Driver</property>
     <property name="connection.username">postgres</property>
     <property name="connection.password">postgres</property>
+    <mapping class="com.jgg.unit4.practica1javafx_jgg.Category"/>
+    <mapping class="com.jgg.unit4.practica1javafx_jgg.Order"/>
+    <mapping class="com.jgg.unit4.practica1javafx_jgg.OrderDetail"/>
+    <mapping class="com.jgg.unit4.practica1javafx_jgg.Product"/>
+    <mapping class="com.jgg.unit4.practica1javafx_jgg.Review"/>
+    <mapping class="com.jgg.unit4.practica1javafx_jgg.Seller"/>
+    <mapping class="com.jgg.unit4.practica1javafx_jgg.SellerProduct"/>
+    <mapping class="com.jgg.unit4.practica1javafx_jgg.User"/>
+
 
     <!-- DB schema will be updated if needed -->
     <!-- <property name="hibernate.hbm2ddl.auto">update</property> -->
