@@ -17,7 +17,7 @@ public class LoginController {
 
     @FXML
     protected void onLoginButtonClick() {
-        System.out.println("Hello Button Clicked!");
+        System.out.println("Login Button Clicked!");
         String user = userText.getText();
         String passwd = passwdText.getText();
 //        checkLogin(user, passwd);
