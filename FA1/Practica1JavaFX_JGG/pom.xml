@@ -42,6 +42,11 @@
             <artifactId>jboss-logging</artifactId>
             <version>3.5.0.Final</version>
         </dependency>
+        <dependency>
+            <groupId>jakarta.persistence</groupId>
+            <artifactId>jakarta.persistence-api</artifactId>
+            <version>3.1.0</version>
+        </dependency>
     </dependencies>
 
     <build>
@@ -65,7 +70,7 @@
                         <id>default-cli</id>
                         <configuration>
                             <mainClass>
-                                com.jgg.unit4.practica1javafx_jgg/com.jgg.unit4.practica1javafx_jgg.SellerAppApplication
+                                com.jgg.unit4.practica1javafx_jgg/com.jgg.unit4.practica1javafx_jgg.SellerApplication
                             </mainClass>
                             <launcher>app</launcher>
                             <jlinkZipName>app</jlinkZipName>

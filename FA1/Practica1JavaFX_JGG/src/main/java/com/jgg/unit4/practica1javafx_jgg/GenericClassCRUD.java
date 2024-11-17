@@ -1,15 +1,17 @@
 package com.jgg.unit4.practica1javafx_jgg;
 
+import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
-import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.query.Query;
-import org.hibernate.service.ServiceRegistry;
 
+import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 import java.util.logging.Level;
+import javax.naming.Referenceable;
 
 
 public class GenericClassCRUD<T> {
@@ -21,28 +23,46 @@ public class GenericClassCRUD<T> {
         this.entityClass = entityClass;
     }
 
-    public static Session openSession() throws Exception {
-        if (sessionFactory == null) {
-            Configuration configuration = new Configuration().configure(); // Carga de hibernate.cfg.xml
-            ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder()
-                    .applySettings(configuration.getProperties())
-                    .build();
-            sessionFactory = configuration.buildSessionFactory(serviceRegistry);
+    public Session openSession() {
+        try {
+            if ( sessionFactory == null )
+                sessionFactory = new Configuration().configure().buildSessionFactory();
+            SellerApplication.LOGGER.log(Level.INFO, "Opening session");
+            Session session = sessionFactory.openSession();
+            if (session == null) {
+                SellerApplication.LOGGER.log(Level.SEVERE, "Session is null");
+            }
+            return session;
+        } catch (HibernateException hibernateException) {
+            SellerApplication.LOGGER.log(Level.SEVERE, "An error occurred while opening session", hibernateException);
+            SellerApplication.LOGGER.info(hibernateException.getMessage());
+            return null;
         }
-        return sessionFactory.openSession();
     }
 
-    // CREATE or UPDATE
+    // CREATE
     public void save(T entity) {
         Transaction transaction = null;
         try (Session session = openSession()) {
-            transaction = session.beginTransaction();
-            session.persist(entity);
-            transaction.commit();
-        } catch (Exception exception) {
-            if (transaction != null)
+            if (session != null) {
+                transaction = session.beginTransaction();
+                session.persist(entity);
+                transaction.commit();
+            }
+        } catch (HibernateException hibernateException) {
+            if (transaction != null) {
                 transaction.rollback();
-            SellerAppApplication.LOGGER.log(Level.SEVERE,"An exception has occurred: " + exception.getMessage());
+            }
+            SellerApplication.LOGGER.log(Level.SEVERE, "Hibernate error during save operation", hibernateException);
+            SellerApplication.LOGGER.info(hibernateException.getMessage());
+            // Notify the user about the failure
+        } catch (RuntimeException runtimeException) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            SellerApplication.LOGGER.log(Level.SEVERE, "Unexpected error during save operation", runtimeException);
+            SellerApplication.LOGGER.info(runtimeException.getMessage());
+            // Notify the user about the unexpected error
         }
     }
 
@@ -50,22 +70,39 @@ public class GenericClassCRUD<T> {
     public void update(T entity) {
         Transaction transaction = null;
         try (Session session = openSession()) {
-            transaction = session.beginTransaction();
-            session.merge(entity);
-            transaction.commit();
-        } catch (Exception exception) {
-            if (transaction != null)
+            if (session != null) {
+                transaction = session.beginTransaction();
+                session.merge(entity);
+                transaction.commit();
+            }
+        } catch (HibernateException hibernateException) {
+            if (transaction != null) {
                 transaction.rollback();
-            SellerAppApplication.LOGGER.log(Level.SEVERE,"An exception has occurred: " + exception.getMessage());
+            }
+            SellerApplication.LOGGER.log(Level.SEVERE, "Hibernate error during update operation", hibernateException);
+            SellerApplication.LOGGER.info(hibernateException.getMessage());
+            // Notify the user about the failure
+        } catch (RuntimeException runtimeException) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            SellerApplication.LOGGER.log(Level.SEVERE, "Unexpected error during update operation", runtimeException);
+            SellerApplication.LOGGER.info(runtimeException.getMessage());
+            // Notify the user about the unexpected error
         }
     }
 
     // READ by ID
     public T findById(int id) {
         try (Session session = openSession() ) {
-            return session.get(entityClass, id);
-        } catch( Exception exception ) {
-            SellerAppApplication.LOGGER.log(Level.SEVERE,"An exception has occurred: " + exception.getMessage());
+            if (session != null) {
+                return session.get(entityClass, id);
+            } else {
+                return null;
+            }
+        } catch (HibernateException hibernateException) {
+            SellerApplication.LOGGER.log(Level.SEVERE, "Hibernate error during find by ID operation", hibernateException);
+            SellerApplication.LOGGER.info(hibernateException.getMessage());
             return null;
         }
     }
@@ -73,12 +110,17 @@ public class GenericClassCRUD<T> {
     // READ All
     public List<T> findAll() {
         try (Session session = openSession()) {
-            String hql = "FROM " + entityClass.getSimpleName();
-            Query<T> query = session.createQuery(hql, entityClass);
-            return query.list();
-        } catch( Exception exception ) {
-            SellerAppApplication.LOGGER.log(Level.SEVERE,"An exception has occurred: " + exception.getMessage());
-            return null;
+            if (session != null) {
+                String hibernateQl = "FROM " + entityClass.getSimpleName();
+                Query<T> query = session.createQuery(hibernateQl, entityClass);
+                return query.list();
+            } else {
+                return Collections.emptyList();
+            }
+        } catch (HibernateException hibernateException) {
+            SellerApplication.LOGGER.log(Level.SEVERE, "Hibernate error during find all operation", hibernateException);
+            SellerApplication.LOGGER.info(hibernateException.getMessage());
+            return Collections.emptyList();
         }
     }
 
@@ -86,52 +128,25 @@ public class GenericClassCRUD<T> {
     public void delete(T entity) {
         Transaction transaction = null;
         try (Session session = openSession()) {
-            transaction = session.beginTransaction();
-            session.remove(entity);
-            transaction.commit();
-        } catch (Exception exception) {
-            if (transaction != null)
+            if (session != null) {
+                transaction = session.beginTransaction();
+                session.remove(entity);
+                transaction.commit();
+            }
+        } catch (HibernateException hibernateException) {
+            if (transaction != null) {
                 transaction.rollback();
-            SellerAppApplication.LOGGER.log(Level.SEVERE,"An exception has occurred: " + exception.getMessage());
+            }
+            SellerApplication.LOGGER.log(Level.SEVERE, "Hibernate error during during deletion operation", hibernateException);
+            SellerApplication.LOGGER.info(hibernateException.getMessage());
+            // Notify the user about the failure
+        } catch (RuntimeException runtimeException) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            SellerApplication.LOGGER.log(Level.SEVERE, "Unexpected error occurred during deletion operation", runtimeException);
+            SellerApplication.LOGGER.info(runtimeException.getMessage());
+            // Notify the user about the unexpected error
         }
     }
-
-//    public static void updateClass( Class<T> class ) {
-//        try ( Session session = openSession() ) {
-//            Seller seller = session.get( Seller.class,
-//                    sellerId );
-//            if ( seller != null ) {
-//                session.beginTransaction();
-//                /*updates seller*/
-//                session.merge(seller); // you can also use ‘update’
-//                session.getTransaction().commit();
-//            }
-//            else
-//                System.out.println("Employee not found");
-//        }
-//        catch( Exception exception ) {
-//            System.out.println( exception.getMessage() );
-//        }
-//    }
-//
-//    public static void insertClass() {
-//        Scanner scanner = new Scanner(System.in);
-//        System.out.print("Department name?: ");
-//        String dname = scanner.nextLine();
-//        System.out.print("Department location?: ");
-//        String dloc = scanner.nextLine();
-//        Transaction transaction;
-//        try ( Session session = openSession() ) {
-//            transaction = session.beginTransaction();
-//            DeptEntity department = new DeptEntity();
-//            department.setDeptname( dname );
-//            department.setLoc( dloc );
-//            session.persist( department ); // you can also use ‘save’
-//            transaction.commit(); // End of transaction
-//        }
-//        catch( Exception e ) {
-//            transaction.rollback();
-//            System.out.println( e.getMessage() );
-//        }
-//    }
 }

@@ -59,7 +59,7 @@
                </VBox.margin>
             </Label>
             <Separator prefHeight="25.0" prefWidth="600.0" visible="false" />
-            <Label text="Username and Password cannot be empty" textAlignment="CENTER" textFill="#ff0064">
+            <Label fx:id="errorMessage" text="" textAlignment="CENTER" textFill="#ff0064">
                <font>
                   <Font name="Broadway" size="16.0" />
                </font>

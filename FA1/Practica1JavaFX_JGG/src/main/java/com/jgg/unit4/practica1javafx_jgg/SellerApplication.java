@@ -11,11 +11,11 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.logging.SimpleFormatter;
 
-public class SellerAppApplication extends Application {
-    public static final Logger LOGGER = Logger.getLogger(SellerAppApplication.class.getName());
+public class SellerApplication extends Application {
+    public static final Logger LOGGER = Logger.getLogger(SellerApplication.class.getName());
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(SellerAppApplication.class.getResource("login-view.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(SellerApplication.class.getResource("login-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 600, 400);
         stage.setTitle("SellerApp");
         stage.setScene(scene);
@@ -25,15 +25,17 @@ public class SellerAppApplication extends Application {
     public static void main(String[] args) {
         try {
             // Creates a file handler
-            FileHandler fh = new FileHandler("my.log");
-            fh.setFormatter(new SimpleFormatter());
-            LOGGER.addHandler(fh);
+            FileHandler fileHandler = new FileHandler("seller_app.log");
+            fileHandler.setFormatter(new SimpleFormatter());
+            LOGGER.addHandler(fileHandler);
             // Registers messages
             LOGGER.info("Program beginning");
             launch();
-            LOGGER.severe("An error occurred");
-        } catch (Exception e) {
-            LOGGER.log(Level.SEVERE, "Error while configuring the logger", e);
+            fileHandler.close();
+        } catch (Exception exception) {
+            LOGGER.log(Level.SEVERE, "Error while configuring the logger", exception);
+            LOGGER.info(exception.getMessage());
+            LOGGER.severe("A critical error occurred during initialization.");
         }
     }
 }

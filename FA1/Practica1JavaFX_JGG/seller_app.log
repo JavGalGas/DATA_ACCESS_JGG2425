@@ -1,0 +1,16 @@
+nov 17, 2024 11:53:16 P. M. com.jgg.unit4.practica1javafx_jgg.SellerApplication main
+INFORMACIÓN: Program beginning
+nov 17, 2024 11:53:19 P. M. com.jgg.unit4.practica1javafx_jgg.LoginController checkLogin
+GRAVE: User and Password are Empty!
+nov 17, 2024 11:53:22 P. M. com.jgg.unit4.practica1javafx_jgg.LoginController checkLogin
+GRAVE: Password is Empty!
+nov 17, 2024 11:53:25 P. M. com.jgg.unit4.practica1javafx_jgg.LoginController checkLogin
+GRAVE: User is Empty!
+nov 17, 2024 11:53:29 P. M. com.jgg.unit4.practica1javafx_jgg.GenericClassCRUD openSession
+INFORMACIÓN: Opening session
+nov 17, 2024 11:53:29 P. M. com.jgg.unit4.practica1javafx_jgg.LoginController checkLogin
+INFORMACIÓN: Login Unsuccessful!
+nov 17, 2024 11:54:27 P. M. com.jgg.unit4.practica1javafx_jgg.GenericClassCRUD openSession
+INFORMACIÓN: Opening session
+nov 17, 2024 11:54:27 P. M. com.jgg.unit4.practica1javafx_jgg.LoginController checkLogin
+INFORMACIÓN: Login Successful!
