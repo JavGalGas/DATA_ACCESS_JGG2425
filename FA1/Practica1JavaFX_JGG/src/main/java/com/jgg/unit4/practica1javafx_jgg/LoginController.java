@@ -4,6 +4,7 @@ import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -20,7 +21,7 @@ public class LoginController {
     @FXML
     public Button loginButton;
     @FXML
-    private AnchorPane mainPane;
+    private AnchorPane loginAPane;
     @FXML
     private PasswordField userText;
 
@@ -32,12 +33,9 @@ public class LoginController {
 
     @FXML
     protected void onLoginButtonClick() {
-//        System.out.println("Login Button Clicked!");
         String user = userText.getText();
         String passwd = passwdText.getText();
         checkLogin(user, passwd);
-//        System.out.println("User: " + user);
-//        System.out.println("Password: " + passwd);
     }
 
     public void checkLogin(String user, String passwd) {
@@ -52,7 +50,6 @@ public class LoginController {
             errorMessage.setText("Password is Empty!");
         } else {
             try {
-
                 GenericClassCRUD<Seller> crud = new GenericClassCRUD<>(Seller.class);
 
                 List<Seller> sellers = crud.findAll();
@@ -63,23 +60,22 @@ public class LoginController {
                         errorMessage.setText("Login Successful!");
                         try {
                             SellerApplication.LOGGER.info("Loading screen...");
-                            FXMLLoader loader = new FXMLLoader(getClass().getResource("seller_data-view.fxml"));
+                            FXMLLoader loader = new FXMLLoader(SellerApplication.class.getResource("prod_offers-view.fxml"/*"seller_data-view.fxml"*/));
                             Parent root = loader.load();
-                            mainPane.getChildren().clear();
-                            mainPane.getChildren().add(root);
+                            Scene scene = new Scene(root, 600,400);
+                            SellerApplication.getAppStage().setScene(scene);
+
                         } catch (IOException ioException) {
                             SellerApplication.LOGGER.log(Level.SEVERE, "An error occurred while loading the seller_data-view.fxml ", ioException);
-//                            SellerApplication.LOGGER.info(ioException.getMessage());
                             Alert alert = new Alert(Alert.AlertType.ERROR);
                             alert.setTitle("Error");
-                            alert.setHeaderText("An error occurred.");
+                            alert.setHeaderText("An error occurred while loading the scene");
                             alert.setContentText(ioException.getMessage());
 
                             alert.showAndWait();
 
                             Platform.exit();
                         }
-                        /*Go to the next screen*/
                         return;
                     }
                 }
@@ -93,6 +89,8 @@ public class LoginController {
                 alert.setTitle("Error");
                 alert.setHeaderText("An error occurred while login");
                 alert.setContentText(exception.getMessage());
+                alert.showAndWait();
+
             }
         }
     }

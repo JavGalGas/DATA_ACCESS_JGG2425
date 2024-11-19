@@ -12,12 +12,20 @@ import java.util.logging.Logger;
 import java.util.logging.SimpleFormatter;
 
 public class SellerApplication extends Application {
+    private static Stage appStage;
     public static final Logger LOGGER = Logger.getLogger(SellerApplication.class.getName());
+
+    public static Stage getAppStage() {
+        return appStage;
+    }
+
     @Override
     public void start(Stage stage) throws IOException {
+        appStage = stage;
         FXMLLoader fxmlLoader = new FXMLLoader(SellerApplication.class.getResource("login-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 600, 400);
         stage.setTitle("SellerApp");
+        stage.setResizable(false);
         stage.setScene(scene);
         stage.show();
     }
@@ -34,8 +42,6 @@ public class SellerApplication extends Application {
             fileHandler.close();
         } catch (Exception exception) {
             LOGGER.log(Level.SEVERE, "Error while configuring the logger", exception);
-            LOGGER.info(exception.getMessage());
-            LOGGER.severe("A critical error occurred during initialization.");
         }
     }
 }

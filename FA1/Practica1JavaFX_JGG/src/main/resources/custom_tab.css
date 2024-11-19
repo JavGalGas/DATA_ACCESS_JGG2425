@@ -1,0 +1,30 @@
+.custom_tab {
+    -fx-background-color: transparent;
+    -fx-transition: -fx-background-color 0.3s ease-in-out; /* Transición para el fondo */
+}
+
+.custom_tab:hover{
+    -fx-background-color:  #58A05C;
+    -fx-transition: -fx-effect 0.5s ease-in-out;
+}
+
+.tabImgView {
+    -fx-effect: null;
+}
+
+.tabImgView:hover {
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.7), 10, 0, 0, 1);
+}
+
+#tab1:hover{
+    -fx-image: url("Images/userImg2.png");
+}
+#tab2:hover{
+    -fx-image: url("Images/productImg2.png");
+}
+#tab3:hover{
+    -fx-image: url("Images/offerImg2.png");
+}
+#tab4:hover{
+     -fx-image: url("Images/exitImg2.png");
+}
