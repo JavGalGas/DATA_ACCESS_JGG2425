@@ -1,0 +1,19 @@
+.custom_tab {
+    -fx-background-color: transparent;
+    -fx-transition: -fx-background-color 0.3s ease-in-out; /* Transición para el fondo */
+}
+
+.custom_tab:hover{
+    -fx-background-color: #424B43;
+    -fx-transition: -fx-effect 0.5s ease-in-out;
+}
+
+.imagen {
+    -fx-image: url("@../imagenes/imagen.png"); /* Imagen normal */
+    -fx-effect: null; /* Inicialmente sin efecto */
+}
+
+.imagen:hover {
+    -fx-image: url("@../imagenes/imagen_hover.png");
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.7), 10, 0, 0, 1); /* Efecto de desvanecimiento */
+}

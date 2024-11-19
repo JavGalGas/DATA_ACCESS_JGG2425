@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.jgg.unit4.practica1javafx_jgg.ProdOffersController">
+   <VBox alignment="CENTER" prefHeight="400.0" prefWidth="120.0" style="-fx-background-color: linear-gradient(to bottom, #58a05c, #4BBF50, #4BBF50);" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="480.0" AnchorPane.topAnchor="0.0">
+      <HBox fx:id="button1" styleClass="custom_tab" alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+         <children>
+            <ImageView fitHeight="80.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
+               <Image url="@../../../../Images/user-circle-svgrepo-com.png" />
+            </ImageView>
+         </children>
+      </HBox>
+      <HBox fx:id="button2" styleClass="custom_tab" alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+         <children>
+            <ImageView fitHeight="80.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
+               <Image url="@../../../../Images/product-f-svgrepo-com.png" />
+            </ImageView>
+         </children>
+      </HBox>
+      <HBox fx:id="button3" styleClass="custom_tab" alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+         <children>
+            <ImageView fitHeight="80.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
+               <Image url="@../../../../Images/offer-svgrepo-com.png" />
+            </ImageView>
+         </children>
+      </HBox>
+      <HBox fx:id="button4" styleClass="custom_tab" alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+         <children>
+            <ImageView fitHeight="70.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
+               <Image url="@../../../../Images/exit-svgrepo-com.png" />
+               <HBox.margin>
+                  <Insets left="10.0" />
+               </HBox.margin>
+            </ImageView>
+         </children>
+      </HBox>
+   </VBox>
+   <VBox alignment="CENTER" prefHeight="400.0" prefWidth="480.0" spacing="35.0" style="-fx-background-color: #547556;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="120.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <padding>
+         <Insets bottom="10.0" />
+      </padding>
+      <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Add offer" textAlignment="CENTER">
+         <VBox.margin>
+            <Insets />
+         </VBox.margin>
+         <font>
+            <Font name="Berlin Sans FB" size="36.0" />
+         </font>
+      </Text>
+      <Label contentDisplay="RIGHT" graphicTextGap="60.0" prefHeight="25.0" prefWidth="480.0" text="Product: " textFill="WHITE">
+         <graphic>
+            <ComboBox prefWidth="300.0" />
+         </graphic>
+         <padding>
+            <Insets left="20.0" />
+         </padding>
+         <font>
+            <Font name="Broadway" size="18.0" />
+         </font>
+      </Label>
+      <Label contentDisplay="RIGHT" graphicTextGap="86.0" layoutX="159.0" layoutY="65.0" prefWidth="480.0" text="From: " textFill="WHITE">
+         <graphic>
+            <DatePicker prefWidth="300.0" />
+         </graphic>
+         <font>
+            <Font name="Broadway" size="18.0" />
+         </font>
+         <padding>
+            <Insets left="20.0" />
+         </padding>
+      </Label>
+      <Label contentDisplay="RIGHT" graphicTextGap="116.0" layoutX="159.0" layoutY="90.0" prefWidth="480.0" text="To: " textFill="WHITE">
+         <graphic>
+            <DatePicker prefWidth="300.0" />
+         </graphic>
+         <font>
+            <Font name="Broadway" size="18.0" />
+         </font>
+         <padding>
+            <Insets left="20.0" />
+         </padding>
+      </Label>
+      <Label contentDisplay="RIGHT" graphicTextGap="55.0" layoutX="159.0" layoutY="115.0" prefWidth="480.0" text="Discount: " textFill="WHITE">
+         <graphic>
+            <TextField prefWidth="300.0" />
+         </graphic>
+         <padding>
+            <Insets left="20.0" />
+         </padding>
+         <font>
+            <Font name="Broadway" size="18.0" />
+         </font>
+      </Label>
+      <Button mnemonicParsing="false" prefHeight="30.0" prefWidth="150.0" style="-fx-background-color: linear-gradient(to bottom, #4BBF50, #58A05C, #4BBF50);" text="Add" textAlignment="CENTER" textFill="WHITE">
+         <font>
+            <Font name="Broadway" size="14.0" />
+         </font>
+      </Button>
+   </VBox>
+</AnchorPane>

@@ -9,7 +9,6 @@ import org.hibernate.query.Query;
 
 import java.util.Collections;
 import java.util.List;
-import java.util.Optional;
 import java.util.logging.Level;
 import javax.naming.Referenceable;
 

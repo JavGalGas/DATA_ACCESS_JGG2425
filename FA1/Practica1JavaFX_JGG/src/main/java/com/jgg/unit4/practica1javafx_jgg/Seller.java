@@ -1,8 +1,10 @@
 package com.jgg.unit4.practica1javafx_jgg;
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.DynamicUpdate;
 
 @Entity
+@DynamicUpdate
 @Table(name = "sellers")
 public class Seller {
     @Id

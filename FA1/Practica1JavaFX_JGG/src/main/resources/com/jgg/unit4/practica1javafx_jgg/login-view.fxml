@@ -6,77 +6,83 @@
 <?import javafx.scene.paint.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="400.0" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.jgg.unit4.practica1javafx_jgg.LoginController">
-   <children>
-      <VBox alignment="CENTER" prefHeight="80.0" prefWidth="600.0" style="-fx-background-color: linear-gradient(to bottom, #547556,#58a05c,#58a05c);" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
-         <children>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="WELCOME" textAlignment="CENTER">
-               <font>
-                  <Font name="Berlin Sans FB" size="56.0" />
-               </font>
-               <fill>
-                  <LinearGradient endX="1.0" endY="1.0" startX="1.0">
-                     <stops>
-                        <Stop>
-                           <color>
-                              <Color red="0.8666666746139526" green="0.8666666746139526" blue="0.8666666746139526" />
-                           </color>
-                        </Stop>
-                        <Stop offset="1.0">
-                           <color>
-                              <Color red="1.0" green="1.0" blue="1.0" />
-                           </color>
-                        </Stop>
-                     </stops>
-                  </LinearGradient>
-               </fill>
-            </Text>
-         </children>
-      </VBox>
-      <VBox alignment="CENTER" prefHeight="225.0" prefWidth="600.0" style="-fx-background-color: linear-gradient(to bottom, #eeeeee,#aaaaaa,#eeeeee);" AnchorPane.bottomAnchor="95.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="80.0">
-         <children>
-            <Label contentDisplay="RIGHT" graphicTextGap="80.0" prefHeight="35.0" prefWidth="600.0" text="User:" textFill="#283629">
-               <graphic>
-                  <PasswordField fx:id="userText" prefHeight="33.0" prefWidth="400.0" style="-fx-background-radius: 15;" />
-               </graphic>
-               <font>
-                  <Font name="Broadway" size="20.0" />
-               </font>
-               <VBox.margin>
-                  <Insets left="30.0" />
-               </VBox.margin>
-            </Label>
-            <Separator prefHeight="50.0" prefWidth="600.0" visible="false" />
-            <Label contentDisplay="RIGHT" graphicTextGap="20.0" prefHeight="35.0" prefWidth="600.0" text="Password: " textFill="#283629">
-               <graphic>
-                  <PasswordField fx:id="passwdText" prefHeight="33.0" prefWidth="400.0" style="-fx-background-radius: 15;" />
-               </graphic>
-               <font>
-                  <Font name="Broadway" size="20.0" />
-               </font>
-               <VBox.margin>
-                  <Insets left="30.0" />
-               </VBox.margin>
-            </Label>
-            <Separator prefHeight="25.0" prefWidth="600.0" visible="false" />
-            <Label fx:id="errorMessage" text="" textAlignment="CENTER" textFill="#ff0064">
-               <font>
-                  <Font name="Broadway" size="16.0" />
-               </font>
-            </Label>
-         </children>
-         <padding>
-            <Insets top="25.0" />
-         </padding>
-      </VBox>
-      <VBox alignment="CENTER" prefHeight="95.0" prefWidth="600.0" style="-fx-background-color: linear-gradient(to top, #547556,#58a05c,#58a05c);" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
-         <children>
-            <Button fx:id="loginButton" onAction="#onLoginButtonClick" alignment="CENTER" mnemonicParsing="false" style="-fx-background-color: linear-gradient(to bottom, #aaaaaa,#eeeeee, #aaaaaa);" text="Login" textAlignment="CENTER" textFill="#4bbf50">
-               <font>
-                  <Font name="Broadway" size="24.0" />
-               </font>
-            </Button>
-         </children>
-      </VBox>
-   </children>
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="400.0" minWidth="-Infinity" prefHeight="400.0"
+            prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.jgg.unit4.practica1javafx_jgg.LoginController">
+   <VBox alignment="CENTER" prefHeight="80.0" prefWidth="600.0"
+         style="-fx-background-color: linear-gradient(to bottom, #547556,#58a05c,#58a05c);" AnchorPane.leftAnchor="0.0"
+         AnchorPane.rightAnchor="0.0">
+      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="WELCOME" textAlignment="CENTER">
+         <font>
+            <Font name="Berlin Sans FB" size="56.0"/>
+         </font>
+         <fill>
+            <LinearGradient startX="1.0">
+               <stops>
+                  <Stop>
+                     <color>
+                        <Color red="0.8666666746139526" green="0.8666666746139526" blue="0.8666666746139526"/>
+                     </color>
+                  </Stop>
+                  <Stop offset="1.0">
+                     <color>
+                        <Color red="1.0" green="1.0" blue="1.0"/>
+                     </color>
+                  </Stop>
+               </stops>
+            </LinearGradient>
+         </fill>
+      </Text>
+   </VBox>
+   <VBox alignment="CENTER" prefHeight="225.0" prefWidth="600.0"
+         style="-fx-background-color: linear-gradient(to bottom, #eeeeee,#aaaaaa,#eeeeee);"
+         AnchorPane.bottomAnchor="95.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
+         AnchorPane.topAnchor="80.0">
+      <padding>
+         <Insets top="25.0"/>
+      </padding>
+      <Label contentDisplay="RIGHT" graphicTextGap="80.0" prefHeight="35.0" prefWidth="600.0" text="User:"
+             textFill="#283629">
+         <graphic>
+            <PasswordField fx:id="userText" prefHeight="33.0" prefWidth="400.0" style="-fx-background-radius: 15;"/>
+         </graphic>
+         <font>
+            <Font name="Broadway" size="20.0"/>
+         </font>
+         <VBox.margin>
+            <Insets left="30.0"/>
+         </VBox.margin>
+      </Label>
+      <Separator prefHeight="50.0" prefWidth="600.0" visible="false"/>
+      <Label contentDisplay="RIGHT" graphicTextGap="20.0" prefHeight="35.0" prefWidth="600.0" text="Password: "
+             textFill="#283629">
+         <graphic>
+            <PasswordField fx:id="passwdText" prefHeight="33.0" prefWidth="400.0"
+                           style="-fx-background-radius: 15;"/>
+         </graphic>
+         <font>
+            <Font name="Broadway" size="20.0"/>
+         </font>
+         <VBox.margin>
+            <Insets left="30.0"/>
+         </VBox.margin>
+      </Label>
+      <Separator prefHeight="25.0" prefWidth="600.0" visible="false"/>
+      <Label fx:id="errorMessage" textAlignment="CENTER" textFill="#ff0064">
+         <font>
+            <Font name="Broadway" size="16.0"/>
+         </font>
+      </Label>
+   </VBox>
+   <VBox alignment="CENTER" prefHeight="95.0" prefWidth="600.0"
+         style="-fx-background-color: linear-gradient(to top, #547556,#58a05c,#58a05c);" AnchorPane.bottomAnchor="0.0"
+         AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+      <Button fx:id="loginButton" alignment="CENTER" mnemonicParsing="false" onAction="#onLoginButtonClick"
+              style="-fx-background-color: linear-gradient(to bottom, #aaaaaa,#eeeeee, #aaaaaa);" text="Login"
+              textAlignment="CENTER" textFill="#4bbf50">
+         <font>
+            <Font name="Broadway" size="24.0"/>
+         </font>
+      </Button>
+   </VBox>
 </AnchorPane>
