@@ -96,7 +96,7 @@
             <Font name="Broadway" size="18.0" />
          </font>
       </Label>
-      <Button onAction="#addOffer" mnemonicParsing="false" prefHeight="30.0" prefWidth="150.0" style="-fx-background-color: linear-gradient(to bottom, #4BBF50, #58A05C, #4BBF50);" text="Add" textAlignment="CENTER" textFill="WHITE">
+      <Button onAction="#onAddButtonClick" mnemonicParsing="false" prefHeight="30.0" prefWidth="150.0" style="-fx-background-color: linear-gradient(to bottom, #4BBF50, #58A05C, #4BBF50);" text="Add" textAlignment="CENTER" textFill="WHITE">
          <font>
             <Font name="Broadway" size="14.0" />
          </font>
