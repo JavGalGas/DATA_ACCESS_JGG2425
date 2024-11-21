@@ -9,7 +9,6 @@ import javafx.scene.layout.HBox;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.List;
 import java.util.Objects;
 import java.util.logging.Level;
 
@@ -49,15 +48,20 @@ public class ProdOffersController {
             try{
                 product.setOfferStartDate(from);
                 product.setOfferEndDate(to);
-                BigDecimal percentage = new BigDecimal(discount);
-                BigDecimal discountedPrice = product.getPrice().multiply(percentage).divide(new BigDecimal(100));
+                double convertedDiscount = Double.parseDouble(discount);
+                convertedDiscount /= 100;
+                BigDecimal percentage = new BigDecimal(convertedDiscount);
+                BigDecimal discountedPrice = product.getPrice().multiply(percentage);
                 product.setOfferPrice(discountedPrice);
                 GenericClassCRUD<SellerProduct> sp_crud = new GenericClassCRUD<>(SellerProduct.class);
                 sp_crud.update(product);
 
+            } catch (NumberFormatException numberFormatException) {
+                SellerApplication.LOGGER.log(Level.SEVERE, "An error occurred while parsing the discount", numberFormatException);
 
             } catch(Exception exception){
                 SellerApplication.LOGGER.log(Level.SEVERE, "An error occurred while adding a new offer", exception);
+
             }
         }
     }
