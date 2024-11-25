@@ -8,7 +8,7 @@
 
 <AnchorPane fx:id="loginAPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="400.0" minWidth="-Infinity" prefHeight="400.0"
             prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="com.jgg.unit4.practica1javafx_jgg.LoginController">
+            fx:controller="com.jgg.unit4.practica1javafx_jgg.controllers.LoginController">
    <VBox alignment="CENTER" prefHeight="80.0" prefWidth="600.0"
          style="-fx-background-color: linear-gradient(to bottom, #547556,#58a05c,#58a05c);" AnchorPane.leftAnchor="0.0"
          AnchorPane.rightAnchor="0.0">

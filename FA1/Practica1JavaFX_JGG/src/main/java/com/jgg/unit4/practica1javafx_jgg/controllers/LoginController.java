@@ -1,20 +1,26 @@
-package com.jgg.unit4.practica1javafx_jgg;
+package com.jgg.unit4.practica1javafx_jgg.controllers;
 
+import com.jgg.unit4.practica1javafx_jgg.GenericClassCRUD;
+import com.jgg.unit4.practica1javafx_jgg.db.Seller;
+import com.jgg.unit4.practica1javafx_jgg.SellerApplication;
+import com.jgg.unit4.practica1javafx_jgg.UI;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.net.URL;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.List;
+import java.util.Objects;
 import java.util.logging.Level;
 
 public class LoginController {
@@ -60,20 +66,18 @@ public class LoginController {
                         errorMessage.setText("Login Successful!");
                         try {
                             SellerApplication.LOGGER.info("Loading screen...");
-                            FXMLLoader loader = new FXMLLoader(SellerApplication.class.getResource("prod_offers-view.fxml"/*"seller_data-view.fxml"*/));
+                            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/jgg/unit4/practica1javafx_jgg/prod_offers-view.fxml"/*"seller_data-view.fxml"*/));
                             Parent root = loader.load();
-                            Scene scene = new Scene(root, 600,400);
-                            SellerApplication.getAppStage().setScene(scene);
 
+                            Scene scene = new Scene(root);
+                            Stage currentStage = (Stage) loginButton.getScene().getWindow();
+                            currentStage.setScene(scene);
+                            currentStage.show();
                         } catch (IOException ioException) {
                             SellerApplication.LOGGER.log(Level.SEVERE, "An error occurred while loading the seller_data-view.fxml ", ioException);
-                            Alert alert = new Alert(Alert.AlertType.ERROR);
-                            alert.setTitle("Error");
-                            alert.setHeaderText("An error occurred while loading the scene");
-                            alert.setContentText(ioException.getMessage());
-
-                            alert.showAndWait();
-
+                            UI.showErrorAlert("Error", "An error occurred while loading the scene", ioException.getMessage());
+                            Stage currentStage = (Stage) loginButton.getScene().getWindow();
+                            currentStage.close();
                             Platform.exit();
                         }
                         return;
@@ -84,13 +88,7 @@ public class LoginController {
             }
             catch (Exception exception) {
                 SellerApplication.LOGGER.log(Level.SEVERE, "An error occurred while login ", exception);
-//                SellerApplication.LOGGER.info("Login Unsuccessful: " + exception.getMessage() );
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Error");
-                alert.setHeaderText("An error occurred while login");
-                alert.setContentText(exception.getMessage());
-                alert.showAndWait();
-
+                UI.showErrorAlert("Error", "An error occurred while login", exception.getMessage());
             }
         }
     }
@@ -111,11 +109,7 @@ public class LoginController {
             return generatedHash.equalsIgnoreCase(storedHash);
         } catch (NoSuchAlgorithmException exception) {
             SellerApplication.LOGGER.log(Level.SEVERE, "Password Hash Not Built Correctly", exception);
-//            SellerApplication.LOGGER.info("Password Hash Not Built Correctly: " + exception.getMessage() );
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error");
-            alert.setHeaderText("Password Hash Not Built Correctly");
-            alert.setContentText(exception.getMessage());
+            UI.showErrorAlert("Error", "Password Hash Not Built Correctly", exception.getMessage());
             return false;
         }
     }

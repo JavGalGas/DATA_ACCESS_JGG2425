@@ -7,19 +7,19 @@
     <property name="connection.url">jdbc:postgresql://localhost:5432/SellerDB</property>
     <property name="connection.driver_class">org.postgresql.Driver</property>
     <property name="connection.username">postgres</property>
-    <property name="connection.password">admin</property>
+    <property name="connection.password">postgres</property>
     <property name="hibernate.show_sql">true</property>
     <property name="hibernate.format_sql">true</property>
     <property name="hibernate.use_sql_comments">true</property>
     <property name="hibernate.generate_statistics">true</property>
-    <mapping class="com.jgg.unit4.practica1javafx_jgg.Category"/>
-    <mapping class="com.jgg.unit4.practica1javafx_jgg.Order"/>
-    <mapping class="com.jgg.unit4.practica1javafx_jgg.OrderDetail"/>
-    <mapping class="com.jgg.unit4.practica1javafx_jgg.Product"/>
-    <mapping class="com.jgg.unit4.practica1javafx_jgg.Review"/>
-    <mapping class="com.jgg.unit4.practica1javafx_jgg.Seller"/>
-    <mapping class="com.jgg.unit4.practica1javafx_jgg.SellerProduct"/>
-    <mapping class="com.jgg.unit4.practica1javafx_jgg.User"/>
+    <mapping class="com.jgg.unit4.practica1javafx_jgg.db.Category"/>
+    <mapping class="com.jgg.unit4.practica1javafx_jgg.db.Order"/>
+    <mapping class="com.jgg.unit4.practica1javafx_jgg.db.OrderDetail"/>
+    <mapping class="com.jgg.unit4.practica1javafx_jgg.db.Product"/>
+    <mapping class="com.jgg.unit4.practica1javafx_jgg.db.Review"/>
+    <mapping class="com.jgg.unit4.practica1javafx_jgg.db.Seller"/>
+    <mapping class="com.jgg.unit4.practica1javafx_jgg.db.SellerProduct"/>
+    <mapping class="com.jgg.unit4.practica1javafx_jgg.db.User"/>
 
 
     <!-- DB schema will be updated if needed -->

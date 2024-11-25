@@ -1,12 +1,18 @@
-package com.jgg.unit4.practica1javafx_jgg;
+package com.jgg.unit4.practica1javafx_jgg.db;
 
 import jakarta.persistence.*;
 import org.hibernate.annotations.ColumnDefault;
+import org.hibernate.annotations.Filter;
+import org.hibernate.annotations.FilterDef;
+import org.hibernate.annotations.ParamDef;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
+
 @Entity
+@FilterDef(name="sellerProductsFilter", parameters=@ParamDef(name="sellerId", type= Integer.class))
+@Filter(name = "sellerProductsFilter", condition = "seller_id = :sellerId")
 @Table(name = "seller_products")
 public class SellerProduct {
     @Id

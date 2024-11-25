@@ -1,4 +1,4 @@
-package com.jgg.unit4.practica1javafx_jgg;
+package com.jgg.unit4.practica1javafx_jgg.db;
 
 import jakarta.persistence.*;
 
