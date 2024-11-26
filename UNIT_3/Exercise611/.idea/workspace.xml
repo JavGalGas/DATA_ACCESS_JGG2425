@@ -4,7 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="41ce2d67-49d6-41c5-97b2-10f34e63404d" name="Changes" comment="" />
+    <list default="true" id="41ce2d67-49d6-41c5-97b2-10f34e63404d" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/../../FA1/Practica1JavaFX_JGG/seller_app.log" beforeDir="false" afterPath="$PROJECT_DIR$/../../FA1/Practica1JavaFX_JGG/seller_app.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../FA1/Practica1JavaFX_JGG/seller_app.log.lck" beforeDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -61,8 +64,8 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-jdk-9823dce3aa75-28b599e66164-intellij.indexing.shared.core-IU-242.23339.11" />
-        <option value="bundled-js-predefined-d6986cc7102b-5c90d61e3bab-JavaScript-IU-242.23339.11" />
+        <option value="bundled-jdk-9823dce3aa75-28b599e66164-intellij.indexing.shared.core-IU-242.23726.103" />
+        <option value="bundled-js-predefined-d6986cc7102b-5c90d61e3bab-JavaScript-IU-242.23726.103" />
       </set>
     </attachedChunks>
   </component>
@@ -83,6 +86,7 @@
       <workItem from="1729863410537" duration="12000" />
       <workItem from="1729863469779" duration="7000" />
       <workItem from="1730129275337" duration="12000" />
+      <workItem from="1732633476664" duration="61000" />
     </task>
     <servers />
   </component>

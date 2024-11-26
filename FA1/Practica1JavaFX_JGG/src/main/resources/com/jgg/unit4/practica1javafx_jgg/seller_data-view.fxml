@@ -39,7 +39,7 @@
             <Font name="Berlin Sans FB" size="36.0" />
          </font>
       </Text>
-      <Label contentDisplay="RIGHT" graphicTextGap="55.0" layoutX="159.0" layoutY="115.0" prefWidth="480.0" text="CIF: " textFill="WHITE">
+      <Label contentDisplay="RIGHT" graphicTextGap="240.0" layoutX="159.0" layoutY="115.0" prefWidth="480.0" text="CIF: " textFill="WHITE">
          <padding>
             <Insets left="20.0" />
          </padding>
@@ -47,23 +47,15 @@
             <Font name="Broadway" size="18.0" />
          </font>
          <graphic>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
+            <Text fx:id="sellerCif" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Text">
+               <font>
+                  <Font name="Broadway" size="18.0" />
+               </font></Text>
          </graphic>
       </Label>
-      <Label contentDisplay="RIGHT" graphicTextGap="55.0" layoutX="10.0" layoutY="196.0" prefWidth="480.0" text="Name: " textFill="WHITE">
+      <Label contentDisplay="RIGHT" graphicTextGap="95.0" layoutX="10.0" layoutY="196.0" prefWidth="480.0" text="Name: " textFill="WHITE">
          <graphic>
-            <TextField prefWidth="300.0" />
-         </graphic>
-         <padding>
-            <Insets left="20.0" />
-         </padding>
-         <font>
-            <Font name="Broadway" size="18.0" />
-         </font>
-      </Label>
-      <Label contentDisplay="RIGHT" graphicTextGap="55.0" layoutX="10.0" layoutY="228.0" prefWidth="480.0" text="Business name: " textFill="WHITE">
-         <graphic>
-            <TextField prefWidth="300.0" />
+            <TextField fx:id="sellerName" prefWidth="280.0" />
          </graphic>
          <padding>
             <Insets left="20.0" />
@@ -72,9 +64,9 @@
             <Font name="Broadway" size="18.0" />
          </font>
       </Label>
-      <Label contentDisplay="RIGHT" graphicTextGap="55.0" layoutX="10.0" layoutY="132.0" prefWidth="480.0" text="Phone: " textFill="WHITE">
+      <Label contentDisplay="RIGHT" graphicTextGap="8.0" layoutX="10.0" layoutY="228.0" prefWidth="480.0" text="Business name: " textFill="WHITE">
          <graphic>
-            <TextField prefWidth="300.0" />
+            <TextField fx:id="sellerBName" prefWidth="280.0" />
          </graphic>
          <padding>
             <Insets left="20.0" />
@@ -83,9 +75,9 @@
             <Font name="Broadway" size="18.0" />
          </font>
       </Label>
-      <Label contentDisplay="RIGHT" graphicTextGap="55.0" layoutX="10.0" layoutY="100.0" prefWidth="480.0" text="Email: " textFill="WHITE">
+      <Label contentDisplay="RIGHT" graphicTextGap="92.0" layoutX="10.0" layoutY="132.0" prefWidth="480.0" text="Phone: " textFill="WHITE">
          <graphic>
-            <TextField prefWidth="300.0" />
+            <TextField fx:id="sellerPhone" prefWidth="280.0" />
          </graphic>
          <padding>
             <Insets left="20.0" />
@@ -94,9 +86,20 @@
             <Font name="Broadway" size="18.0" />
          </font>
       </Label>
-      <Label contentDisplay="RIGHT" graphicTextGap="55.0" layoutX="10.0" layoutY="402.0" prefWidth="480.0" text="Password: " textFill="WHITE">
+      <Label contentDisplay="RIGHT" graphicTextGap="95.0" layoutX="10.0" layoutY="100.0" prefWidth="480.0" text="Email: " textFill="WHITE">
          <graphic>
-            <TextField prefWidth="300.0" />
+            <TextField fx:id="sellerEmail" prefWidth="280.0" />
+         </graphic>
+         <padding>
+            <Insets left="20.0" />
+         </padding>
+         <font>
+            <Font name="Broadway" size="18.0" />
+         </font>
+      </Label>
+      <Label contentDisplay="RIGHT" graphicTextGap="61.0" layoutX="10.0" layoutY="402.0" prefWidth="480.0" text="Password: " textFill="WHITE">
+         <graphic>
+            <TextField fx:id="sellerPasswd" prefWidth="280.0" />
          </graphic>
          <padding>
             <Insets left="20.0" />

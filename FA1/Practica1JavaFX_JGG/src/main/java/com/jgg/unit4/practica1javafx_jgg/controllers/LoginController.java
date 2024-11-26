@@ -16,11 +16,9 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.net.URL;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.List;
-import java.util.Objects;
 import java.util.logging.Level;
 
 public class LoginController {
@@ -36,6 +34,16 @@ public class LoginController {
 
     @FXML
     private Label errorMessage;
+
+    private static Seller user;
+
+    public static Seller getUser() {
+        return user;
+    }
+
+    public static void setUser(Seller user) {
+        LoginController.user = user;
+    }
 
     @FXML
     protected void onLoginButtonClick() {
@@ -61,12 +69,13 @@ public class LoginController {
                 List<Seller> sellers = crud.findAll();
                 for (Seller seller : sellers) {
 
-                    if (user.equals(seller.getCif()) && checkPassword(passwd, seller.getPassword())) {
+                    if (user.equals(seller.getCif()) && UI.convertToMD5(passwd).equals(seller.getPassword())) {
                         SellerApplication.LOGGER.info("Login Successful!");
                         errorMessage.setText("Login Successful!");
                         try {
+                            setUser(seller);
                             SellerApplication.LOGGER.info("Loading screen...");
-                            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/jgg/unit4/practica1javafx_jgg/prod_offers-view.fxml"/*"seller_data-view.fxml"*/));
+                            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/jgg/unit4/practica1javafx_jgg/seller_data-view.fxml"));
                             Parent root = loader.load();
 
                             Scene scene = new Scene(root);
@@ -90,27 +99,6 @@ public class LoginController {
                 SellerApplication.LOGGER.log(Level.SEVERE, "An error occurred while login ", exception);
                 UI.showErrorAlert("Error", "An error occurred while login", exception.getMessage());
             }
-        }
-    }
-
-    public static boolean checkPassword(String password, String storedHash) {
-        try {
-            MessageDigest md = MessageDigest.getInstance("MD5");
-
-            byte[] hashedBytes = md.digest(password.getBytes());
-
-            StringBuilder sb = new StringBuilder();
-            for (byte b : hashedBytes)
-            {
-                sb.append(String.format("%02x",  b));
-            }
-            String generatedHash = sb.toString();
-
-            return generatedHash.equalsIgnoreCase(storedHash);
-        } catch (NoSuchAlgorithmException exception) {
-            SellerApplication.LOGGER.log(Level.SEVERE, "Password Hash Not Built Correctly", exception);
-            UI.showErrorAlert("Error", "Password Hash Not Built Correctly", exception.getMessage());
-            return false;
         }
     }
 
