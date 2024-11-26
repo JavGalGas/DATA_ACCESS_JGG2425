@@ -6,26 +6,31 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane fx:id="sDataAPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.jgg.unit4.practica1javafx_jgg.controllers.SellerDataController">
+<AnchorPane fx:id="sDataAPane" stylesheets="/css/custom_tab.css" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.jgg.unit4.practica1javafx_jgg.controllers.SellerDataController">
    <VBox alignment="TOP_CENTER" prefHeight="400.0" prefWidth="120.0" spacing="10.0" style="-fx-background-color: linear-gradient(to bottom, #58a05c, #4BBF50, #4BBF50);" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="480.0" AnchorPane.topAnchor="0.0">
-      <padding>
-         <Insets bottom="10.0" top="10.0" />
-      </padding>
-      <ImageView fitHeight="80.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
-         <Image url="@../../../../Images/userImg1.png" />
-      </ImageView>
-      <ImageView fitHeight="80.0" fitWidth="100.0" layoutX="10.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
-         <Image url="@../../../../Images/productImg1.png" />
-      </ImageView>
-      <ImageView fitHeight="80.0" fitWidth="100.0" layoutX="10.0" layoutY="110.0" pickOnBounds="true" preserveRatio="true">
-         <Image url="@../../../../Images/offerImg1.png" />
-      </ImageView>
-      <ImageView fitHeight="70.0" fitWidth="100.0" layoutX="10.0" layoutY="210.0" pickOnBounds="true" preserveRatio="true">
-         <VBox.margin>
-            <Insets left="10.0" top="10.0" />
-         </VBox.margin>
-         <Image url="@../../../../Images/exitImg1.png" />
-      </ImageView>
+      <HBox fx:id="tab1" alignment="CENTER" prefHeight="100.0" prefWidth="200.0" styleClass="custom_tab">
+         <ImageView fitHeight="80.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true" styleClass="tabImgView">
+            <Image url="@../../../../Images/userImg1.png"/>
+         </ImageView>
+      </HBox>
+      <HBox fx:id="tab2" alignment="CENTER" prefHeight="100.0" prefWidth="200.0" styleClass="custom_tab">
+         <ImageView fitHeight="80.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true" styleClass="tabImgView">
+            <Image url="@../../../../Images/productImg1.png"/>
+         </ImageView>
+      </HBox>
+      <HBox fx:id="tab3" alignment="CENTER" prefHeight="100.0" prefWidth="200.0" styleClass="custom_tab">
+         <ImageView fitHeight="80.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true" styleClass="tabImgView">
+            <Image url="@../../../../Images/offerImg1.png"/>
+         </ImageView>
+      </HBox>
+      <HBox fx:id="tab4" alignment="CENTER" prefHeight="100.0" prefWidth="200.0" styleClass="custom_tab">
+         <ImageView fitHeight="70.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true" styleClass="tabImgView">
+            <Image url="@../../../../Images/exitImg1.png"/>
+            <HBox.margin>
+               <Insets left="10.0"/>
+            </HBox.margin>
+         </ImageView>
+      </HBox>
    </VBox>
    <VBox alignment="CENTER" prefHeight="400.0" prefWidth="480.0" spacing="20.0" style="-fx-background-color: #547556;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="120.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
       <padding>

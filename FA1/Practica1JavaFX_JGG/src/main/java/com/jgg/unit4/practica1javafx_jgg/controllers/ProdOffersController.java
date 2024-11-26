@@ -102,15 +102,6 @@ public class ProdOffersController {
     private void initialize() {
 //        productCB.setConverter(converter);
         productCB.getItems().addAll(fetchProducts());
-        // Get the current scene
-        Scene scene = SellerApplication.getAppStage().getScene();
-        // Add the CSS file
-        try {
-            scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("/css/custom_tab.css")).toExternalForm());
-        } catch (NullPointerException exception) {
-            SellerApplication.LOGGER.log(Level.SEVERE, "Resource was null", exception);
-            UI.showErrorAlert("Error", "Resource was null", exception.getMessage());
-        }
     }
 
     StringConverter<SellerProduct> converter = new StringConverter<>() {

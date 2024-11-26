@@ -9,6 +9,7 @@ import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.text.Text;
 
 import java.util.Objects;
@@ -24,6 +25,10 @@ public class SellerDataController {
     public TextField sellerPhone;
     public TextField sellerEmail;
     public TextField sellerPasswd;
+    public HBox tab1;
+    public HBox tab2;
+    public HBox tab3;
+    public HBox tab4;
 
     @FXML
     private void initialize() {
@@ -46,4 +51,6 @@ public class SellerDataController {
             UI.showErrorAlert("Error", "An error occurred while initializing", exception.getMessage());
         }
     }
+
+
 }

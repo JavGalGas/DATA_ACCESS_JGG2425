@@ -69,7 +69,7 @@ public class LoginController {
                 List<Seller> sellers = crud.findAll();
                 for (Seller seller : sellers) {
 
-                    if (user.equals(seller.getCif()) && UI.convertToMD5(passwd).equals(seller.getPassword())) {
+                    if (user.equals(seller.getCif()) && UI.convertToMD5(passwd).equalsIgnoreCase(seller.getPassword())) {
                         SellerApplication.LOGGER.info("Login Successful!");
                         errorMessage.setText("Login Successful!");
                         try {
