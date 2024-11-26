@@ -10,20 +10,23 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
+import javafx.scene.input.InputMethodEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.io.IOException;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 import java.util.List;
 import java.util.logging.Level;
 
 public class LoginController {
     @FXML
     public Button loginButton;
+    public CheckBox rememberCheckBox;
     @FXML
     private AnchorPane loginAPane;
     @FXML
@@ -74,6 +77,10 @@ public class LoginController {
                         errorMessage.setText("Login Successful!");
                         try {
                             setUser(seller);
+                            if(rememberCheckBox.isSelected()) {
+                                System.out.println("Saving user...");
+                                UI.saveUserCif(user);
+                            }
                             SellerApplication.LOGGER.info("Loading screen...");
                             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/jgg/unit4/practica1javafx_jgg/seller_data-view.fxml"));
                             Parent root = loader.load();
@@ -102,4 +109,38 @@ public class LoginController {
         }
     }
 
+    public void checkSavedCifs(InputMethodEvent mouseEvent) {
+        char[] cif = userText.getText().toCharArray();
+        try (BufferedReader reader = new BufferedReader(new FileReader("user_info.txt"))){
+            char[] userCif = null;
+            String line = reader.readLine();
+            while (line != null) {
+                userCif = line.toCharArray();
+                for (int i = 0; i < cif.length; i++) {
+                    if (userCif[i] != cif[i]) {
+                        break;
+                    } else if (userCif[i] == cif[i] && i == cif.length - 1) {
+                        setTextFieldsByCif(line);
+                        return;
+                    }
+                }
+                line = reader.readLine();
+            }
+        } catch (IOException exception) {
+            SellerApplication.LOGGER.log(Level.SEVERE, "Error while reading user_info.txt", exception);
+            UI.showErrorAlert("Error", "Error while reading user_info.txt", exception.getMessage());
+        }
+    }
+
+    private void setTextFieldsByCif(String userCif){
+        userText.setText(userCif);
+        List<Seller> sellers = new GenericClassCRUD<>(Seller.class).findAll();
+        for (Seller seller : sellers) {
+            if (userCif.equals(seller.getCif())) {
+                passwdText.setText(seller.getPassword());
+                return;
+            }
+        }
+        passwdText.setText("");
+    }
 }
