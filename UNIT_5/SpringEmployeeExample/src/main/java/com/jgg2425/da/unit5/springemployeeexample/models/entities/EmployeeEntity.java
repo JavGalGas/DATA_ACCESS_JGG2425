@@ -1,20 +1,33 @@
 package com.jgg2425.da.unit5.springemployeeexample.models.entities;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "employee")
 public class EmployeeEntity {
+    @Id
+    @Column(name = "empno", nullable = false)
+    private Integer id;
+
     @Column(name = "ename", length = 10)
     private String ename;
 
     @Column(name = "job", length = 9)
     private String job;
 
-    @Column(name = "deptno")
-    private Integer deptno;
+    @ManyToOne
+    @JoinColumn(name = "deptno")
+    @JsonIgnoreProperties("employees")
+    private DeptEntity deptno;
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
     public String getEname() {
         return ename;
@@ -32,11 +45,11 @@ public class EmployeeEntity {
         this.job = job;
     }
 
-    public Integer getDeptno() {
+    public DeptEntity getDeptno() {
         return deptno;
     }
 
-    public void setDeptno(Integer deptno) {
+    public void setDeptno(DeptEntity deptno) {
         this.deptno = deptno;
     }
 
