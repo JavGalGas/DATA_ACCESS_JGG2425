@@ -1,10 +1,10 @@
-package com.jgg2425.da.unit5.sprinemployeeexample;
+package com.jgg2425.da.unit5.springemployeeexample;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class SpringEmployeeExampleApplicationTests {
+class SpringEmployeeEntityExampleApplicationTests {
 
 	@Test
 	void contextLoads() {

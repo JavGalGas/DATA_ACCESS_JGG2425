@@ -1,4 +1,4 @@
-package com.jgg2425.da.unit5.sprinemployeeexample;
+package com.jgg2425.da.unit5.springemployeeexample;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
