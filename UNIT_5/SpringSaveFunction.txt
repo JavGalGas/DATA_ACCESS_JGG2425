@@ -1,0 +1,7 @@
+Optional<EmployeeEntity> employeeEntity = employeeEntityDAO.findById(id);
+if (employeeEntity.isPresent()) {
+	return ResponseEntity.badRequest().body("Employee already exists on the table");
+} else {
+	employeeEntityDAO.save(employee);
+	return ResponseEntity.ok().body("Saved");
+}
