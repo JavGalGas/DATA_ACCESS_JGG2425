@@ -3,6 +3,7 @@ package com.jgg2425.da.unit5.springemployeeexample.controllers;
 import com.jgg2425.da.unit5.springemployeeexample.models.dao.IEmployeeEntityDAO;
 import com.jgg2425.da.unit5.springemployeeexample.models.entities.EmployeeEntity;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -58,7 +59,12 @@ public class EmployeesController {
     }
 
     @PostMapping
-    public EmployeeEntity saveEmployee(@Validated @RequestBody EmployeeEntity employee) {
-        return employeeEntityDAO.save(employee);
+    public ResponseEntity<?> saveEmployee(@Validated @RequestBody EmployeeEntity employee) {
+        if (employeeEntityDAO.existsById(employee.getId())) {
+            return ResponseEntity.status(HttpStatus.CONFLICT).body("Employee already exists.");
+        } else {
+            employeeEntityDAO.save(employee);
+            return ResponseEntity.status(HttpStatus.CREATED).body("Employee saved successfully.");
+        }
     }
 }
