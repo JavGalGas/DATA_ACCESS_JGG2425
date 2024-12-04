@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/api-rest/Departments")
+@RequestMapping("/api-rest/departments")
 public class DeptsController {
 
     @Autowired
@@ -32,8 +32,8 @@ public class DeptsController {
         }
     }
 
-    @PutMapping
-    public ResponseEntity<DeptEntity> updateDept(@RequestBody @Validated DeptEntity dept,
+    @PutMapping("/{id}")
+    public ResponseEntity<?> updateDept(@RequestBody @Validated DeptEntity dept,
                                                  @PathVariable(value = "id") int id) {
         Optional<DeptEntity> deptEntity = deptEntityDAO.findById(id);
         if (deptEntity.isPresent()) {
@@ -41,7 +41,18 @@ public class DeptsController {
             deptEntity.get().setLoc(dept.getLoc());
             deptEntity.get().setEmployees(dept.getEmployees());
             deptEntityDAO.save(deptEntity.get());
-            return ResponseEntity.ok().body(deptEntity.get());
+            return ResponseEntity.ok().body("Updated");
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> deleteDept(@PathVariable(value = "id") int id) {
+        Optional<DeptEntity> deptEntity = deptEntityDAO.findById(id);
+        if (deptEntity.isPresent()) {
+            deptEntityDAO.delete(deptEntity.get());
+            return ResponseEntity.ok().body("Deleted");
         } else {
             return ResponseEntity.notFound().build();
         }

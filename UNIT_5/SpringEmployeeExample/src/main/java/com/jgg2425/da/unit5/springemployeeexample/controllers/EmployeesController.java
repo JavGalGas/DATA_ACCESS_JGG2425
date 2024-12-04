@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/api-rest/Employees")
+@RequestMapping("/api-rest/employees")
 public class EmployeesController {
 
     @Autowired
@@ -27,6 +27,31 @@ public class EmployeesController {
         Optional<EmployeeEntity> employee = employeeEntityDAO.findById(id);
         if (employee.isPresent()) {
             return ResponseEntity.ok().body(employee.get());
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<?> updateEmployee(@RequestBody EmployeeEntity employee,@PathVariable(value = "id") int id) {
+        Optional<EmployeeEntity> employeeEntity = employeeEntityDAO.findById(id);
+        if (employeeEntity.isPresent()) {
+            employeeEntity.get().setEname(employee.getEname());
+            employeeEntity.get().setJob(employee.getJob());
+            employeeEntity.get().setDeptno(employee.getDeptno());
+            employeeEntityDAO.save(employee);
+            return ResponseEntity.ok().body("Updated");
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> deleteEmployee(@PathVariable(value = "id") int id) {
+        Optional<EmployeeEntity> employeeEntity = employeeEntityDAO.findById(id);
+        if (employeeEntity.isPresent()) {
+            employeeEntityDAO.delete(employeeEntity.get());
+            return ResponseEntity.ok().body("Deleted");
         } else {
             return ResponseEntity.notFound().build();
         }
