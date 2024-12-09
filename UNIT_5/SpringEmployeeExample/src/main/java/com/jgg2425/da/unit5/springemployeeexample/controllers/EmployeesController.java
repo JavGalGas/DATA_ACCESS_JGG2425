@@ -2,6 +2,7 @@ package com.jgg2425.da.unit5.springemployeeexample.controllers;
 
 import com.jgg2425.da.unit5.springemployeeexample.models.dao.IEmployeeEntityDAO;
 import com.jgg2425.da.unit5.springemployeeexample.models.entities.EmployeeEntity;
+import com.jgg2425.da.unit5.springemployeeexample.services.EmployeesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,55 +17,30 @@ import java.util.Optional;
 public class EmployeesController {
 
     @Autowired
-    private IEmployeeEntityDAO employeeEntityDAO;
+    private EmployeesService employeesService;
 
     @GetMapping
     public List<EmployeeEntity> findAllEmployees(){
-        return (List<EmployeeEntity>) employeeEntityDAO.findAll();
+        return employeesService.findAllEmployees();
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<EmployeeEntity> findEmployeeById(@PathVariable(value = "id") int id) {
-        Optional<EmployeeEntity> employee = employeeEntityDAO.findById(id);
-        if (employee.isPresent()) {
-            return ResponseEntity.ok().body(employee.get());
-        } else {
-            return ResponseEntity.notFound().build();
-        }
+        return employeesService.findEmployeeById(id);
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<?> updateEmployee(@RequestBody EmployeeEntity employee,@PathVariable(value = "id") int id) {
-        Optional<EmployeeEntity> employeeEntity = employeeEntityDAO.findById(id);
-        if (employeeEntity.isPresent()) {
-            employeeEntity.get().setEname(employee.getEname());
-            employeeEntity.get().setJob(employee.getJob());
-            employeeEntity.get().setDeptno(employee.getDeptno());
-            employeeEntityDAO.save(employee);
-            return ResponseEntity.ok().body("Updated");
-        } else {
-            return ResponseEntity.notFound().build();
-        }
+        return employeesService.updateEmployee(employee,id);
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteEmployee(@PathVariable(value = "id") int id) {
-        Optional<EmployeeEntity> employeeEntity = employeeEntityDAO.findById(id);
-        if (employeeEntity.isPresent()) {
-            employeeEntityDAO.delete(employeeEntity.get());
-            return ResponseEntity.ok().body("Deleted");
-        } else {
-            return ResponseEntity.notFound().build();
-        }
+        return employeesService.deleteEmployee(id);
     }
 
     @PostMapping
     public ResponseEntity<?> saveEmployee(@Validated @RequestBody EmployeeEntity employee) {
-        if (employeeEntityDAO.existsById(employee.getId())) {
-            return ResponseEntity.status(HttpStatus.CONFLICT).body("Employee already exists.");
-        } else {
-            employeeEntityDAO.save(employee);
-            return ResponseEntity.status(HttpStatus.CREATED).body("Employee saved successfully.");
-        }
+        return employeesService.saveEmployee(employee);
     }
 }
