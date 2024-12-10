@@ -75,7 +75,9 @@ public class EmployeesService {
             employeeDTO.setId(employee.getId());
             employeeDTO.setEname(employee.getEname());
             employeeDTO.setJob(employee.getJob());
-            employeeDTO.setDeptName();
+            employeeDTO.setDeptName(dept.getDname());
+            employeeDTO.setLocation(dept.getLoc());
+            employeesDTO.add(employeeDTO);
         }
     }
 
