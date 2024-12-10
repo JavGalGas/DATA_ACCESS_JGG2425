@@ -1,4 +1,4 @@
-package com.jgg2425.da.unit5.springemployeeexample.services;
+package com.jgg2425.da.unit5.springemployeeexample.models.dto;
 
 public class EmployeeDTO {
     private int id;

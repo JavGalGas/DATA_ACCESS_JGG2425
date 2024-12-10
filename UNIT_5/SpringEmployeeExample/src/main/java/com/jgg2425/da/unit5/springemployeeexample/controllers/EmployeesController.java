@@ -1,16 +1,14 @@
 package com.jgg2425.da.unit5.springemployeeexample.controllers;
 
-import com.jgg2425.da.unit5.springemployeeexample.models.dao.IEmployeeEntityDAO;
 import com.jgg2425.da.unit5.springemployeeexample.models.entities.EmployeeEntity;
+import com.jgg2425.da.unit5.springemployeeexample.models.dto.EmployeeDTO;
 import com.jgg2425.da.unit5.springemployeeexample.services.EmployeesService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/employees")
@@ -43,4 +41,31 @@ public class EmployeesController {
     public ResponseEntity<?> saveEmployee(@Validated @RequestBody EmployeeEntity employee) {
         return employeesService.saveEmployee(employee);
     }
+
+    @GetMapping("/dto")
+    public List<EmployeeDTO> findAllEmployeesDTO(){
+        return employeesService.findAllEmployeesDTO();
+    }
+
+    @GetMapping("/dto/{id}")
+    public ResponseEntity<EmployeeDTO> findEmployeeDTOById(@PathVariable(value = "id") int id) {
+        return employeesService.findEmployeeDTOById(id);
+    }
+
+//    @PutMapping("/dto/{id}")
+//    public ResponseEntity<?> updateEmployeeDTO(@RequestBody EmployeeEntity employee,@PathVariable(value = "id") int id) {
+//        return employeesService.updateEmployeeDTO(employee,id);
+//    }
+//
+//    @DeleteMapping("/dto/{id}")
+//    public ResponseEntity<?> deleteEmployeeDTO(@PathVariable(value = "id") int id) {
+//        return employeesService.deleteEmployeeDTO(id);
+//    }
+//
+//    @PostMapping("/dto")
+//    public ResponseEntity<?> saveEmployeeDTO(@Validated @RequestBody EmployeeEntity employee) {
+//        return employeesService.saveEmployeeDTO(employee);
+//    }
+
+
 }

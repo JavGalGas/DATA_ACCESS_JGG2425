@@ -1,6 +1,7 @@
 package com.jgg2425.da.unit5.springemployeeexample.services;
 
 import com.jgg2425.da.unit5.springemployeeexample.models.dao.IDeptEntityDAO;
+import com.jgg2425.da.unit5.springemployeeexample.models.dao.IEmployeeEntityDAO;
 import com.jgg2425.da.unit5.springemployeeexample.models.entities.DeptEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,6 +18,9 @@ public class DeptsService {
 
     @Autowired
     private IDeptEntityDAO deptEntityDAO;
+
+    @Autowired
+    private IEmployeeEntityDAO employeeEntityDAO;
 
     public List<DeptEntity> findAllDepts(){
         return (List<DeptEntity>) deptEntityDAO.findAll();
