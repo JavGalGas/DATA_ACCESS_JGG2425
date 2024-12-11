@@ -78,6 +78,7 @@ public class EmployeesService {
             employeeDTO.setId(employee.getId());
             employeeDTO.setEname(employee.getEname());
             employeeDTO.setJob(employee.getJob());
+            employeeDTO.setDeptno(dept.get().getId());
             employeeDTO.setDeptName(dept.get().getDname());
             employeeDTO.setLocation(dept.get().getLoc());
             employeesDTO.add(employeeDTO);
@@ -93,6 +94,7 @@ public class EmployeesService {
             employeeDTO.setId(employee.get().getId());
             employeeDTO.setEname(employee.get().getEname());
             employeeDTO.setJob(employee.get().getJob());
+            employeeDTO.setDeptno(dept.get().getId());
             employeeDTO.setDeptName(dept.get().getDname());
             employeeDTO.setLocation(dept.get().getLoc());
             return ResponseEntity.ok().body(employeeDTO);
@@ -100,36 +102,4 @@ public class EmployeesService {
             return ResponseEntity.notFound().build();
         }
     }
-
-//    public ResponseEntity<?> updateEmployeeDTO(EmployeeEntity employee, int id) {
-//        Optional<EmployeeEntity> employeeEntity = employeeEntityDAO.findById(id);
-//        if (employeeEntity.isPresent()) {
-//            employeeEntity.get().setEname(employee.getEname());
-//            employeeEntity.get().setJob(employee.getJob());
-//            employeeEntity.get().setDeptno(employee.getDeptno());
-//            employeeEntityDAO.save(employee);
-//            return ResponseEntity.ok().body("Updated");
-//        } else {
-//            return ResponseEntity.notFound().build();
-//        }
-//    }
-//
-//    public ResponseEntity<?> deleteEmployeeDTO(int id) {
-//        Optional<EmployeeEntity> employeeEntity = employeeEntityDAO.findById(id);
-//        if (employeeEntity.isPresent()) {
-//            employeeEntityDAO.delete(employeeEntity.get());
-//            return ResponseEntity.ok().body("Deleted");
-//        } else {
-//            return ResponseEntity.notFound().build();
-//        }
-//    }
-//
-//    public ResponseEntity<?> saveEmployeeDTO(EmployeeEntity employee) {
-//        if (employeeEntityDAO.existsById(employee.getId())) {
-//            return ResponseEntity.status(HttpStatus.CONFLICT).body("Employee already exists.");
-//        } else {
-//            employeeEntityDAO.save(employee);
-//            return ResponseEntity.status(HttpStatus.CREATED).body("Employee saved successfully.");
-//        }
-//    }
 }

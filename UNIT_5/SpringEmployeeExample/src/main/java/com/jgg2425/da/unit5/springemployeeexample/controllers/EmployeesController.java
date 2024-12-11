@@ -52,20 +52,4 @@ public class EmployeesController {
         return employeesService.findEmployeeDTOById(id);
     }
 
-//    @PutMapping("/dto/{id}")
-//    public ResponseEntity<?> updateEmployeeDTO(@RequestBody EmployeeEntity employee,@PathVariable(value = "id") int id) {
-//        return employeesService.updateEmployeeDTO(employee,id);
-//    }
-//
-//    @DeleteMapping("/dto/{id}")
-//    public ResponseEntity<?> deleteEmployeeDTO(@PathVariable(value = "id") int id) {
-//        return employeesService.deleteEmployeeDTO(id);
-//    }
-//
-//    @PostMapping("/dto")
-//    public ResponseEntity<?> saveEmployeeDTO(@Validated @RequestBody EmployeeEntity employee) {
-//        return employeesService.saveEmployeeDTO(employee);
-//    }
-
-
 }

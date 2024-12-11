@@ -2,14 +2,14 @@ package com.jgg2425.da.unit5.springemployeeexample.services;
 
 import com.jgg2425.da.unit5.springemployeeexample.models.dao.IDeptEntityDAO;
 import com.jgg2425.da.unit5.springemployeeexample.models.dao.IEmployeeEntityDAO;
+import com.jgg2425.da.unit5.springemployeeexample.models.dto.DeptDTO;
 import com.jgg2425.da.unit5.springemployeeexample.models.entities.DeptEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -26,7 +26,7 @@ public class DeptsService {
         return (List<DeptEntity>) deptEntityDAO.findAll();
     }
 
-    public ResponseEntity<DeptEntity> findDeptById(@PathVariable(value = "id") int id) {
+    public ResponseEntity<DeptEntity> findDeptById(int id) {
         Optional<DeptEntity> dept = deptEntityDAO.findById(id);
         if (dept.isPresent()) {
             return ResponseEntity.ok().body(dept.get());
@@ -35,8 +35,8 @@ public class DeptsService {
         }
     }
 
-    public ResponseEntity<?> updateDept(@RequestBody @Validated DeptEntity dept,
-                                        @PathVariable(value = "id") int id) {
+    public ResponseEntity<?> updateDept(DeptEntity dept,
+                                        int id) {
         Optional<DeptEntity> deptEntity = deptEntityDAO.findById(id);
         if (deptEntity.isPresent()) {
             deptEntity.get().setDname(dept.getDname());
@@ -49,7 +49,7 @@ public class DeptsService {
         }
     }
 
-    public ResponseEntity<?> deleteDept(@PathVariable(value = "id") int id) {
+    public ResponseEntity<?> deleteDept(int id) {
         Optional<DeptEntity> deptEntity = deptEntityDAO.findById(id);
         if (deptEntity.isPresent()) {
             deptEntityDAO.delete(deptEntity.get());
@@ -59,12 +59,38 @@ public class DeptsService {
         }
     }
 
-    public ResponseEntity<?> saveDept(@Validated @RequestBody DeptEntity dept) {
+    public ResponseEntity<?> saveDept(DeptEntity dept) {
         if (deptEntityDAO.existsById(dept.getId())) {
             return ResponseEntity.status(HttpStatus.CONFLICT).body("Department already exists.");
         } else {
             deptEntityDAO.save(dept);
             return ResponseEntity.status(HttpStatus.CREATED).body("Department saved successfully.");
+        }
+    }
+
+    public List<DeptDTO> findAllDeptsDTO() {
+        List<DeptEntity> depts = (List<DeptEntity>) deptEntityDAO.findAll();
+        List<DeptDTO> deptsDTO = new ArrayList<>();
+        for (DeptEntity dept : depts) {
+            DeptDTO deptDTO = new DeptDTO();
+            deptDTO.setId(dept.getId());
+            deptDTO.setDname(dept.getDname());
+            deptDTO.setLoc(dept.getLoc());
+            deptsDTO.add(deptDTO);
+        }
+        return deptsDTO;
+    }
+
+    public ResponseEntity<DeptDTO> findDeptDTOById(int id) {
+        Optional<DeptEntity> dept = deptEntityDAO.findById(id);
+        if (dept.isPresent()) {
+            DeptDTO deptDTO = new DeptDTO();
+            deptDTO.setId(dept.get().getId());
+            deptDTO.setDname(dept.get().getDname());
+            deptDTO.setLoc(dept.get().getLoc());
+            return ResponseEntity.ok().body(deptDTO);
+        } else {
+            return ResponseEntity.notFound().build();
         }
     }
 }
