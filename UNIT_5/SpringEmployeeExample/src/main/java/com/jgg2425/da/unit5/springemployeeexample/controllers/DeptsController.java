@@ -1,6 +1,7 @@
 package com.jgg2425.da.unit5.springemployeeexample.controllers;
 
 import com.jgg2425.da.unit5.springemployeeexample.models.dto.DeptDTO;
+import com.jgg2425.da.unit5.springemployeeexample.models.dto.ManagerDeptDTO;
 import com.jgg2425.da.unit5.springemployeeexample.models.entities.DeptEntity;
 import com.jgg2425.da.unit5.springemployeeexample.services.DeptsService;
 import jakarta.validation.constraints.Min;
@@ -53,5 +54,10 @@ public class DeptsController {
     @GetMapping("/dto/{id}")
     public ResponseEntity<DeptDTO> findDeptDTOById(@NotNull @Min(0) @PathVariable(value = "id") int id) {
         return deptsService.findDeptDTOById(id);
+    }
+
+    @GetMapping("/managerDto/{id}")
+    public List<ManagerDeptDTO> findAllManagerDeptsDTO() {
+        return deptsService.findAllManagerDeptsDTO();
     }
 }

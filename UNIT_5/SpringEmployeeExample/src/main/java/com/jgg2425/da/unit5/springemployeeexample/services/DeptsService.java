@@ -3,7 +3,9 @@ package com.jgg2425.da.unit5.springemployeeexample.services;
 import com.jgg2425.da.unit5.springemployeeexample.models.dao.IDeptEntityDAO;
 import com.jgg2425.da.unit5.springemployeeexample.models.dao.IEmployeeEntityDAO;
 import com.jgg2425.da.unit5.springemployeeexample.models.dto.DeptDTO;
+import com.jgg2425.da.unit5.springemployeeexample.models.dto.ManagerDeptDTO;
 import com.jgg2425.da.unit5.springemployeeexample.models.entities.DeptEntity;
+import com.jgg2425.da.unit5.springemployeeexample.models.entities.EmployeeEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -92,5 +94,26 @@ public class DeptsService {
         } else {
             return ResponseEntity.notFound().build();
         }
+    }
+
+    public List<ManagerDeptDTO> findAllManagerDeptsDTO() {
+        List<DeptEntity> depts = (List<DeptEntity>) deptEntityDAO.findAll();
+        List<ManagerDeptDTO> deptsDTO = new ArrayList<>();
+        for (DeptEntity dept : depts) {
+            ManagerDeptDTO deptDTO = new ManagerDeptDTO();
+            deptDTO.setDeptCode(dept.getId());
+            deptDTO.setDeptName(dept.getDname());
+            deptDTO.setLocation(dept.getLoc());
+            deptDTO.setNumEmployees(dept.getEmployees().size());
+            List<EmployeeEntity> entities = (List<EmployeeEntity>) employeeEntityDAO.findAll();
+            Optional<EmployeeEntity> employeeEntity = entities.stream().filter((entity) -> {
+                if(entity.getDeptno().getId().equals(dept.getId())) {
+                    ;
+                }
+            });
+            deptDTO.setBossId(employeeEntity.get().getEname());
+            deptsDTO.add(deptDTO);
+        }
+        return deptsDTO;
     }
 }
