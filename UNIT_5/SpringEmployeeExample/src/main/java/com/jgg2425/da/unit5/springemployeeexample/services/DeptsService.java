@@ -24,6 +24,9 @@ public class DeptsService {
     @Autowired
     private IEmployeeEntityDAO employeeEntityDAO;
 
+    private List<String> relevantJobs = List.of("manager", "president");
+
+
     public List<DeptEntity> findAllDepts(){
         return (List<DeptEntity>) deptEntityDAO.findAll();
     }
@@ -98,22 +101,22 @@ public class DeptsService {
 
     public List<ManagerDeptDTO> findAllManagerDeptsDTO() {
         List<DeptEntity> depts = (List<DeptEntity>) deptEntityDAO.findAll();
-        List<ManagerDeptDTO> deptsDTO = new ArrayList<>();
-        for (DeptEntity dept : depts) {
+        return depts.stream().map(dept -> {
             ManagerDeptDTO deptDTO = new ManagerDeptDTO();
+
             deptDTO.setDeptCode(dept.getId());
             deptDTO.setDeptName(dept.getDname());
             deptDTO.setLocation(dept.getLoc());
             deptDTO.setNumEmployees(dept.getEmployees().size());
-            List<EmployeeEntity> entities = (List<EmployeeEntity>) employeeEntityDAO.findAll();
-            Optional<EmployeeEntity> employeeEntity = entities.stream().filter((entity) -> {
-                if(entity.getDeptno().getId().equals(dept.getId())) {
-                    ;
-                }
-            });
-            deptDTO.setBossId(employeeEntity.get().getEname());
-            deptsDTO.add(deptDTO);
-        }
-        return deptsDTO;
+
+            List<EmployeeEntity> employees = employeeEntityDAO.findByJobInAndDeptno(relevantJobs, dept.getId());
+
+            employees.stream().findFirst()
+                    .ifPresentOrElse(
+                            emp -> deptDTO.setBossId(emp.getId()),
+                            () -> deptDTO.setBossId(0)
+                    );
+            return deptDTO;
+        }).toList();
     }
 }

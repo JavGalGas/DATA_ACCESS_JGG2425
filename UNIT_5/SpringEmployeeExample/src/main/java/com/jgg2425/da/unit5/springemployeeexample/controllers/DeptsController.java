@@ -56,7 +56,7 @@ public class DeptsController {
         return deptsService.findDeptDTOById(id);
     }
 
-    @GetMapping("/managerDto/{id}")
+    @GetMapping("/managerDto")
     public List<ManagerDeptDTO> findAllManagerDeptsDTO() {
         return deptsService.findAllManagerDeptsDTO();
     }
