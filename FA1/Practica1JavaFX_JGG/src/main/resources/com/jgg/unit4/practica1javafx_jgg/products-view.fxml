@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" stylesheets="/css/custom_tab.css" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.jgg.unit4.practica1javafx_jgg.controllers.ProductsView">
+<VBox alignment="CENTER" prefHeight="400.0" prefWidth="120.0" style="-fx-background-color: linear-gradient(to bottom, #58a05c, #4BBF50, #4BBF50);" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="480.0" AnchorPane.topAnchor="0.0">
+    <HBox fx:id="tab1" alignment="CENTER" prefHeight="100.0" prefWidth="200.0" styleClass="custom_tab">
+        <ImageView fitHeight="80.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true" styleClass="tabImgView">
+            <Image url="@../../../../Images/userImg1.png" />
+        </ImageView>
+    </HBox>
+    <HBox fx:id="tab2" alignment="CENTER" prefHeight="100.0" prefWidth="200.0" styleClass="custom_tab">
+        <ImageView fitHeight="80.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true" styleClass="tabImgView">
+            <Image url="@../../../../Images/productImg1.png" />
+        </ImageView>
+    </HBox>
+    <HBox fx:id="tab3" alignment="CENTER" prefHeight="100.0" prefWidth="200.0" styleClass="custom_tab">
+        <ImageView fitHeight="80.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true" styleClass="tabImgView">
+            <Image url="@../../../../Images/offerImg1.png" />
+        </ImageView>
+    </HBox>
+    <HBox fx:id="tab4" alignment="CENTER" prefHeight="100.0" prefWidth="200.0" styleClass="custom_tab" stylesheets="@../../../../css/custom_tab.css">
+        <ImageView fitHeight="70.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true" styleClass="tabImgView">
+            <Image url="@../../../../Images/exitImg1.png" />
+            <HBox.margin>
+                <Insets left="10.0" />
+            </HBox.margin>
+        </ImageView>
+    </HBox>
+</VBox>
+<VBox alignment="CENTER" prefHeight="400.0" prefWidth="480.0" spacing="26.0" style="-fx-background-color: #547556;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="120.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+    <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Add to store" textAlignment="CENTER">
+        <VBox.margin>
+            <Insets top="15.0" />
+        </VBox.margin>
+        <font>
+            <Font name="Berlin Sans FB" size="36.0" />
+        </font>
+    </Text>
+    <Label contentDisplay="RIGHT" graphicTextGap="53.0" prefHeight="25.0" prefWidth="480.0" text="Category: " textFill="WHITE">
+        <graphic>
+            <ComboBox fx:id="productCB" prefWidth="300.0" />
+        </graphic>
+        <padding>
+            <Insets left="20.0" />
+        </padding>
+        <font>
+            <Font name="Broadway" size="18.0" />
+        </font>
+    </Label>
+      <Label contentDisplay="RIGHT" graphicTextGap="60.0" layoutX="10.0" layoutY="96.0" prefHeight="25.0" prefWidth="480.0" text="Product: " textFill="WHITE">
+         <graphic>
+            <ComboBox fx:id="productCB1" prefWidth="300.0" />
+         </graphic>
+         <padding>
+            <Insets left="20.0" />
+         </padding>
+         <font>
+            <Font name="Broadway" size="18.0" />
+         </font>
+      </Label>
+    <Label contentDisplay="RIGHT" graphicTextGap="85.0" layoutX="159.0" layoutY="65.0" prefWidth="480.0" text="Stock: " textFill="WHITE">
+        <font>
+            <Font name="Broadway" size="18.0" />
+        </font>
+        <padding>
+            <Insets left="20.0" />
+        </padding>
+         <graphic>
+            <VBox alignment="CENTER" prefHeight="50.0" prefWidth="300.0">
+               <children>
+                  <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Units" textAlignment="CENTER">
+                     <font>
+                        <Font name="Broadway" size="18.0" />
+                     </font>
+                  </Text>
+                  <Slider fx:id="unitSlider" blockIncrement="5.0" majorTickUnit="5.0" max="25.0" minorTickCount="1" prefWidth="300.0" showTickLabels="true" showTickMarks="true" snapToTicks="true" />
+               </children>
+            </VBox>
+         </graphic>
+    </Label>
+    <Label contentDisplay="RIGHT" graphicTextGap="85.0" layoutX="159.0" layoutY="115.0" prefWidth="480.0" text="Price: " textFill="WHITE">
+        <graphic>
+            <TextField fx:id="discountTF" prefWidth="300.0" />
+        </graphic>
+        <padding>
+            <Insets left="20.0" />
+        </padding>
+        <font>
+            <Font name="Broadway" size="18.0" />
+        </font>
+    </Label>
+    <Button mnemonicParsing="false" prefHeight="30.0" prefWidth="150.0" style="-fx-background-color: linear-gradient(to bottom, #4BBF50, #58A05C, #4BBF50);" text="Add" textAlignment="CENTER" textFill="WHITE">
+        <font>
+            <Font name="Broadway" size="14.0" />
+        </font>
+    </Button>
+      <padding>
+         <Insets bottom="20.0" />
+      </padding>
+</VBox>
+</AnchorPane>

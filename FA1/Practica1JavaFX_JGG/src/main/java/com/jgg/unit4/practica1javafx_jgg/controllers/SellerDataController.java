@@ -6,13 +6,12 @@ import com.jgg.unit4.practica1javafx_jgg.UI;
 import com.jgg.unit4.practica1javafx_jgg.db.Seller;
 import com.jgg.unit4.practica1javafx_jgg.db.User;
 import javafx.fxml.FXML;
-import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.text.Text;
 
-import java.util.Objects;
 import java.util.logging.Level;
 
 public class SellerDataController {
@@ -29,6 +28,7 @@ public class SellerDataController {
     public HBox tab2;
     public HBox tab3;
     public HBox tab4;
+    public Button userdatabutton;
 
     @FXML
     private void initialize() {

@@ -1,10 +1,10 @@
-nov 26, 2024 8:20:05 P. M. com.jgg.unit4.practica1javafx_jgg.SellerApplication main
+ene 04, 2025 1:35:57 P. M. com.jgg.unit4.practica1javafx_jgg.SellerApplication main
 INFORMACIÓN: Program beginning
-nov 26, 2024 8:20:24 P. M. com.jgg.unit4.practica1javafx_jgg.GenericClassCRUD openSession
+ene 04, 2025 1:36:09 P. M. com.jgg.unit4.practica1javafx_jgg.GenericClassCRUD openSession
 INFORMACIÓN: Opening session
-nov 26, 2024 8:20:24 P. M. com.jgg.unit4.practica1javafx_jgg.controllers.LoginController checkLogin
+ene 04, 2025 1:36:09 P. M. com.jgg.unit4.practica1javafx_jgg.controllers.LoginController handleSuccessfulLogin
 INFORMACIÓN: Login Successful!
-nov 26, 2024 8:20:24 P. M. com.jgg.unit4.practica1javafx_jgg.controllers.LoginController checkLogin
+ene 04, 2025 1:36:09 P. M. com.jgg.unit4.practica1javafx_jgg.controllers.LoginController loadNextScene
 INFORMACIÓN: Loading screen...
-nov 26, 2024 8:20:24 P. M. com.jgg.unit4.practica1javafx_jgg.GenericClassCRUD openSession
+ene 04, 2025 1:36:09 P. M. com.jgg.unit4.practica1javafx_jgg.GenericClassCRUD openSession
 INFORMACIÓN: Opening session

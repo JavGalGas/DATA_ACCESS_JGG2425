@@ -9,6 +9,8 @@ import java.util.logging.Level;
 
 public class UI {
 
+    private static final String USER_INFO_FILE = "user_info.txt";
+
     public static void showErrorAlert(String title, String header, String content) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle(title);
@@ -37,27 +39,35 @@ public class UI {
     }
 
     public static void saveUserCif(String userCif) {
-        try (PrintWriter writer = new PrintWriter( new BufferedWriter(new FileWriter("user_info.txt", true)), true)) {
-
-            String user = null;
-
-            try (BufferedReader reader = new BufferedReader(new FileReader("user_info.txt"))){
-                while (reader.readLine() != null) {
-                    if(userCif.equals(reader.readLine())) {
-                        user = userCif;
-                        break;
-                    }
-                }
-            } catch (IOException exception) {
-                SellerApplication.LOGGER.log(Level.SEVERE, "Error while reading user_info.txt", exception);
-                showErrorAlert("Error", "Error while reading user_info.txt", exception.getMessage());
-            }
-            if (user != null) {
+        if (userCif == null || userCif.trim().isEmpty()) {
+            SellerApplication.LOGGER.warning("Attempted to save an invalid CIF.");
+            return;
+        }
+        if (!existsUserCif(userCif)) {
+            try (PrintWriter writer = new PrintWriter(new BufferedWriter(new FileWriter(USER_INFO_FILE, true)))) {
                 writer.println(userCif);
+                SellerApplication.LOGGER.info("User CIF saved successfully: " + userCif);
+            } catch (IOException exception) {
+                SellerApplication.LOGGER.log(Level.SEVERE, "Error saving user info", exception);
+                showErrorAlert("Error", "Error saving user info", exception.getMessage());
+            }
+        } else {
+            SellerApplication.LOGGER.info("User CIF already exists, not saving: " + userCif);
+        }
+    }
+
+    private static boolean existsUserCif(String userCif) {
+        try (BufferedReader reader = new BufferedReader(new FileReader(USER_INFO_FILE))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                if (userCif.equals(line)) {
+                    return true;
+                }
             }
         } catch (IOException exception) {
-            SellerApplication.LOGGER.log(Level.SEVERE, "Error saving user info", exception);
-            showErrorAlert("Error", "Error saving user info", exception.getMessage());
+            SellerApplication.LOGGER.log(Level.SEVERE, "Error while reading " + USER_INFO_FILE, exception);
+            showErrorAlert("Error", "Error while reading " + USER_INFO_FILE, exception.getMessage());
         }
+        return false;
     }
 }

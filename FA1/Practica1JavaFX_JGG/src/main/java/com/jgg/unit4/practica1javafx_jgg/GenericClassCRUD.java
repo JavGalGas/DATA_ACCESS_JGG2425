@@ -123,7 +123,7 @@ public class GenericClassCRUD<T> {
         }
     }
 
-    // READ All
+    // FILTERED READ All
     public List<T> findAll(String filterName, String paramName, Object value) {
         try (Session session = openSession()) {
             if (session != null && filterName != null
@@ -148,7 +148,7 @@ public class GenericClassCRUD<T> {
         }
     }
 
-    // FILTERED READ All
+    // READ All
     public List<T> findAll() {
         try (Session session = openSession()) {
             if (session != null) {

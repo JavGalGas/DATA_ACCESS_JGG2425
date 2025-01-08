@@ -1,0 +1,50 @@
+body {
+    background-image: linear-gradient(to bottom, #FFFFFF, #808080);
+    background-repeat: no-repeat;
+    background-position: center;
+    min-height: 97.7vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+h1 {
+    font: bold 8vh Berlin Sans FB;
+    text-align: center;
+}
+
+h2 {
+    font: 5vh Berlin Sans FB;
+    text-align: center;
+    color: lightgray;
+}
+
+#container {
+    padding: 2vw;
+    background-color: white;
+    width: 60vw;
+    height: 70vh;
+    display: grid;
+}
+.button-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 3vh;
+}
+
+.button {
+    background-image: linear-gradient(to bottom, #00006c, #0078f3);
+    border: none;
+    border-radius: 2vh;
+    color: white;
+    width: 20vw;
+    height: 12vh;
+    padding: 15px 32px;
+    text-align: center;
+    display: inline-block;
+    font: bold 2.6vh Arial, sans-serif ;
+    margin: 4px 2px;
+    cursor: pointer;
+}
+

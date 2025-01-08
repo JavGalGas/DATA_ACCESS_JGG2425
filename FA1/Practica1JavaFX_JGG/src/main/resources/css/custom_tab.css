@@ -5,18 +5,46 @@
 }
 
 .tabImgView:hover {
-    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.7), 10, 0, 0, 1);
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 10, 0, 0, 0);
 }
 
-#tab1:hover{
-    -fx-image: url("/Images/userImg2.png");
+.slider .track {
+    -fx-pref-height: 5.0;
 }
-#tab2:hover{
-    -fx-image: url("/Images/productImg2.png");
+
+.slider .thumb {
+    -fx-background-color: #283629;
+    -fx-pref-height: 7.0;
+    -fx-pref-width: 7.0;
 }
-#tab3:hover{
-    -fx-image: url("/Images/offerImg2.png");
+
+.slider .track{
+    -fx-background-color: #4BBF50;
+    -fx-pref-height: 7.0;
+    -fx-pref-width: 7.0;
 }
-#tab4:hover{
-     -fx-image: url("/Images/exitImg2.png");
+
+#tab1 ImageView{
+    -fx-image: url("../Images/userImg1.png");
+}
+#tab2 ImageView{
+    -fx-image: url("../Images/productImg1.png");
+}
+#tab3 ImageView{
+    -fx-image: url("../Images/offerImg1.png");
+}
+#tab4 ImageView{
+     -fx-image: url("../Images/exitImg1.png");
+}
+#tab1 ImageView:hover{
+    -fx-image: url("../Images/userImg2.png");
+}
+#tab2 ImageView:hover{
+    -fx-image: url("../Images/productImg2.png");
+}
+#tab3 ImageView:hover{
+    -fx-image: url("../Images/offerImg2.png");
+}
+#tab4 ImageView:hover{
+    -fx-image: url("../Images/exitImg2.png");
 }

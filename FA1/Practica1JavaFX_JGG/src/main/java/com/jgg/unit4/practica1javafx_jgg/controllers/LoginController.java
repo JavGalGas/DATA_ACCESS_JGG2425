@@ -26,6 +26,7 @@ import java.util.logging.Level;
 public class LoginController {
     @FXML
     public Button loginButton;
+    @FXML
     public CheckBox rememberCheckBox;
     @FXML
     private AnchorPane loginAPane;
@@ -56,57 +57,86 @@ public class LoginController {
     }
 
     public void checkLogin(String user, String passwd) {
-        if (user.isEmpty() && passwd.isEmpty()) {
-            SellerApplication.LOGGER.log(Level.SEVERE, "User and Password are Empty!");
-            errorMessage.setText("User and Password are Empty!");
-        } else if (user.isEmpty()) {
-            SellerApplication.LOGGER.log(Level.SEVERE, "User is Empty!");
-            errorMessage.setText("User is Empty!");
-        } else if (passwd.isEmpty()) {
-            SellerApplication.LOGGER.log(Level.SEVERE, "Password is Empty!");
-            errorMessage.setText("Password is Empty!");
-        } else {
-            try {
-                GenericClassCRUD<Seller> crud = new GenericClassCRUD<>(Seller.class);
-
-                List<Seller> sellers = crud.findAll();
-                for (Seller seller : sellers) {
-
-                    if (user.equals(seller.getCif()) && UI.convertToMD5(passwd).equalsIgnoreCase(seller.getPassword())) {
-                        SellerApplication.LOGGER.info("Login Successful!");
-                        errorMessage.setText("Login Successful!");
-                        try {
-                            setUser(seller);
-                            if(rememberCheckBox.isSelected()) {
-                                System.out.println("Saving user...");
-                                UI.saveUserCif(user);
-                            }
-                            SellerApplication.LOGGER.info("Loading screen...");
-                            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/jgg/unit4/practica1javafx_jgg/seller_data-view.fxml"));
-                            Parent root = loader.load();
-
-                            Scene scene = new Scene(root);
-                            Stage currentStage = (Stage) loginButton.getScene().getWindow();
-                            currentStage.setScene(scene);
-                            currentStage.show();
-                        } catch (IOException ioException) {
-                            SellerApplication.LOGGER.log(Level.SEVERE, "An error occurred while loading the seller_data-view.fxml ", ioException);
-                            UI.showErrorAlert("Error", "An error occurred while loading the scene", ioException.getMessage());
-                            Stage currentStage = (Stage) loginButton.getScene().getWindow();
-                            currentStage.close();
-                            Platform.exit();
-                        }
-                        return;
-                    }
-                }
-                SellerApplication.LOGGER.log(Level.INFO, "Login Unsuccessful!");
-                errorMessage.setText("Login Unsuccessful!");
-            }
-            catch (Exception exception) {
-                SellerApplication.LOGGER.log(Level.SEVERE, "An error occurred while login ", exception);
-                UI.showErrorAlert("Error", "An error occurred while login", exception.getMessage());
-            }
+        if (validateInputs(user, passwd)) {
+            attemptLogin(user, passwd);
         }
+    }
+
+    private boolean validateInputs(String user, String passwd) {
+        if (user.isEmpty() && passwd.isEmpty()) {
+            logAndShowError("User and Password are Empty!");
+            return false;
+        } else if (user.isEmpty()) {
+            logAndShowError("User is Empty!");
+            return false;
+        } else if (passwd.isEmpty()) {
+            logAndShowError("Password is Empty!");
+            return false;
+        }
+        return true;
+    }
+
+    private void attemptLogin(String user, String passwd) {
+        try {
+            GenericClassCRUD<Seller> crud = new GenericClassCRUD<>(Seller.class);
+            List<Seller> sellers = crud.findAll();
+
+            for (Seller seller : sellers) {
+                if (isValidUser(seller, user, passwd)) {
+                    handleSuccessfulLogin(seller, user);
+                    return;
+                }
+            }
+            logAndShowError("Login Unsuccessful!");
+        } catch (Exception exception) {
+            SellerApplication.LOGGER.log(Level.SEVERE, "An error occurred during login", exception);
+            UI.showErrorAlert("Error", "An error occurred during login", exception.getMessage());
+        }
+    }
+
+    private boolean isValidUser(Seller seller, String user, String passwd) {
+        return user.equals(seller.getCif()) &&
+                UI.convertToMD5(passwd).equalsIgnoreCase(seller.getPassword());
+    }
+
+    private void handleSuccessfulLogin(Seller seller, String user) {
+        SellerApplication.LOGGER.info("Login Successful!");
+        errorMessage.setText("Login Successful!");
+        setUser(seller);
+
+        if (rememberCheckBox.isSelected()) {
+            saveUser(user);
+        }
+
+        loadNextScene();
+    }
+
+    private void saveUser(String user) {
+        SellerApplication.LOGGER.info("Saving user...");
+        UI.saveUserCif(user);
+    }
+
+    private void loadNextScene() {
+        try {
+            SellerApplication.LOGGER.info("Loading screen...");
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/jgg/unit4/practica1javafx_jgg/seller_data-view.fxml"));
+            Parent root = loader.load();
+            Scene scene = new Scene(root);
+            Stage currentStage = (Stage) loginButton.getScene().getWindow();
+            currentStage.setScene(scene);
+            currentStage.show();
+        } catch (IOException ioException) {
+            SellerApplication.LOGGER.log(Level.SEVERE, "An error occurred while loading the seller_data-view.fxml", ioException);
+            UI.showErrorAlert("Error", "An error occurred while loading the scene", ioException.getMessage());
+            Stage currentStage = (Stage) loginButton.getScene().getWindow();
+            currentStage.close();
+            Platform.exit();
+        }
+    }
+
+    private void logAndShowError(String message) {
+        SellerApplication.LOGGER.log(Level.SEVERE, message);
+        errorMessage.setText(message);
     }
 
     public void checkSavedCifs(InputMethodEvent mouseEvent) {
