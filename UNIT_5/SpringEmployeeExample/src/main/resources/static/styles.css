@@ -16,21 +16,20 @@ h1 {
 h2 {
     font: 5vh Berlin Sans FB;
     text-align: center;
-    color: lightgray;
+    color: #4b4c52;
 }
 
 #container {
     padding: 2vw;
     background-color: white;
     width: 60vw;
-    height: 70vh;
+    min-height: 70vh;
     display: grid;
 }
 .button-container {
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 3vh;
 }
 
 .button {
@@ -38,13 +37,43 @@ h2 {
     border: none;
     border-radius: 2vh;
     color: white;
-    width: 20vw;
-    height: 12vh;
+    width: 18vw;
+    min-height: 10vh;
     padding: 15px 32px;
     text-align: center;
     display: inline-block;
     font: bold 2.6vh Arial, sans-serif ;
-    margin: 4px 2px;
+    margin: 1vh 2vw;
     cursor: pointer;
+}
+
+.details-table {
+    width: 40vw;
+    margin: 20px auto;
+    border-collapse: collapse;
+    font: 3vh Arial, sans-serif;
+    text-align: left;
+}
+
+.details-table thead th {
+    background-image: linear-gradient(to bottom, #00006c, #0078f3);
+    color: white;
+    padding: 0.1vw;
+    border: none;
+    font: 4vh Berlin Sans FB;
+    text-align: center;
+}
+
+.details-table tbody td {
+    border: 1px solid #ddd;
+    padding: 1vh;
+}
+
+.details-table tbody tr:nth-child(even) {
+    background-color: #ededed;
+}
+
+.details-table tbody tr:hover {
+    background-color: #cccccc;
 }
 
