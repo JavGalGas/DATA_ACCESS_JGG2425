@@ -2,7 +2,7 @@ body {
     background-image: linear-gradient(to bottom, #FFFFFF, #808080);
     background-repeat: no-repeat;
     background-position: center;
-    min-height: 97.7vh;
+    min-height: 98.906vh;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -37,7 +37,7 @@ h2 {
     border: none;
     border-radius: 2vh;
     color: white;
-    width: 18vw;
+    min-width: 18vw;
     min-height: 10vh;
     padding: 15px 32px;
     text-align: center;
@@ -48,9 +48,11 @@ h2 {
 }
 
 .details-table {
-    width: 40vw;
+    min-width: 50vw;
+    min-height: 33vh;
     margin: 20px auto;
     border-collapse: collapse;
+    border-style: hidden;
     font: 3vh Arial, sans-serif;
     text-align: left;
 }
@@ -58,14 +60,14 @@ h2 {
 .details-table thead th {
     background-image: linear-gradient(to bottom, #00006c, #0078f3);
     color: white;
-    padding: 0.1vw;
-    border: none;
+    padding: 0.4vw;
+    border: 0.01vw solid #5a85ff;
     font: 4vh Berlin Sans FB;
     text-align: center;
 }
 
 .details-table tbody td {
-    border: 1px solid #ddd;
+    border: 0.01vw solid #ddd;
     padding: 1vh;
 }
 

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>DEPARTMENT DISCHARGE</title>
+</head>
+<body>
+<div id="container">
+  <h1>Crear Nuevo Departamento</h1>
+  <form action="#" th:action="@{/departmentdischarge}" th:object="${dept}" method="post">
+    <div class="form-group">
+      <label for="depno">Número de Departamento:</label>
+      <input type="text" id="depno" name="depno" required>
+    </div>
+    <div class="form-group">
+      <label for="name">Nombre:</label>
+      <input type="text" id="name" name="name" required>
+    </div>
+    <div class="form-group">
+      <label for="location">Ubicación:</label>
+      <input type="text" id="location" name="location" required>
+    </div>
+    <button class="form_button" type="submit">Crear Departamento</button>
+  </form>
+  <div th:if="${message}">
+    <p th:text="${#message}"></p>
+  </div>
+</div>
+</body>
+</html>
