@@ -26,6 +26,53 @@ h2 {
     min-height: 70vh;
     display: grid;
 }
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 2vh;
+}
+
+.form-group label {
+    font: bold 2.5vh Arial, sans-serif;
+    margin-bottom: 0.5vh;
+}
+
+.form-group input {
+    height: 4vh;
+    border: 1px solid #ccc;
+    border-radius: 0.5vh;
+    padding: 0 1vh;
+    font: 2vh Arial, sans-serif;
+    background-color: #f3f3f3;
+}
+
+.form_button {
+    background-color: #0078f3;
+    border: none;
+    border-radius: 1vh;
+    color: white;
+    min-width: 15vw;
+    min-height: 6vh;
+    font: bold 2.5vh Arial, sans-serif;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.form_button:hover {
+    background-color: #005bb5;
+}
+
+#message {
+    background-color: #28a745;
+    color: white;
+    padding: 1vh;
+    text-align: center;
+    border-radius: 0.5vh;
+    font: bold 2.5vh Arial, sans-serif;
+    margin: 0;
+}
+
 .button-container {
     display: flex;
     justify-content: center;
@@ -45,6 +92,10 @@ h2 {
     font: bold 2.6vh Arial, sans-serif ;
     margin: 1vh 2vw;
     cursor: pointer;
+}
+
+.button:hover {
+    background-image: linear-gradient(to bottom, #000055, #0065d1);
 }
 
 .details-table {

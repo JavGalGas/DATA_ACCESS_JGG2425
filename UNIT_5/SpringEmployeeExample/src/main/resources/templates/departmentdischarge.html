@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>DEPARTMENT DISCHARGE</title>
+    <link rel="stylesheet" type="text/css" href="/styles.css">
 </head>
 <body>
 <div id="container">
@@ -20,10 +21,15 @@
       <label for="location">Ubicación:</label>
       <input type="text" id="location" name="location" required>
     </div>
-    <button class="form_button" type="submit">Crear Departamento</button>
+    <div class="button-container">
+      <button class="form_button" type="submit">Crear Departamento</button>
+    </div>
   </form>
   <div th:if="${message}">
-    <p th:text="${#message}"></p>
+    <p th:text="${#message}" id="message"></p>
+  </div>
+  <div class="button-container">
+    <a href="http://localhost:8080/"><button class="button">Volver a la página de inicio</button></a>
   </div>
 </div>
 </body>
