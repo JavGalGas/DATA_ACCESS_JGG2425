@@ -2,10 +2,13 @@ package com.jgg2425.da.unit5.springemployeeexample.models.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
+import org.hibernate.annotations.DynamicInsert;
+import org.hibernate.annotations.DynamicUpdate;
 
 import java.util.LinkedHashSet;
 import java.util.Set;
-
+@DynamicInsert
+@DynamicUpdate
 @Entity
 @Table(name = "dept")
 public class DeptEntity {

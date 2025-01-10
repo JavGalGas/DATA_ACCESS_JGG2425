@@ -8,28 +8,28 @@
 <body>
 <div id="container">
   <h1>Crear Nuevo Departamento</h1>
-  <form action="#" th:action="@{/departmentdischarge}" th:object="${dept}" method="post">
+  <form th:action="@{/departmentdischarge}" th:object="${dept}" method="post">
     <div class="form-group">
-      <label for="depno">Número de Departamento:</label>
-      <input type="text" id="depno" name="depno" required>
+      <label for="deptId">Número de Departamento:</label>
+      <input type="number" id="deptId" name="id" min="1" max="2147483647" required>
     </div>
     <div class="form-group">
-      <label for="name">Nombre:</label>
-      <input type="text" id="name" name="name" required>
+      <label for="deptName">Nombre:</label>
+      <input type="text" id="deptName" name="dname" maxlength="14" required>
     </div>
     <div class="form-group">
-      <label for="location">Ubicación:</label>
-      <input type="text" id="location" name="location" required>
+      <label for="deptLoc">Ubicación:</label>
+      <input type="text" id="deptLoc" name="loc" maxlength="13" required>
     </div>
     <div class="button-container">
       <button class="form_button" type="submit">Crear Departamento</button>
     </div>
   </form>
-  <div th:if="${message}">
-    <p th:text="${#message}" id="message"></p>
+  <div th:if="${message}" id="message-container">
+    <p th:text="${message}" id="message-text" th:class="${theme == 'success' ? 'success-theme' : (theme == 'error' ? 'error-theme' : 'default-theme')}"></p>
   </div>
   <div class="button-container">
-    <a href="http://localhost:8080/"><button class="button">Volver a la página de inicio</button></a>
+    <a href="/"><button class="button">Volver a la página de inicio</button></a>
   </div>
 </div>
 </body>

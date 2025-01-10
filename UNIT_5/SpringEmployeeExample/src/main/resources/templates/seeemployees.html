@@ -20,12 +20,12 @@
       <td th:text="${employee.id}"></td>
       <td th:text="${employee.ename}"></td>
       <td th:text="${employee.job}"></td>
-      <td th:text="${employee.deptno}"></td>
+      <td th:text="${employee.deptno.getId()}"></td>
     </tr>
     </tbody>
   </table>
   <div class="button-container">
-    <a href="http://localhost:8080/"><button class="button">Volver a la página de inicio</button></a>
+    <a href="/"><button class="button">Volver a la página de inicio</button></a>
   </div>
 </div>
 </body>

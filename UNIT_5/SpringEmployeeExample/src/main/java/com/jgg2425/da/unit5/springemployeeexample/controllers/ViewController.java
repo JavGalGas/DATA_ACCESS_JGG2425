@@ -9,12 +9,10 @@ import com.jgg2425.da.unit5.springemployeeexample.services.EmployeesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Set;
 
 @Controller
 public class ViewController {
@@ -23,7 +21,7 @@ public class ViewController {
     private IDeptEntityDAO deptEntityDAO;
 
     @Autowired
-    private EmployeesService employeesService;
+    private IEmployeeEntityDAO employeeEntityDAO;
 
     @GetMapping("/")
     public String index() {
@@ -39,7 +37,7 @@ public class ViewController {
 
     @GetMapping("/seeemployees")
     public String showEmployees(Model model) {
-        List<EmployeeDTO> employees = employeesService.findAllEmployeesDTO();
+        List<EmployeeEntity> employees = (List<EmployeeEntity>) employeeEntityDAO.findAll();
         model.addAttribute("employees", employees);
         return "seeemployees";
     }
@@ -53,12 +51,48 @@ public class ViewController {
     @PostMapping("/departmentdischarge")
     public String createDept(@ModelAttribute DeptEntity dept, Model model) {
         if (!deptEntityDAO.existsById(dept.getId())) {
+            dept.setDname(dept.getDname().toUpperCase());
+            dept.setLoc(dept.getLoc().toUpperCase());
             deptEntityDAO.save(dept);
             model.addAttribute("message", "Department created successfully");
+            model.addAttribute("theme", "success");
         }
         else {
-            model.addAttribute("message", "Error creating department: " + dept.getId());
+            model.addAttribute("message", "Error: Department with Id " + dept.getId() + " already exists");
+            model.addAttribute("theme", "error");
         }
         return "departmentdischarge";
+    }
+
+    @GetMapping("/employeedischarge")
+    public String employeeDischarge(Model model) {
+        model.addAttribute("employee", new EmployeeEntity());
+        return "employeedischarge";
+    }
+
+    @PostMapping("/employeedischarge")
+    public String createEmployee(@ModelAttribute EmployeeEntity employee, @RequestParam("deptId") int deptId, Model model) {
+        var departmentOptional = deptEntityDAO.findById(deptId);
+        if (departmentOptional.isEmpty()) {
+            model.addAttribute("message", "Error: Department with ID " + deptId + " doesn't exists.");
+            model.addAttribute("theme", "error");
+        } else if (employeeEntityDAO.existsById(employee.getId())) {
+            model.addAttribute("message", "Error: Employee with ID " + employee.getId() + " already exists.");
+            model.addAttribute("theme", "error");
+        } else {
+            employee.setEname(employee.getEname().toUpperCase());
+            employee.setJob(employee.getJob().toUpperCase());
+            employee.setDeptno(departmentOptional.get());
+            employeeEntityDAO.save(employee);
+
+            Set<EmployeeEntity> employeeSet = departmentOptional.get().getEmployees();
+            employeeSet.add(employee);
+            departmentOptional.get().setEmployees(employeeSet);
+            deptEntityDAO.save(departmentOptional.get());
+
+            model.addAttribute("message", "Employee created successfully with Department " + deptId + ".");
+            model.addAttribute("theme", "success");
+        }
+        return "employeedischarge";
     }
 }

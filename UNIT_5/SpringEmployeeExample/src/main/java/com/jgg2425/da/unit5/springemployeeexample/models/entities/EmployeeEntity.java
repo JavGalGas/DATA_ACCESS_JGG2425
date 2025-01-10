@@ -2,7 +2,11 @@ package com.jgg2425.da.unit5.springemployeeexample.models.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
+import org.hibernate.annotations.DynamicInsert;
+import org.hibernate.annotations.DynamicUpdate;
 
+@DynamicInsert
+@DynamicUpdate
 @Entity
 @Table(name = "employee")
 public class EmployeeEntity {

@@ -63,14 +63,34 @@ h2 {
     background-color: #005bb5;
 }
 
-#message {
-    background-color: #28a745;
-    color: white;
+#message-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#message-text {
     padding: 1vh;
     text-align: center;
-    border-radius: 0.5vh;
+    width: 30vw;
+    border-radius: 1vh;
     font: bold 2.5vh Arial, sans-serif;
-    margin: 0;
+    margin: 1vh;
+}
+
+.success-theme {
+    background-color: #daffe2;
+    color: #00620d;
+}
+
+.error-theme {
+    background-color: #ffdada;
+    color: #620000;
+}
+
+.confirm-theme {
+    background-color: #d7d7d7;
+    color: #2c2c2c;
 }
 
 .button-container {

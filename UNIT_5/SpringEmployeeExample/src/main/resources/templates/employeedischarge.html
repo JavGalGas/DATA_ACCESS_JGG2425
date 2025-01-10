@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>DEPARTMENT DISCHARGE</title>
+  <link rel="stylesheet" type="text/css" href="/styles.css">
+</head>
+<body>
+<div id="container">
+  <h1>Crear Nuevo Empleado</h1>
+  <form th:action="@{/employeedischarge}" method="post">
+    <div class="form-group">
+      <label for="emplId">Número de Empleado:</label>
+      <input type="number" id="emplId" name="id" min="1" max="2147483647" required>
+    </div>
+    <div class="form-group">
+      <label for="emplName">Nombre:</label>
+      <input type="text" id="emplName" name="ename" maxlength="10" required>
+    </div>
+    <div class="form-group">
+      <label for="emplJob">Trabajo:</label>
+      <input type="text" id="emplJob" name="job" maxlength="9" required>
+    </div>
+    <div class="form-group">
+      <label for="emplDept">Número de Departamento:</label>
+      <input type="number" id="emplDept" name="deptId" min="1" max="2147483647" required>
+    </div>
+    <div class="button-container">
+      <button class="form_button" type="submit">Crear Empleado</button>
+    </div>
+  </form>
+  <div th:if="${message}" id="message-container">
+    <p th:text="${message}" id="message-text" th:class="${theme == 'success' ? 'success-theme' : (theme == 'error' ? 'error-theme' : 'default-theme')}"></p>
+  </div>
+  <div class="button-container">
+    <a href="/"><button class="button">Volver a la página de inicio</button></a>
+  </div>
+</div>
+</body>
+</html>
