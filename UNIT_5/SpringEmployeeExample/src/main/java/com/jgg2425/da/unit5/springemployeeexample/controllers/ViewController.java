@@ -2,16 +2,15 @@ package com.jgg2425.da.unit5.springemployeeexample.controllers;
 
 import com.jgg2425.da.unit5.springemployeeexample.models.dao.IDeptEntityDAO;
 import com.jgg2425.da.unit5.springemployeeexample.models.dao.IEmployeeEntityDAO;
-import com.jgg2425.da.unit5.springemployeeexample.models.dto.EmployeeDTO;
 import com.jgg2425.da.unit5.springemployeeexample.models.entities.DeptEntity;
 import com.jgg2425.da.unit5.springemployeeexample.models.entities.EmployeeEntity;
-import com.jgg2425.da.unit5.springemployeeexample.services.EmployeesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 @Controller
@@ -28,18 +27,30 @@ public class ViewController {
         return "index";
     }
 
-    @GetMapping("/seedepartments")
+    @GetMapping("/viewdepartments")
     public String showDepts(Model model) {
         List<DeptEntity> depts = (List<DeptEntity>) deptEntityDAO.findAll();
         model.addAttribute("depts", depts);
-        return "seedepartments";
+        return "viewdepartments";
     }
 
-    @GetMapping("/seeemployees")
+    @GetMapping("/viewemployees")
     public String showEmployees(Model model) {
         List<EmployeeEntity> employees = (List<EmployeeEntity>) employeeEntityDAO.findAll();
         model.addAttribute("employees", employees);
-        return "seeemployees";
+        return "viewemployees";
+    }
+
+    @GetMapping("/viewemployee")
+    public String showEmployee(Model model, @RequestParam(name = "id", required = true) int id) {
+        Optional<EmployeeEntity> employee = employeeEntityDAO.findById(id);
+        if(employee.isEmpty()) {
+            model.addAttribute("title", "Error");
+            model.addAttribute("message", "Employee with id " + id + " was not found");
+            return "error";
+        }
+        model.addAttribute("employee", employee.get());
+        return "viewemployee";
     }
 
     @GetMapping("/departmentdischarge")

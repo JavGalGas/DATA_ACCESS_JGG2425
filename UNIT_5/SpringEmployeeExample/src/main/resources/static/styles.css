@@ -118,6 +118,15 @@ h2 {
     background-image: linear-gradient(to bottom, #000055, #0065d1);
 }
 
+.detail-title {
+    background-image: linear-gradient(to bottom, #00006c, #0078f3);
+    color: white;
+    padding: 0.4vw;
+    border: 0.01vw solid #5a85ff;
+    font: 4vh Berlin Sans FB;
+    text-align: center;
+}
+
 .details-table {
     min-width: 50vw;
     min-height: 33vh;
@@ -128,7 +137,30 @@ h2 {
     text-align: left;
 }
 
-.details-table thead th {
+.details-table tbody tr td {
+    border: 0.01vw solid #ddd;
+    padding: 1vh;
+}
+
+.details-table tbody tr:hover {
+    background-color: #cccccc;
+}
+
+.details-table tbody tr:hover .detail-title {
+    background-image: linear-gradient(to bottom, #000055, #0065d1);
+}
+
+.list-detail-table {
+    min-width: 50vw;
+    min-height: 33vh;
+    margin: 20px auto;
+    border-collapse: collapse;
+    border-style: hidden;
+    font: 3vh Arial, sans-serif;
+    text-align: left;
+}
+
+.list-detail-table thead th {
     background-image: linear-gradient(to bottom, #00006c, #0078f3);
     color: white;
     padding: 0.4vw;
@@ -137,16 +169,15 @@ h2 {
     text-align: center;
 }
 
-.details-table tbody td {
+.list-detail-table tbody td {
     border: 0.01vw solid #ddd;
     padding: 1vh;
 }
 
-.details-table tbody tr:nth-child(even) {
+.list-detail-table tbody tr:nth-child(even) {
     background-color: #ededed;
 }
 
-.details-table tbody tr:hover {
+.list-detail-table tbody tr:hover {
     background-color: #cccccc;
 }
-

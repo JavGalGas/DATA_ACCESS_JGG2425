@@ -30,7 +30,7 @@
     </div>
   </form>
   <div th:if="${message}" id="message-container">
-    <p th:text="${message}" id="message-text" th:class="${theme == 'success' ? 'success-theme' : (theme == 'error' ? 'error-theme' : 'default-theme')}"></p>
+    <p th:text="${message}" id="message-text" th:class="${theme != null ? theme + '-theme' : 'default-theme'}"></p>
   </div>
   <div class="button-container">
     <a href="/"><button class="button">Volver a la página de inicio</button></a>
