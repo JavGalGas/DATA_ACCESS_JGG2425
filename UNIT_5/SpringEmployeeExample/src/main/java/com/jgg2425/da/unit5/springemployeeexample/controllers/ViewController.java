@@ -34,6 +34,18 @@ public class ViewController {
         return "viewdepartments";
     }
 
+    @GetMapping("/viewdepartment")
+    public String showDept(Model model, @RequestParam(name = "id", required = true) int id) {
+        Optional<DeptEntity> department = deptEntityDAO.findById(id);
+        if(department.isEmpty()) {
+            model.addAttribute("title", "Error");
+            model.addAttribute("message", "Department with id " + id + " was not found");
+            return "error";
+        }
+        model.addAttribute("department", department.get());
+        return "viewdepartment";
+    }
+
     @GetMapping("/viewemployees")
     public String showEmployees(Model model) {
         List<EmployeeEntity> employees = (List<EmployeeEntity>) employeeEntityDAO.findAll();

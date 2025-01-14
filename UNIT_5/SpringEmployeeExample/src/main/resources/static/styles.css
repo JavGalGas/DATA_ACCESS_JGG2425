@@ -114,6 +114,10 @@ h2 {
     cursor: pointer;
 }
 
+.button i {
+    margin-right: 10px;
+}
+
 .button:hover {
     background-image: linear-gradient(to bottom, #000055, #0065d1);
 }
@@ -125,6 +129,17 @@ h2 {
     border: 0.01vw solid #5a85ff;
     font: 4vh Berlin Sans FB;
     text-align: center;
+}
+
+.details-icon {
+    color: #007bff;
+    font-size: 1.2em;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.details-icon:hover {
+    color: #0056b3;
 }
 
 .details-table {
@@ -180,4 +195,10 @@ h2 {
 
 .list-detail-table tbody tr:hover {
     background-color: #cccccc;
+}
+
+#error-message {
+    color: #ff0000;
+    font: bold 3vh Arial, sans-serif;
+    text-align: center;
 }

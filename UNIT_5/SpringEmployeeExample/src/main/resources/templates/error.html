@@ -4,14 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title th:text="${title}">Error</title>
-    <link rel="stylesheet" type="text/css" href="/styles.css">
+    <link rel="stylesheet" type="text/css" href="/employee-app/styles.css">
 </head>
 <body>
-<div id="error-container">
+<div id="container">
     <h1 th:text="${title}">Error</h1>
-    <p th:text="${message}">An error occurred while processing your request.</p>
+    <p id="error-message" th:text="${message}">An error occurred while processing your request.</p>
     <div class="button-container">
-        <a href="/viewemployees"><button class="button">Go Back</button></a>
+        <a href="/employee-app/viewemployees"><button class="button">Go Back</button></a>
     </div>
 </div>
 </body>

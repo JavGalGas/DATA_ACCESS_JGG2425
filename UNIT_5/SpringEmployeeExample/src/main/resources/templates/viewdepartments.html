@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <title>DEPARTMENTS</title>
-    <link rel="stylesheet" type="text/css" href="/styles.css">
+    <link rel="stylesheet" type="text/css" href="/employee-app/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
     <div id="container">
@@ -12,18 +13,20 @@
             <thead>
                 <th>Número de Departamento</th>
                 <th>Nombre</th>
-                <th>Ubicación</th>
+                <th></th>
             </thead>
             <tbody>
             <tr th:each="dept : ${depts}">
                 <td th:text="${dept.id}"></td>
                 <td th:text="${dept.dname}"></td>
-                <td th:text="${dept.loc}"></td>
+                <td><a th:href="${'/employee-app/viewdepartment?id=' + dept.id}" class="details-icon" title="Ver detalles">
+                    <i class="fas fa-info-circle"></i>
+                </a></td>
             </tr>
             </tbody>
         </table>
         <div class="button-container">
-            <a href="/"><button class="button">Volver a la página de inicio</button></a>
+            <a href="/employee-app"><button class="button"><i class="fas fa-home"></i> Volver a la página de inicio</button></a>
         </div>
     </div>
 </body>

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>EMPLOYEES</title>
-    <link rel="stylesheet" type="text/css" href="/styles.css">
+    <link rel="stylesheet" type="text/css" href="/employee-app/styles.css">
 </head>
 <body>
 <div id="container">
@@ -12,19 +12,18 @@
     <thead>
     <th>Número de Empleado</th>
     <th>Nombre</th>
-    <th>Trabajo</th>
-    <th>Departamento</th>
+    <th></th>
     </thead>
     <tbody>
     <tr th:each="employee : ${employees}">
       <td th:text="${employee.id}"></td>
       <td th:text="${employee.ename}"></td>
-      <td><a th:ref="${'/viewemployee?id=' + employee.id}">Detalles</a></td>
+      <td><a th:href="${'/employee-app/viewemployee?id=' + employee.id}">Detalles</a></td>
     </tr>
     </tbody>
   </table>
   <div class="button-container">
-    <a href="/"><button class="button">Volver a la página de inicio</button></a>
+    <a href="/employee-app"><button class="button">Volver a la página de inicio</button></a>
   </div>
 </div>
 </body>

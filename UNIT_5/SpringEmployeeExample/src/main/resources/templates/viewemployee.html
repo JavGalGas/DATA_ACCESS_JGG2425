@@ -2,20 +2,14 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>EMPLOYEES</title>
-  <link rel="stylesheet" type="text/css" href="/styles.css">
+  <title th:object="${employee}" th:text="'EMPLOYEE '+ ${employee.id}"></title>
+  <link rel="stylesheet" type="text/css" href="/employee-app/styles.css">
 </head>
 <body>
 <div id="container">
   <h1>Detalles del Empleado</h1>
   <table class="details-table">
-    <thead>
-    <th>Número de Empleado</th>
-    <th></th>
-    <th>Trabajo</th>
-    <th>Departamento</th>
-    </thead>
-    <tbody th:object="employee">
+    <tbody th:object="${employee}">
     <tr>
       <td class="detail-title">Número de Empleado</td>
       <td th:text="${employee.id}"></td>
@@ -30,12 +24,12 @@
     </tr>
     <tr>
       <td class="detail-title">Departamento</td>
-      <td><a th:href="${'/viewdepartment?id=' + employee.deptno.id}" th:text="${employee.deptno.id}"></a></td>
+      <td><a th:href="${'/employee-app/viewdepartment?id=' + employee.deptno.id}" th:text="${employee.deptno.id}"></a></td>
     </tr>
     </tbody>
   </table>
   <div class="button-container">
-    <a href="/viewemployees"><button class="button">Volver atrás</button></a>
+    <a href="/employee-app/viewemployees"><button class="button">Volver atrás</button></a>
   </div>
 </div>
 </body>
