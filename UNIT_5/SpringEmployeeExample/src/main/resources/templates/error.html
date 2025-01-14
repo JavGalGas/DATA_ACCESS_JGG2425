@@ -2,9 +2,17 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${title}">Error</title>
+    <link rel="stylesheet" type="text/css" href="/styles.css">
 </head>
 <body>
-
+<div id="error-container">
+    <h1 th:text="${title}">Error</h1>
+    <p th:text="${message}">An error occurred while processing your request.</p>
+    <div class="button-container">
+        <a href="/viewemployees"><button class="button">Go Back</button></a>
+    </div>
+</div>
 </body>
 </html>
