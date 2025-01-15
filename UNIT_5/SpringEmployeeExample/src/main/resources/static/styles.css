@@ -1,60 +1,65 @@
-body {
-    background-image: linear-gradient(to bottom, #FFFFFF, #808080);
-    background-repeat: no-repeat;
-    background-position: center;
-    min-height: 98.906vh;
+html, body{
+    height: 100%;
+    width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
+
+body {
+    background-image: linear-gradient(to bottom, #FFFFFF, #808080);
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
 h1 {
-    font: bold 8vh Berlin Sans FB;
+    font: bold 420% Berlin Sans FB;
     text-align: center;
 }
 
 h2 {
-    font: 5vh Berlin Sans FB;
+    font: 250% Berlin Sans FB;
     text-align: center;
     color: #4b4c52;
 }
 
 #container {
-    padding: 2vw;
+    padding: 2%;
     background-color: white;
-    width: 60vw;
-    min-height: 70vh;
+    width: 60%;
+    min-height: 70%;
     display: grid;
 }
 
 .form-group {
     display: flex;
     flex-direction: column;
-    margin-bottom: 2vh;
+    margin-bottom: 2%;
 }
 
 .form-group label {
-    font: bold 2.5vh Arial, sans-serif;
-    margin-bottom: 0.5vh;
+    font: bold 2.5% Arial, sans-serif;
+    margin-bottom: 0.5%;
 }
 
 .form-group input {
-    height: 4vh;
+    height: 4%;
     border: 1px solid #ccc;
-    border-radius: 0.5vh;
-    padding: 0 1vh;
-    font: 2vh Arial, sans-serif;
+    border-radius: 0.5%;
+    padding: 0 1%;
+    font: 2% Arial, sans-serif;
     background-color: #f3f3f3;
 }
 
 .form_button {
     background-color: #0078f3;
     border: none;
-    border-radius: 1vh;
+    border-radius: 1%;
     color: white;
-    min-width: 15vw;
-    min-height: 6vh;
-    font: bold 2.5vh Arial, sans-serif;
+    min-width: 15%;
+    min-height: 6%;
+    font: bold 2.5% Arial, sans-serif;
     cursor: pointer;
     transition: background-color 0.3s ease;
 }
@@ -70,12 +75,12 @@ h2 {
 }
 
 #message-text {
-    padding: 1vh;
+    padding: 1%;
     text-align: center;
-    width: 30vw;
-    border-radius: 1vh;
-    font: bold 2.5vh Arial, sans-serif;
-    margin: 1vh;
+    width: 30%;
+    border-radius: 1%;
+    font: bold 2.5% Arial, sans-serif;
+    margin: 1%;
 }
 
 .success-theme {
@@ -102,15 +107,15 @@ h2 {
 .button {
     background-image: linear-gradient(to bottom, #00006c, #0078f3);
     border: none;
-    border-radius: 2vh;
+    border-radius: 7.5%;
     color: white;
-    min-width: 18vw;
-    min-height: 10vh;
+    min-width: 100%;
+    min-height: 100%;
     padding: 15px 32px;
     text-align: center;
     display: inline-block;
-    font: bold 2.6vh Arial, sans-serif ;
-    margin: 1vh 2vw;
+    font: bold 102.6% Arial, sans-serif ;
+    margin: 10% 20%;
     cursor: pointer;
 }
 
@@ -122,11 +127,11 @@ h2 {
     background-image: linear-gradient(to bottom, #000055, #0065d1);
 }
 
-.detail-title {
+.detail-title, .list-detail-table thead th {
     background-image: linear-gradient(to bottom, #00006c, #0078f3);
     color: white;
-    padding: 0.4vw;
-    border: 0.01vw solid #5a85ff;
+    padding: 0.4%;
+    border: thin solid #5a85ff;
     font: 4vh Berlin Sans FB;
     text-align: center;
 }
@@ -142,18 +147,18 @@ h2 {
     color: #0056b3;
 }
 
-.details-table {
-    min-width: 50vw;
-    min-height: 33vh;
+.details-table, .list-detail-table {
+    min-width: 50%;
+    min-height: 33%;
     margin: 20px auto;
     border-collapse: collapse;
     border-style: hidden;
-    font: 3vh Arial, sans-serif;
+    font: 3% Arial, sans-serif;
     text-align: left;
 }
 
-.details-table tbody tr td {
-    border: 0.01vw solid #ddd;
+.details-table tbody tr td, .list-detail-table tbody td {
+    border: thin solid #ddd;
     padding: 1vh;
 }
 
@@ -163,30 +168,6 @@ h2 {
 
 .details-table tbody tr:hover .detail-title {
     background-image: linear-gradient(to bottom, #000055, #0065d1);
-}
-
-.list-detail-table {
-    min-width: 50vw;
-    min-height: 33vh;
-    margin: 20px auto;
-    border-collapse: collapse;
-    border-style: hidden;
-    font: 3vh Arial, sans-serif;
-    text-align: left;
-}
-
-.list-detail-table thead th {
-    background-image: linear-gradient(to bottom, #00006c, #0078f3);
-    color: white;
-    padding: 0.4vw;
-    border: 0.01vw solid #5a85ff;
-    font: 4vh Berlin Sans FB;
-    text-align: center;
-}
-
-.list-detail-table tbody td {
-    border: 0.01vw solid #ddd;
-    padding: 1vh;
 }
 
 .list-detail-table tbody tr:nth-child(even) {
@@ -201,4 +182,14 @@ h2 {
     color: #ff0000;
     font: bold 3vh Arial, sans-serif;
     text-align: center;
+}
+
+#department-link a {
+    text-decoration: none;
+    font-weight: bold;
+    color: #0078f3;
+}
+
+#department-link a:hover{
+    color: #00006c;
 }

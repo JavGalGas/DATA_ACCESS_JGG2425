@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title th:object="${employee}" th:text="'EMPLOYEE '+ ${employee.id}"></title>
   <link rel="stylesheet" type="text/css" href="/employee-app/styles.css">
 </head>
@@ -24,7 +25,7 @@
     </tr>
     <tr>
       <td class="detail-title">Departamento</td>
-      <td><a th:href="${'/employee-app/viewdepartment?id=' + employee.deptno.id}" th:text="${employee.deptno.id}"></a></td>
+      <td id="department-link"><a th:href="${'/employee-app/viewdepartment?id=' + employee.deptno.id}" th:text="${employee.deptno.id}"></a></td>
     </tr>
     </tbody>
   </table>
