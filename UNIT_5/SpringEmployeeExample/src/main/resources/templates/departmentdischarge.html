@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DEPARTMENT DISCHARGE</title>
     <link rel="stylesheet" type="text/css" href="/employee-app/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
 <div id="container">
@@ -30,7 +31,7 @@
     <p th:text="${message}" id="message-text" th:class="${theme != null ? theme + '-theme' : 'default-theme'}"></p>
   </div>
   <div class="button-container">
-    <a href="/employee-app"><button class="button">Volver a la página de inicio</button></a>
+    <a href="/employee-app"><button class="button"><i class="fas fa-home"></i>Volver a la página de inicio</button></a>
   </div>
 </div>
 </body>

@@ -1,7 +1,9 @@
-html, body {
+html,
+body {
     height: 100%;
     width: 100%;
     margin: 0;
+    padding: 0;
     font-family: Arial, sans-serif;
 }
 
@@ -10,30 +12,40 @@ body {
     background-repeat: no-repeat;
     background-position: center;
     background-attachment: fixed;
+    background-size: cover;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
 h1 {
-    font: bold 4rem 'Berlin Sans FB', sans-serif;
+    font-family: "Berlin Sans FB", Arial, sans-serif;
+    font-weight: bold;
+    font-size: 4.5rem;
     text-align: center;
-    margin-bottom: 1.5rem;
+    margin-bottom: 1rem;
 }
 
 h2 {
-    font: 3rem 'Berlin Sans FB', sans-serif;
+    font: 3rem "Berlin Sans FB", sans-serif;
     text-align: center;
     color: #4b4c52;
 }
 
 #container {
     background-color: white;
-    width: 68%;
-    min-height: 78%;
+    width: 90%;
+    max-width: 1000px;
+    height: auto;
+    min-height: 80vh;
+    max-height: 80vh;
+    overflow-y: auto;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
     padding: 2rem;
     border-radius: 15px;
+    margin: 2vh auto;
+    display: flex;
+    flex-direction: column;
 }
 
 .form-group {
@@ -43,8 +55,10 @@ h2 {
 }
 
 .form-group label {
-    font-size: 1rem;
+    font-size: 1.35rem;
     margin-bottom: 0.5rem;
+    color: #000055;
+    font-weight: bold;
 }
 
 .form-group input {
@@ -61,8 +75,8 @@ h2 {
     border: none;
     border-radius: 1rem;
     color: white;
-    width: 15%;
-    height: 6vh;
+    min-width: 15%;
+    max-width: 25%;
     font-size: 1rem;
     cursor: pointer;
     margin: 0 auto;
@@ -75,6 +89,10 @@ h2 {
 }
 
 #message-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
     margin-top: 1rem;
     text-align: center;
 }
@@ -84,6 +102,7 @@ h2 {
     font-size: 1rem;
     border-radius: 0.5rem;
     text-align: center;
+    font-weight: 100;
     width: 30%;
 }
 
@@ -94,7 +113,7 @@ h2 {
 
 .error-theme {
     background-color: #ffdada;
-    color: #620000;
+    color: #9c0000;
 }
 
 .confirm-theme {
@@ -104,23 +123,25 @@ h2 {
 
 .button-container {
     display: flex;
-    justify-content: space-around;
     flex-wrap: wrap;
-    margin-top: 1.5rem;
-    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 1rem;
 }
 
 .button {
     background-image: linear-gradient(to bottom, #00006c, #0078f3);
     color: white;
     border: none;
-    border-radius: 1.5rem;
-    padding: 0.8rem 1.5rem;
+    border-radius: 1rem;
+    padding: 0.8rem 2rem;
     font-size: 1.2rem;
     cursor: pointer;
     transition: background-color 0.3s ease;
-    width: 100%;
+    max-width: none;
+    height: 3.5rem;
     text-align: center;
+    margin-bottom: 1rem;
 }
 
 .button i {
@@ -131,7 +152,8 @@ h2 {
     background-image: linear-gradient(to bottom, #000055, #0065d1);
 }
 
-.detail-title, .list-detail-table thead th {
+.detail-title,
+.list-detail-table thead th {
     background-image: linear-gradient(to bottom, #00006c, #0078f3);
     color: white;
     padding: 0.4%;
@@ -151,19 +173,20 @@ h2 {
     color: #0056b3;
 }
 
-.details-table, .list-detail-table {
-    width: 90%;
-    height: auto;
-    margin: 20px auto;
+.details-table,
+.list-detail-table {
+    width: 100%;
+    margin: 10px 0;
     border-collapse: collapse;
     border-style: hidden;
-    font: 3vh Arial, sans-serif;
+    font: 2.5vh Arial, sans-serif;
     text-align: left;
 }
 
-.details-table tbody tr td, .list-detail-table tbody td {
+.details-table tbody tr td,
+.list-detail-table tbody td {
     border: thin solid #ddd;
-    padding: 1vh;
+    padding: 0.5vh;
 }
 
 .details-table tbody tr:hover {
@@ -206,7 +229,8 @@ h2 {
         padding: 1.5rem;
     }
 
-    h1, h2 {
+    h1,
+    h2 {
         font-size: 2.5em;
     }
 
@@ -215,8 +239,10 @@ h2 {
     }
 
     .button {
+        width: 100%;
+        max-width: none;
         font-size: 1em;
-        padding: 8px 16px;
+        padding: 0.8rem 1rem;
     }
 
     .form-group input {
@@ -224,8 +250,10 @@ h2 {
         height: 2.2rem;
     }
 
-    .form_button, .button {
+    .form_button,
+    .button {
         font-size: 0.9rem;
         padding: 0.6rem 1rem;
     }
 }
+
