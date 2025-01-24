@@ -4,7 +4,7 @@
     <title>EMPLOYEES</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" type="text/css" href="styles.css">
+    <link rel="stylesheet" type="text/css" href="/employee-app/styles.css">
 </head>
 <body>
 <div id="container">
@@ -13,7 +13,17 @@
         <thead>
             <th>Número de Empleado</th>
             <th>Nombre</th>
-            <th></th>
+            <th>
+                <select id="selectDept" onchange="changeDept()">
+                    <option value="" th:selected="${selectedDept != null}">Selecciona un departamento</option>
+                    <option th:each="dept : ${departments}"
+                            th:value="${dept.id}"
+                            th:text="${dept.dname}"
+                            th:selected="${selectedDept != null && selectedDept.id == dept.id}">
+                    </option>
+                </select>
+
+            </th>
         </thead>
         <tbody>
         <tr th:each="employee : ${employees}">
@@ -29,5 +39,14 @@
         <a href="/employee-app"><button class="button"><i class="fas fa-home"></i> Volver a la página de inicio</button></a>
     </div>
 </div>
+<script>
+    function changeDept() {
+        var deptno = document.getElementById("selectDept").value;
+        if (!deptno || deptno === "")
+            window.location.href = "/employee-app/viewemployees";
+        else
+            window.location.href = "/employee-app/viewemployees?deptno=" + deptno;
+    }
+</script>
 </body>
 </html>

@@ -47,9 +47,21 @@ public class ViewController {
     }
 
     @GetMapping("/viewemployees")
-    public String showEmployees(Model model) {
-        List<EmployeeEntity> employees = (List<EmployeeEntity>) employeeEntityDAO.findAll();
+    public String showEmployees(Model model, @RequestParam(name="deptno", required = false) Integer deptno) {
+        List<DeptEntity> depts = (List<DeptEntity>) deptEntityDAO.findAll();
+        model.addAttribute("departments", depts);
+        List<EmployeeEntity> employees;
+        DeptEntity selectedDept = null;
+
+        if (deptno == null) {
+            employees = (List<EmployeeEntity>) employeeEntityDAO.findAll();
+        }
+        else {
+            employees = employeeEntityDAO.findByDeptno_Id(deptno);
+            selectedDept = deptEntityDAO.findById(deptno).orElse(null);
+        }
         model.addAttribute("employees", employees);
+        model.addAttribute("selectedDept", selectedDept);
         return "viewemployees";
     }
 

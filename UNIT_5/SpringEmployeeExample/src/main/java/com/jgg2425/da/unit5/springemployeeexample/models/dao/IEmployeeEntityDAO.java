@@ -12,4 +12,6 @@ import java.util.List;
 public interface IEmployeeEntityDAO extends CrudRepository<EmployeeEntity, Integer> {
     @Query("SELECT e FROM EmployeeEntity e WHERE LOWER(e.job) IN :jobs AND e.deptno.id = :deptId")
     List<EmployeeEntity> findByJobInAndDeptno(@Param("jobs") List<String> jobs, @Param("deptId") Integer deptId);
+
+    List<EmployeeEntity> findByDeptno_Id(Integer depno);
 }

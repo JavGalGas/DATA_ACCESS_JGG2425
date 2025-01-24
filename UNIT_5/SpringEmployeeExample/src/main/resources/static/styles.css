@@ -257,3 +257,36 @@ h2 {
     }
 }
 
+#selectDept {
+    width: 100%;
+    max-width: 300px;
+    height: 2.5rem;
+    border: 2px solid #0078f3;
+    border-radius: 8px;
+    padding: 0 0.8rem;
+    font-size: 1rem;
+    color: #00006c;
+    background-color: #f3f3f3;
+    transition: border-color 0.3s ease, background-color 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+#selectDept:hover {
+    background-color: #e6f0ff;
+}
+
+#selectDept:focus {
+    outline: none;
+    border-color: #005bb5;
+    background-color: #ffffff;
+    box-shadow: 0 0 5px rgba(0, 91, 181, 0.5);
+}
+
+#selectDept option {
+    font-size: 1rem;
+    color: #00006c;
+    background-color: #ffffff;
+    padding: 0.5rem;
+}
+
+
