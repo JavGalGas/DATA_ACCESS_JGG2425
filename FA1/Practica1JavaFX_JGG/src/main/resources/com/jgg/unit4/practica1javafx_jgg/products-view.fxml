@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" stylesheets="/css/custom_tab.css" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.jgg.unit4.practica1javafx_jgg.controllers.ProductsView">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" stylesheets="@../../../../css/custom_tab.css" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.jgg.unit4.practica1javafx_jgg.controllers.ProductsView">
 <VBox alignment="CENTER" prefHeight="400.0" prefWidth="120.0" style="-fx-background-color: linear-gradient(to bottom, #58a05c, #4BBF50, #4BBF50);" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="480.0" AnchorPane.topAnchor="0.0">
     <HBox fx:id="tab1" alignment="CENTER" prefHeight="100.0" prefWidth="200.0" styleClass="custom_tab">
         <ImageView fitHeight="80.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true" styleClass="tabImgView">

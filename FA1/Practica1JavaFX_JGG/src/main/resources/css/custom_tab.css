@@ -19,9 +19,13 @@
 }
 
 .slider .track{
-    -fx-background-color: #4BBF50;
+    -fx-background-color: linear-gradient(to bottom, #4BBF50, #58A05C);
     -fx-pref-height: 7.0;
     -fx-pref-width: 7.0;
+}
+
+.slider .axis{
+    -fx-tick-label-fill: #283629;
 }
 
 #tab1 ImageView{
