@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Add to Store</title>
+    <title>Seller Data</title>
     <style>
         body {
             margin: 0;
@@ -66,9 +66,7 @@
             margin-right: 10px;
         }
 
-        .form-group select,
-        .form-group input[type="range"],
-        .form-group input[type="text"] {
+        .form-group input {
             width: 65%;
             padding: 10px;
             border: none;
@@ -76,23 +74,8 @@
             font-size: 14px;
         }
 
-        .form-group select:focus,
-        .form-group input[type="range"]:focus,
-        .form-group input[type="text"]:focus {
+        .form-group input:focus {
             outline: 2px solid #58a05c;
-        }
-
-        .slider-container {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            width: 65%;
-            margin-left: auto;
-        }
-
-        .slider-container span {
-            margin-right: 10px;
-            font-size: 14px;
         }
 
         .form-section button {
@@ -120,32 +103,33 @@
         <img src="https://via.placeholder.com/50" alt="Icon 4">
     </div>
     <div class="form-section">
-        <h2>Add to Store</h2>
+        <h2>Seller Data</h2>
         <form>
             <div class="form-group">
-                <label for="category">Category:</label>
-                <select id="category">
-                    <option>Choose...</option>
-                </select>
+                <label for="cif">CIF:</label>
+                <input type="text" id="cif" name="cif" required>
             </div>
             <div class="form-group">
-                <label for="product">Product:</label>
-                <select id="product">
-                    <option>Choose...</option>
-                </select>
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" required>
             </div>
             <div class="form-group">
-                <label for="stock">Stock:</label>
-                <div class="slider-container">
-                    <span>Units</span>
-                    <input type="range" id="stock" min="1" max="25" step="1">
-                </div>
+                <label for="business">Business name:</label>
+                <input type="text" id="business" name="business" required>
             </div>
             <div class="form-group">
-                <label for="price">Price:</label>
-                <input type="text" id="price">
+                <label for="phone">Phone:</label>
+                <input type="tel" id="phone" name="phone" required>
             </div>
-            <button type="submit">Add</button>
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            <button type="submit">Ok</button>
         </form>
     </div>
 </div>
