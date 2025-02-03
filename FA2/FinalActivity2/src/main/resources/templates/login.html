@@ -10,10 +10,17 @@
 <div class="container">
   <div class="welcome-text">WELCOME</div>
   <form class="login-form">
-    <input type="text" placeholder="Username" required>
-    <input type="password" placeholder="Password" required>
+    <label>
+      <input type="text" placeholder="Username" required>
+    </label>
+    <label>
+      <input type="password" placeholder="Password" required>
+    </label>
     <button type="submit">Login</button>
   </form>
+  <div th:if="${message}" id="message-container">
+    <p th:text="${message}" id="message-text" th:class="${theme != null ? theme + '-theme' : 'default-theme'}"></p>
+  </div>
 </div>
 </body>
 </html>

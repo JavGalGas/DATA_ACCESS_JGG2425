@@ -1,0 +1,95 @@
+html,
+body {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background-image: linear-gradient(to bottom, #ffffff, #808080);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment: fixed;
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#container {
+    background-color: white;
+    width: 90%;
+    max-width: 1000px;
+    height: auto;
+    min-height: 80vh;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    padding: 2rem;
+    border-radius: 15px;
+    margin: 2vh auto;
+    display: flex;
+    flex-direction: column;
+}
+
+h1 {
+    font-size: 4.5rem;
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+#error-message {
+    color: #ff0000;
+    font-size: 1.2rem;
+    font-weight: bold;
+    text-align: center;
+    margin: 20px auto;
+    padding: 10px;
+    border: 2px solid #ff0000;
+    border-radius: 5px;
+    background-color: #ffe5e5;
+}
+
+.button-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 1rem;
+}
+
+.button {
+    background-image: linear-gradient(to bottom, #3b613f, #58a05c);
+    color: white;
+    border: none;
+    border-radius: 1rem;
+    padding: 0.8rem 2rem;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    height: 3.5rem;
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+.button i {
+    margin-right: 1vw;
+}
+
+.button:hover {
+    background-image: linear-gradient(to bottom, #304f34, #47814a);
+}
+
+@media (max-width: 768px) {
+    #container {
+        width: 90%;
+        padding: 1.5rem;
+    }
+
+    h1 {
+        font-size: 2.5em;
+    }
+
+    .button {
+        font-size: 1em;
+        padding: 0.8rem 1rem;
+    }
+}
