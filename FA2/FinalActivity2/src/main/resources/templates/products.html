@@ -4,27 +4,40 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Add to Store</title>
-    <link rel="stylesheet" type=text/css href="../static/sellerAppStyles.css">
+    <link rel="stylesheet" type=text/css href="/seller-app/sellerAppStyles.css">
 </head>
 <body>
 <div class="container">
     <div class="sidebar">
-        <img src="../static/userImg1.png" alt="Icon 1">
-        <img src="../static/productImg1.png" alt="Icon 2">
-        <img src="../static/offerImg1.png" alt="Icon 3">
-        <img src="../static/exitImg1.png" alt="Icon 4">
+        <img src="/seller-app/userImg1.png" alt="Icon 1">
+        <img src="/seller-app/productImg1.png" alt="Icon 2">
+        <img src="/seller-app/offerImg1.png" alt="Icon 3">
+        <img src="/seller-app/exitImg1.png" alt="Icon 4">
     </div>
     <div class="form-section">
         <h2>Add to Store</h2>
-        <form>
+        <form th:action="@{/product_discharge}">
             <div class="form-group">
                 <label for="category">Category:</label>
                 <select id="category">
-                    <option>Choose...</option>
+                    <option th:value="">Choose...</option>
+                    <option th:each="category : ${categories}"
+                            th:value="${category.id}"
+                            th:text="${category.categoryName}"
+                            th:selected="${selectedCateg != null && selectedCateg.id == category.id}">
+                    </option>
                 </select>
             </div>
             <div class="form-group">
                 <label for="product">Product:</label>
+                <select id="product">
+                    <option value="" th:selected="${selectedProd != null}">Choose...</option>
+                    <option th:each="product : ${products}"
+                            th:value="${product.id}"
+                            th:text="${product.productName}"
+                            th:selected="${selectedProd != null && selectedProd.id == product.id}">
+                    </option>
+                </select>
                 <select id="product">
                     <option>Choose...</option>
                 </select>

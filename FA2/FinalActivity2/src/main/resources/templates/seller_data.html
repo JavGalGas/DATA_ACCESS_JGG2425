@@ -4,103 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Seller Data</title>
-    <style>
-        body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-            background-color: #547556;
-            color: white;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-        }
-
-        .container {
-            display: flex;
-            width: 800px;
-            height: 500px;
-            background: #476e4e;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-        }
-
-        .sidebar {
-            width: 25%;
-            background: #3b613f;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: space-around;
-            padding: 20px 0;
-        }
-
-        .sidebar img {
-            width: 50px;
-            height: 50px;
-        }
-
-        .form-section {
-            width: 75%;
-            padding: 20px 40px;
-        }
-
-        .form-section h2 {
-            text-align: center;
-            font-size: 28px;
-            margin-bottom: 20px;
-        }
-
-        .form-group {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 15px;
-        }
-
-        .form-group label {
-            width: 30%;
-            font-size: 16px;
-            text-align: right;
-            margin-right: 10px;
-        }
-
-        .form-group input {
-            width: 65%;
-            padding: 10px;
-            border: none;
-            border-radius: 4px;
-            font-size: 14px;
-        }
-
-        .form-group input:focus {
-            outline: 2px solid #58a05c;
-        }
-
-        .form-section button {
-            width: 100%;
-            padding: 10px;
-            font-size: 16px;
-            background-color: #58a05c;
-            color: white;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-
-        .form-section button:hover {
-            background-color: #4d8b52;
-        }
-    </style>
+    <link rel="stylesheet" type="text/css" href="/seller-app/sAppStyles.css">
 </head>
 <body>
 <div class="container">
     <div class="sidebar">
-        <img src="../static/userImg1.png" alt="Icon 1">
-        <img src="../static/productImg1.png" alt="Icon 2">
-        <img src="../static/offerImg1.png" alt="Icon 3">
-        <img src="../static/exitImg1.png" alt="Icon 4">
+
+        <img src="/seller-app/userImg1.png" alt="Icon 1">
+        <img src="/seller-app/productImg1.png" alt="Icon 2">
+        <img src="/seller-app/offerImg1.png" alt="Icon 3">
+        <form th:action="@{/logout}" method="post">
+            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+            <button type="submit"><img src="/seller-app/exitImg1.png" alt="Icon 4"></button>
+        </form>
     </div>
     <div class="form-section">
         <h2>Seller Data</h2>

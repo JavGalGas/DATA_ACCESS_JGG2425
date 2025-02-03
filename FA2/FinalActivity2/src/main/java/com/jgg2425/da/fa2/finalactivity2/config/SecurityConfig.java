@@ -5,11 +5,16 @@ import com.jgg2425.da.fa2.finalactivity2.models.entities.Seller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+
+import static org.springframework.security.config.Customizer.withDefaults;
 
 @Configuration
 @EnableWebSecurity
@@ -46,5 +51,31 @@ public class SecurityConfig {
                     // comment this line if password is stored encoded
                     .build();
         };
+    }
+
+    @Bean
+    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+        http
+                .requiresChannel( channel -> channel.anyRequest().requiresSecure() )
+                .authorizeHttpRequests(auth -> auth
+                        // free access to the REST API
+                        .requestMatchers("/api-rest/**").permitAll()
+                        // free access to the styles.css file
+                        .requestMatchers("/styles.css").permitAll()
+                        // free access to login page
+                        .requestMatchers("/login").permitAll()
+                        // Any other request must be authenticated
+                        .anyRequest().authenticated()
+                )
+                .formLogin(form -> form.loginPage("/seller-app/login")
+                        .defaultSuccessUrl("/seller-app/seller_data", true)
+                )
+                .logout(logout -> logout
+                        .logoutRequestMatcher(new AntPathRequestMatcher("/logout", "POST"))
+                        .logoutSuccessUrl("/login")
+                )
+                .httpBasic(withDefaults());
+
+        return http.build();
     }
 }
