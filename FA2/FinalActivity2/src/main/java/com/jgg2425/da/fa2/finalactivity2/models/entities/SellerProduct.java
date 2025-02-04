@@ -8,8 +8,7 @@ import org.hibernate.annotations.DynamicUpdate;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.LinkedHashSet;
-import java.util.Set;
+
 @DynamicInsert
 @DynamicUpdate
 @Entity

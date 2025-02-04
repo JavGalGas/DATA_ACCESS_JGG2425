@@ -23,17 +23,9 @@ public class SellerService {
     @Autowired
     private UtilsService utilsService;
 
-    public List<Seller> findAllSellers() {
-        return (List<Seller>) sellerDAO.findAll();
-    }
-
     public ResponseEntity<Seller> findSellerById(@NotNull @Min(0) @PathVariable(value = "id") int id) {
         Optional<Seller> seller = sellerDAO.findById(id);
-        if (seller.isPresent()) {
-            return ResponseEntity.ok().body(seller.get());
-        } else {
-            return ResponseEntity.notFound().build();
-        }
+        return seller.isPresent() ? ResponseEntity.ok(seller.get()) : ResponseEntity.notFound().build();
     }
 
     public ResponseEntity<?> updateSeller(@Valid @RequestBody SellerDTO seller, @PathVariable(value = "id") @NotNull @Min(0) int id) {

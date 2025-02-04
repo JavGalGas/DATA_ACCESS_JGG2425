@@ -19,11 +19,6 @@ public class SellerController {
     @Autowired
     public SellerService sellerService;
 
-    @GetMapping()
-    public List<Seller> findAllSellers() {
-        return sellerService.findAllSellers();
-    }
-
     @GetMapping("/{id}")
     public ResponseEntity<Seller> findSellerById(@PathVariable int id) {
         return sellerService.findSellerById(id);

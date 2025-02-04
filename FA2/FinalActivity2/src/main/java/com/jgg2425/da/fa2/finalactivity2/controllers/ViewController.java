@@ -15,10 +15,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -38,7 +35,7 @@ public class ViewController {
     private UtilsService utilsService;
 
     @GetMapping("/login")
-    public String login() {
+    public String login(Model model) {
         return "login";
     }
 
@@ -96,5 +93,16 @@ public class ViewController {
             model.addAttribute("message", "Credentials are expired");
         }
         return "error";
+    }
+
+    @PostMapping("/products")
+    public String saveSellerProducts(@AuthenticationPrincipal UserDetails user, Model model, @RequestParam SellerProduct sellerProduct) {
+        if (user.isCredentialsNonExpired()) {
+
+        } else {
+            model.addAttribute("title", "Error");
+            model.addAttribute("message", "Credentials are expired");
+        }
+        return "redirect:/seller-api/products";
     }
 }
