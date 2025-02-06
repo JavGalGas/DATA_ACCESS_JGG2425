@@ -6,6 +6,7 @@ import com.jgg2425.da.fa2.finalactivity2.models.dao.ISellerDAO;
 import com.jgg2425.da.fa2.finalactivity2.models.dto.SellerDTO;
 import com.jgg2425.da.fa2.finalactivity2.models.entities.Category;
 import com.jgg2425.da.fa2.finalactivity2.models.entities.Product;
+import com.jgg2425.da.fa2.finalactivity2.models.entities.Seller;
 import com.jgg2425.da.fa2.finalactivity2.models.entities.SellerProduct;
 import com.jgg2425.da.fa2.finalactivity2.services.UtilsService;
 import jakarta.validation.Valid;
@@ -36,7 +37,19 @@ public class ViewController {
 
     @GetMapping("/login")
     public String login(Model model) {
+        model.addAttribute("user", new Seller());
         return "login";
+    }
+
+    @PostMapping("/login")
+    public String checkLogin(@ModelAttribute @Valid Seller seller, Model model) {
+        if(sellerDAO.findByCif(seller.getCif()).isEmpty()) {
+
+        } else if (sellerDAO.findByCif(seller.getCif()).get().equals(seller.getCif())) {
+
+        } else {
+
+        }
     }
 
     @GetMapping("/seller_data")

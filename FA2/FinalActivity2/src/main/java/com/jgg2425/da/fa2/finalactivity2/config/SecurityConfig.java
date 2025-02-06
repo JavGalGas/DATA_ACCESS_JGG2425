@@ -62,9 +62,9 @@ public class SecurityConfig {
                         // free access to the REST API
                         .requestMatchers("/api-rest/**").permitAll()
                         // free access to the styles.css file
-                        .requestMatchers("/styles.css").permitAll()
+                        .requestMatchers("/seller-app/styles.css").permitAll()
                         // free access to login page
-                        .requestMatchers("/login").permitAll()
+                        .requestMatchers("/seller-app/login").permitAll()
                         // Any other request must be authenticated
                         .anyRequest().authenticated()
                 )
@@ -73,7 +73,7 @@ public class SecurityConfig {
                 )
                 .logout(logout -> logout
                         .logoutRequestMatcher(new AntPathRequestMatcher("/logout", "POST"))
-                        .logoutSuccessUrl("/login")
+                        .logoutSuccessUrl("/seller-app/login")
                 )
                 .httpBasic(withDefaults());
 
