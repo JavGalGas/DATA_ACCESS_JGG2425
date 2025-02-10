@@ -12,25 +12,25 @@
   <form class="login-form" th:action="@{/login}" method="post">
     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
     <label>
-      <input id="username" type="text" name="username" placeholder="Username" required>
+      <input id="username" type="text" name="username" placeholder="Username" maxlength="20" required>
     </label>
     <label>
-      <input id="password" type="password" name="password" placeholder="Password" required>
+      <input id="password" type="password" name="password" placeholder="Password" maxlength="50" required>
     </label>
-    <!--<div>
-      <label for="checkbox">Remember me </label>
+    <div class="form-group">
+      <label for="checkbox">Remember me:</label>
       <input id="checkbox" type="checkbox" placeholder="Remember me" name="remember-me">
-    </div>-->
+    </div>
     <button type="submit">Login</button>
   </form>
   <!-- Display login errors if authentication fails -->
-  <div th:if="${error}" style="color: red;">
-    <p th:text="${error}"></p>
+  <div th:if="${error}" class="message-container">
+    <p id="error" th:text="${error}"></p>
   </div>
 
   <!-- Show logout message if the user logged out -->
-  <div th:if="${param.logout}">
-    <p style="color: green;">You have been logged out.</p>
+  <div th:if="${logout}" class="message-container">
+    <p id="logout">You have been logged out.</p>
   </div>
 </div>
 </body>

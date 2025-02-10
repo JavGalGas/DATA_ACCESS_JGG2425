@@ -22,9 +22,10 @@ public class SellerController {
         return sellerService.findSellerById(id);
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/{id}/{confirm}")
     public ResponseEntity<?> updateSeller(@RequestBody @Validated SellerDTO seller,
-                                          @NotNull @Min(0) @PathVariable(value = "id") int id) {
-        return sellerService.updateSeller(seller, id);
+                                          @NotNull @Min(0) @PathVariable(value = "id") int id,
+                                          @PathVariable(value = "confirm") String confirmPasswd) {
+        return sellerService.updateSeller(seller, id, confirmPasswd);
     }
 }

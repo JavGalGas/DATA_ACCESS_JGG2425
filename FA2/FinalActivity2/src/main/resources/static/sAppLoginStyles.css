@@ -22,7 +22,7 @@ body {
     border-radius: 12px;
     padding: 40px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    height: 13rem;
+    height: 15rem;
     width: 28rem;
     text-align: center;
     color: black;
@@ -63,4 +63,53 @@ body {
 }
 .login-form button:hover {
     background-color: #4d8b52;
+}
+
+
+.form-group {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    width: 100%;
+    font-size: 16px;
+    text-align: center;
+}
+.form-group input {
+    margin-right: 50%;
+}
+.form-group input:checked{
+    background-color: #333333;
+}
+
+.message-container {
+    background: linear-gradient(to bottom, #bbbbbb, #dddddd, #aaaaaa);
+    border-radius: 12px;
+    padding: 0 20px;
+    margin-top: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.message-container #logout{
+    background-image: linear-gradient(to bottom, #4CAF50, #4d8b52);
+    color: transparent;
+    background-clip: text;
+    -webkit-background-clip: text;
+    font-weight: bold;
+}
+
+.message-container #error{
+    background-image: linear-gradient(to bottom, #d12323, #850000);
+    color: transparent;
+    background-clip: text;
+    -webkit-background-clip: text;
+    font-weight: bold;
 }

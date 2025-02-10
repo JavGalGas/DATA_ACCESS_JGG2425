@@ -38,40 +38,52 @@ public class ViewController {
     private UtilsService utilsService;
 
     @GetMapping("/login")
-    public String login(@RequestParam(value = "error", required = false) String error, Model model) {
+    public String login(
+            @RequestParam(value = "error", required = false) String error,
+            @RequestParam(value = "logout", required = false) String logout,
+            Model model) {
         if (error != null) {
-            model.addAttribute("error", error);
+            model.addAttribute("error", "Wrong credentials. Please try again.");
         }
-        model.addAttribute("user", new Seller());
+        if (logout != null) {
+            model.addAttribute("logout", logout);
+        }
         return "login";
     }
 
-    @PostMapping("/login")
-    public String checkLogin(@RequestParam(name = "cif") String cif,
-                             @RequestParam(name = "password") String password,
-                             Model model,
-                             HttpSession session) {
-        if (cif.isEmpty()) {
-            model.addAttribute("error", "Username cannot be empty");
-        }
-        if (password.isEmpty()) {
-            model.addAttribute("error", "Password cannot be empty");
-        }
-        if (model.containsAttribute("error")) {
-            return "login";
-        }
-
-        Optional<Seller> optionalSeller = sellerDAO.findByCifAndPassword(cif, utilsService.encode(password));
-
-        if (optionalSeller.isPresent()) {
-            // Save seller in a Spring Security session
-            session.setAttribute("seller", optionalSeller.get());
-            return "redirect:/seller_data";
-        } else {
-            model.addAttribute("error", "User not found");
-            return "login";
-        }
-    }
+//    @PostMapping("/login")
+//    public String checkLogin(@RequestParam(name = "cif") String cif,
+//                             @RequestParam(name = "password") String password,
+//                             Model model,
+//                             HttpSession session) {
+//        String errorMessage = "";
+//        if (cif.isEmpty()) {
+//            errorMessage += "Username";
+//        }
+//        if (password.isEmpty() && !errorMessage.isEmpty()) {
+//            errorMessage += " and Password";
+//        } else if (password.isEmpty()) {
+//            errorMessage += "Password";
+//        }
+//        if (!errorMessage.isEmpty()) {
+//            errorMessage += " cannot be empty";
+//            model.addAttribute("errorMessage", errorMessage);
+//        }
+//        if (model.containsAttribute("errorMessage")) {
+//            return "login";
+//        }
+//
+//        Optional<Seller> optionalSeller = sellerDAO.findByCifAndPassword(cif, utilsService.encode(password));
+//
+//        if (optionalSeller.isPresent()) {
+//            // Save seller in a Spring Security session
+//            session.setAttribute("seller", optionalSeller.get());
+//            return "redirect:/seller_data?";
+//        } else {
+//            model.addAttribute("errorMessage", "User not found. Please try again");
+//            return "login";
+//        }
+//    }
 
     @GetMapping({"/seller_data", "/seller_data.html"})
     public String showSellerData(@AuthenticationPrincipal UserDetails user, Model model) {
@@ -94,7 +106,7 @@ public class ViewController {
     public String updateSeller(
             @AuthenticationPrincipal UserDetails user,
             Model model,
-            @Valid @ModelAttribute("seller") SellerDTO sellerDTO,
+            @Valid @ModelAttribute("sellerDTO") SellerDTO sellerDTO,
             BindingResult binding,
             @RequestParam("id") int sellerId,
             @RequestParam("confirm") String confirmPasswd) {
@@ -107,7 +119,7 @@ public class ViewController {
             }
 
             if (utilsService.checkSDTODtUpdt(sellerId, sellerDTO)) {
-                sellerController.updateSeller(sellerDTO, sellerId);
+                sellerController.updateSeller(sellerDTO, sellerId, confirmPasswd);
             } else {
                 model.addAttribute("message", "Error: Seller with Id " +sellerId + " does not exist");
                 model.addAttribute("theme", "error");
@@ -115,8 +127,8 @@ public class ViewController {
             return "seller_data";
         } else {
             model.addAttribute("error", "Credentials are expired");
+            return "redirect:/login";
         }
-        return "redirect:/login";
     }
 
     @GetMapping("/products")
@@ -129,11 +141,11 @@ public class ViewController {
             List<Product> products = null;
             int userId = sellerDAO.findByCif(user.getUsername()).get().getId();
             if (category == null) {
-                products = productDAO.findProductsNotInSellerProducts(userId);
+                products = productDAO.getNonAddedProducts(userId);
             } else {
                 selectedCategory = categoryDAO.findById(category).get();
                 model.addAttribute("selectedCategory", selectedCategory);
-                products = productDAO.findProductsNotInSellerProducts(userId, selectedCategory.getId());
+                products = productDAO.getNonAddedProductsByCategory(userId, selectedCategory.getId());
             }
             model.addAttribute("products", products);
             return "products";

@@ -8,8 +8,53 @@ import org.springframework.data.repository.query.Param;
 import java.util.List;
 
 public interface IProductDAO extends CrudRepository<Product, Integer> {
-    @Query(value = "SELECT * FROM get_prod_nin_seller_products(:sellerId)", nativeQuery = true)
-    List<Product> findProductsNotInSellerProducts(@Param("sellerId") int sellerId);
-    @Query(value = "SELECT * FROM get_prod_nin_seller_products(:sellerId, :categoryId)", nativeQuery = true)
-    List<Product> findProductsNotInSellerProducts(@Param("sellerId") int sellerId, @Param("categoryId") int categoryId);
+    /**
+     *
+     * @param sellerId
+     * @return
+     * @<code>
+     *     CREATE OR REPLACE FUNCTION get_non_added_products(seller_id_param INTEGER)
+     *      RETURNS SETOF products
+     *      AS $$
+     *      BEGIN
+     *          RETURN QUERY
+     *          SELECT p.*
+     *          FROM products p
+     *          WHERE p.product_id NOT IN (
+     *              SELECT s.id
+     *              FROM seller_products s
+     *              WHERE s.seller_id = seller_id_param
+     *              );
+     *      END; $$
+     *      LANGUAGE plpgsql;
+     * </code>
+     */
+    @Query(value = "SELECT * FROM get_non_added_products(:sellerId)", nativeQuery = true)
+    List<Product> getNonAddedProducts(@Param("sellerId") int sellerId);
+
+    /**
+     *
+     * @param sellerId
+     * @param categoryId
+     * @return
+     * @<code>
+     *     CREATE OR REPLACE FUNCTION get_non_added_products_by_category(seller_id_param INTEGER, category_id_param INTEGER)
+     *      RETURNS SETOF products
+     *      AS $$
+     *      BEGIN
+     *          RETURN QUERY
+     *          SELECT p.*
+     *          FROM products p
+     *          WHERE p.product_id NOT IN (
+     *              SELECT s.id
+     *              FROM seller_products s
+     *              WHERE s.seller_id = seller_id_param
+     *              )
+     *          AND p.category_id = category_id_param;
+     *      END; $$
+     *      LANGUAGE plpgsql;
+     * </code>
+     */
+    @Query(value = "SELECT * FROM get_non_added_products_by_category(:sellerId, :categoryId)", nativeQuery = true)
+    List<Product> getNonAddedProductsByCategory(@Param("sellerId") int sellerId, @Param("categoryId") int categoryId);
 }
