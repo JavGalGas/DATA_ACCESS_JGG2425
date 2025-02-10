@@ -5,6 +5,9 @@ import com.jgg2425.da.fa2.finalactivity2.models.entities.Seller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.ProviderManager;
+import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.core.userdetails.User;
@@ -62,18 +65,24 @@ public class SecurityConfig {
                         // free access to the REST API
                         .requestMatchers("/api-rest/**").permitAll()
                         // free access to the styles.css file
-                        .requestMatchers("/seller-app/styles.css").permitAll()
+                        .requestMatchers("/styles.css").permitAll()
+                        .requestMatchers("/sAppLoginStyles.css").permitAll()
+                        .requestMatchers("/sellerAppStyles.css").permitAll()
                         // free access to login page
-                        .requestMatchers("/seller-app/login").permitAll()
+                        .requestMatchers("/login").permitAll()
                         // Any other request must be authenticated
                         .anyRequest().authenticated()
                 )
-                .formLogin(form -> form.loginPage("/seller-app/login")
-                        .defaultSuccessUrl("/seller-app/seller_data", true)
+                .formLogin(form -> form
+                        .loginPage("/login")
+                        .failureUrl("/login?error=true")
+                        .defaultSuccessUrl("/seller_data", true)
                 )
                 .logout(logout -> logout
                         .logoutRequestMatcher(new AntPathRequestMatcher("/logout", "POST"))
-                        .logoutSuccessUrl("/seller-app/login")
+                        .logoutSuccessUrl("/login")
+                        .invalidateHttpSession(true)  // Invalidates user's session
+                        .clearAuthentication(true)  // Clears session's authentication
                 )
                 .httpBasic(withDefaults());
 

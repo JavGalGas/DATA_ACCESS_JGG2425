@@ -54,7 +54,7 @@ public class SecurityConfig {
             // Request Authorization Settings
             .authorizeHttpRequests(auth -> auth
                     .requestMatchers("/api-rest/**").permitAll() // Free access to the REST API
-                    .requestMatchers("/employee/**").permitAll() // Free access to REST API redirection
+                    .requestMatchers("/employee-app/**").permitAll() // Free access to REST API redirection
                     .requestMatchers("/styles.css").permitAll() // Free access to styles
                     .requestMatchers("/login").permitAll() // Free access to the login page
                     .anyRequest().authenticated() // Any other request requires authentication

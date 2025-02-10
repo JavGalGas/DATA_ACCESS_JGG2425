@@ -7,4 +7,5 @@ import java.util.Optional;
 
 public interface ISellerDAO extends CrudRepository<Seller, Integer> {
     Optional<Seller> findByCif(String cif);
+    Optional<Seller> findByCifAndPassword(String cif, String password);
 }

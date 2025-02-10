@@ -12,7 +12,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 
-import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -28,7 +27,10 @@ public class SellerService {
         return seller.isPresent() ? ResponseEntity.ok(seller.get()) : ResponseEntity.notFound().build();
     }
 
-    public ResponseEntity<?> updateSeller(@Valid @RequestBody SellerDTO seller, @PathVariable(value = "id") @NotNull @Min(0) int id) {
+    public ResponseEntity<?> updateSeller(
+            @Valid @RequestBody SellerDTO seller,
+            @PathVariable(value = "id") @NotNull @Min(0) int id,
+            @PathVariable(value = "confirm") String passwdCheck) {
         Optional<Seller> optionalSeller = sellerDAO.findById(id);
         if (optionalSeller.isPresent()) {
             if (seller.getName() != null) {
