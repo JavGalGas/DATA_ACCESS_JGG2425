@@ -1,7 +1,7 @@
 body {
     margin: 0;
     font-family: Arial, sans-serif;
-    background-color: #547556;
+    background: linear-gradient(to bottom, #547556, #58a05c, #58a05c);
     color: white;
     display: flex;
     justify-content: center;
@@ -33,6 +33,7 @@ body {
     width: 6rem;
     height: 6rem;
     transition: 0.3s;
+    cursor: pointer;
 }
 
 .sidebar img:hover {
@@ -41,7 +42,7 @@ body {
 
 .form-section {
     width: 75%;
-    padding: 20px 40px;
+    padding: 0 40px;
 }
 
 .form-section h2 {
@@ -66,7 +67,10 @@ body {
 
 .form-group select,
 .form-group input[type="range"],
-.form-group input[type="text"] {
+.form-group input[type="text"],
+.form-group input[type="tel"],
+.form-group input[type="email"],
+.form-group input[type="password"]{
     width: 65%;
     padding: 10px;
     border: none;
@@ -75,8 +79,11 @@ body {
 }
 
 .form-group select:focus,
-.form-group input[type="range"]:focus,
-.form-group input[type="text"]:focus {
+.form-group input[type="range"] :focus,
+.form-group input[type="text"] :focus,
+.form-group input[type="tel"] :focus,
+.form-group input[type="email"] :focus,
+.form-group input[type="password"] :focus {
     outline: 2px solid #58a05c;
 }
 
@@ -94,9 +101,11 @@ body {
 }
 
 .form-section button {
-    width: 100%;
+    width: 80%;
     padding: 10px;
+    margin-top: 5px;
     font-size: 16px;
+    font-weight: bold;
     background-color: #58a05c;
     color: white;
     border: none;
@@ -106,4 +115,16 @@ body {
 
 .form-section button:hover {
     background-color: #4d8b52;
+}
+
+#logoutButton {
+    background: none;
+    border: none;
+    padding: 0;
+}
+
+.form-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }

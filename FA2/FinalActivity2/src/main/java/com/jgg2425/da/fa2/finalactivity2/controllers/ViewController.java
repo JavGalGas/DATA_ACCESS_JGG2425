@@ -43,7 +43,9 @@ public class ViewController {
             @RequestParam(value = "logout", required = false) String logout,
             Model model) {
         if (error != null) {
-            model.addAttribute("error", "Wrong credentials. Please try again.");
+            if (error.equals("true"))
+                model.addAttribute("error", "Wrong credentials. Please try again.");
+            model.addAttribute("error", error);
         }
         if (logout != null) {
             model.addAttribute("logout", logout);
@@ -90,7 +92,15 @@ public class ViewController {
         if (user.isCredentialsNonExpired()) {
             Optional<Seller> optionalSeller = sellerDAO.findByCif(user.getUsername());
             if (optionalSeller.isPresent()) {
-                model.addAttribute("seller", optionalSeller.get());
+                SellerDTO sellerDTO = new SellerDTO();
+                sellerDTO.setCif(optionalSeller.get().getCif());
+                sellerDTO.setName(optionalSeller.get().getName());
+                sellerDTO.setBusinessName(optionalSeller.get().getBusinessName());
+                sellerDTO.setEmail(optionalSeller.get().getEmail());
+                sellerDTO.setPhone(optionalSeller.get().getPhone());
+                sellerDTO.setPlainPassword(optionalSeller.get().getPlainPassword());
+
+                model.addAttribute("sellerDTO", sellerDTO);
             } else {
                 model.addAttribute("error", "Seller not found. Please check your Username and password.");
                 return "redirect:/login";
@@ -108,22 +118,29 @@ public class ViewController {
             Model model,
             @Valid @ModelAttribute("sellerDTO") SellerDTO sellerDTO,
             BindingResult binding,
-            @RequestParam("id") int sellerId,
-            @RequestParam("confirm") String confirmPasswd) {
+            @RequestParam("password-confirm") String confirmPasswd) {
         if (user.isCredentialsNonExpired()) {
+            int sellerId = Integer.MIN_VALUE;
+            Optional<Seller> optionalSeller = sellerDAO.findByCif(user.getUsername());
+
+            if (optionalSeller.isPresent()) {
+                sellerId = optionalSeller.get().getId();
+            }
+
             if (binding.hasErrors()) {
                 System.out.println(binding.getAllErrors());
-                model.addAttribute("message", "Error: Seller with Id " +sellerId + " does not exist");
+                model.addAttribute("message", "Error: Seller with Id " + sellerId + " does not exist");
                 model.addAttribute("theme", "error");
-                return "/seller_data";
+                return "seller_data";
             }
 
             if (utilsService.checkSDTODtUpdt(sellerId, sellerDTO)) {
                 sellerController.updateSeller(sellerDTO, sellerId, confirmPasswd);
             } else {
-                model.addAttribute("message", "Error: Seller with Id " +sellerId + " does not exist");
+                model.addAttribute("message", "Error: The given seller data is not valid for the update.");
                 model.addAttribute("theme", "error");
             }
+
             return "seller_data";
         } else {
             model.addAttribute("error", "Credentials are expired");
@@ -132,20 +149,29 @@ public class ViewController {
     }
 
     @GetMapping("/products")
-    public String showProducts(@AuthenticationPrincipal UserDetails user, Model model, @RequestParam(name = "category", required = false) Integer category) {
+    public String showProducts(@AuthenticationPrincipal UserDetails user, Model model, @RequestParam(name = "selectedCategory", required = false) Integer category) {
         if (user.isCredentialsNonExpired()) {
             model.addAttribute("sellerProduct", new SellerProduct());
             List<Category> categories = (List<Category>) categoryDAO.findAll();
             model.addAttribute("categories", categories);
             Category selectedCategory = null;
             List<Product> products = null;
-            int userId = sellerDAO.findByCif(user.getUsername()).get().getId();
+            int userId = 0;
+            Optional<Seller> optionalSeller = sellerDAO.findByCif(user.getUsername());
+            if (optionalSeller.isPresent()) {
+                userId = optionalSeller.get().getId();
+            }
             if (category == null) {
                 products = productDAO.getNonAddedProducts(userId);
             } else {
-                selectedCategory = categoryDAO.findById(category).get();
-                model.addAttribute("selectedCategory", selectedCategory);
-                products = productDAO.getNonAddedProductsByCategory(userId, selectedCategory.getId());
+                Optional<Category> optionalCategory = categoryDAO.findById(category);
+                if (optionalCategory.isPresent()) {
+                    selectedCategory = optionalCategory.get();
+                    model.addAttribute("selectedCategory", selectedCategory);
+                    products = productDAO.getNonAddedProductsByCategory(userId, selectedCategory.getId());
+                } else {
+                    products = productDAO.getNonAddedProducts(userId);
+                }
             }
             model.addAttribute("products", products);
             return "products";
