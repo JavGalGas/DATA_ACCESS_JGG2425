@@ -4,6 +4,7 @@ import com.jgg2425.da.fa2.finalactivity2.models.dao.ICategoryDAO;
 import com.jgg2425.da.fa2.finalactivity2.models.dao.IProductDAO;
 import com.jgg2425.da.fa2.finalactivity2.models.dao.ISellerDAO;
 import com.jgg2425.da.fa2.finalactivity2.models.dto.SellerDTO;
+import com.jgg2425.da.fa2.finalactivity2.models.dto.SellerProductDTO;
 import com.jgg2425.da.fa2.finalactivity2.models.entities.Category;
 import com.jgg2425.da.fa2.finalactivity2.models.entities.Product;
 import com.jgg2425.da.fa2.finalactivity2.models.entities.Seller;
@@ -17,6 +18,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -128,14 +130,19 @@ public class ViewController {
             }
 
             if (binding.hasErrors()) {
-                System.out.println(binding.getAllErrors());
-                model.addAttribute("message", "Error: Seller with Id " + sellerId + " does not exist");
+                StringBuilder errorMessage = new StringBuilder("\n");
+                for (ObjectError error : binding.getAllErrors()) {
+                    errorMessage.append("\n").append(error.getDefaultMessage());
+                }
+                model.addAttribute("message", "Binding Error: " + errorMessage);
                 model.addAttribute("theme", "error");
                 return "seller_data";
             }
 
             if (utilsService.checkSDTODtUpdt(sellerId, sellerDTO)) {
                 sellerController.updateSeller(sellerDTO, sellerId, confirmPasswd);
+                model.addAttribute("message", "Seller updated successfully");
+                model.addAttribute("theme", "success");
             } else {
                 model.addAttribute("message", "Error: The given seller data is not valid for the update.");
                 model.addAttribute("theme", "error");
@@ -149,11 +156,13 @@ public class ViewController {
     }
 
     @GetMapping("/products")
-    public String showProducts(@AuthenticationPrincipal UserDetails user, Model model, @RequestParam(name = "selectedCategory", required = false) Integer category) {
+    public String showProducts(
+            @AuthenticationPrincipal UserDetails user,
+            Model model,
+            @RequestParam(name = "selectedCategory", required = false) Integer category
+    ) {
         if (user.isCredentialsNonExpired()) {
-            model.addAttribute("sellerProduct", new SellerProduct());
-            List<Category> categories = (List<Category>) categoryDAO.findAll();
-            model.addAttribute("categories", categories);
+            model.addAttribute("sellerProduct", new SellerProductDTO());
             Category selectedCategory = null;
             List<Product> products = null;
             int userId = 0;
@@ -161,6 +170,8 @@ public class ViewController {
             if (optionalSeller.isPresent()) {
                 userId = optionalSeller.get().getId();
             }
+            List<Category> categories = (userId != 0) ? categoryDAO.findAllCategWithProducts(userId) : null;
+            model.addAttribute("categories", categories);
             if (category == null) {
                 products = productDAO.getNonAddedProducts(userId);
             } else {
@@ -176,20 +187,31 @@ public class ViewController {
             model.addAttribute("products", products);
             return "products";
         } else {
-            model.addAttribute("title", "Error");
-            model.addAttribute("message", "Credentials are expired");
+            model.addAttribute("error", "Credentials are expired");
         }
-        return "error";
+        return "redirect:/login";
     }
 
-    /*@PostMapping("/products")
-    public String saveSellerProducts(@AuthenticationPrincipal UserDetails user, Model model, @RequestParam SellerProduct sellerProduct) {
+    @PostMapping("/products")
+    public String saveSellerProducts(
+            @AuthenticationPrincipal UserDetails user,
+            Model model,
+            @ModelAttribute SellerProductDTO sellerProduct,
+            BindingResult binding
+    ) {
         if (user.isCredentialsNonExpired()) {
-
+            if (binding.hasErrors()) {
+                StringBuilder errorMessage = new StringBuilder("\n");
+                for (ObjectError error : binding.getAllErrors()) {
+                    errorMessage.append("\n").append(error.getDefaultMessage());
+                }
+                model.addAttribute("message", "Binding Error: " + errorMessage);
+                model.addAttribute("theme", "error");
+                return "products";
+            }
         } else {
-            model.addAttribute("title", "Error");
-            model.addAttribute("message", "Credentials are expired");
+            model.addAttribute("error", "Credentials are expired");
         }
-        return "redirect:/seller-api/products";
-    }*/
+        return "redirect:/login";
+    }
 }

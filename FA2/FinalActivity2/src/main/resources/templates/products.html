@@ -27,18 +27,17 @@
                     <option th:each="category : ${categories}"
                             th:value="${category.id}"
                             th:text="${category.categoryName}"
-                            th:selected="${selectedCateg != null && selectedCateg.id == category.id}">
+                            th:selected="${selectedCategory != null && selectedCategory.id == category.id}">
                     </option>
                 </select>
             </div>
             <div class="form-group">
                 <label for="product">Product:</label>
                 <select id="product">
-                    <option value="" th:selected="${selectedProd != null}">Choose...</option>
+                    <option value="">Choose...</option>
                     <option th:each="product : ${products}"
                             th:value="${product.id}"
-                            th:text="${product.productName}"
-                            th:selected="${selectedProd != null && selectedProd.id == product.id}">
+                            th:text="${product.productName}">
                     </option>
                 </select>
             </div>
