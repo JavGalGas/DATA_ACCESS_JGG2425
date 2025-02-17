@@ -8,6 +8,7 @@ public class SellerProductDTO {
     private BigDecimal price;
     private int stock;
 
-    public  getSeller() {
+    public int getSeller() {
+        return sellerId;
     }
 }

@@ -3,6 +3,7 @@ package com.jgg2425.da.fa2.finalactivity2.controllers;
 import com.jgg2425.da.fa2.finalactivity2.models.dao.ICategoryDAO;
 import com.jgg2425.da.fa2.finalactivity2.models.dao.IProductDAO;
 import com.jgg2425.da.fa2.finalactivity2.models.dao.ISellerDAO;
+import com.jgg2425.da.fa2.finalactivity2.models.dao.ISellerProductDAO;
 import com.jgg2425.da.fa2.finalactivity2.models.dto.SellerDTO;
 import com.jgg2425.da.fa2.finalactivity2.models.dto.SellerProductDTO;
 import com.jgg2425.da.fa2.finalactivity2.models.entities.Category;
@@ -33,6 +34,8 @@ public class ViewController {
     private ISellerDAO sellerDAO;
     @Autowired
     private IProductDAO productDAO;
+    @Autowired
+    private ISellerProductDAO sellerProductDAO;
     @Autowired
     private ICategoryDAO categoryDAO;
 
@@ -209,6 +212,8 @@ public class ViewController {
                 model.addAttribute("theme", "error");
                 return "products";
             }
+
+            sellerPr
         } else {
             model.addAttribute("error", "Credentials are expired");
         }
