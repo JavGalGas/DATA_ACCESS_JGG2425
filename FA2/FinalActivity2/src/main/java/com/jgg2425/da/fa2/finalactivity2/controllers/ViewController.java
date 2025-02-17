@@ -31,6 +31,8 @@ public class ViewController {
     @Autowired
     private SellerController sellerController;
     @Autowired
+    private SellerProdController sellerProdController;
+    @Autowired
     private ISellerDAO sellerDAO;
     @Autowired
     private IProductDAO productDAO;
@@ -212,8 +214,17 @@ public class ViewController {
                 model.addAttribute("theme", "error");
                 return "products";
             }
+            Optional<Seller> seller_user = sellerDAO.findByCif(user.getUsername());
+            if (seller_user.isPresent()) {
+                if (sellerProductDAO.existsBySeller(seller_user.get())) {
+                    sellerProdController.saveProduct(sellerProduct);
+                } else {
 
-            sellerPr
+                }
+            } else {
+                model.addAttribute("error", "User not found. Please check your Username and password. ");
+                return "redirect:/login";
+            }
         } else {
             model.addAttribute("error", "Credentials are expired");
         }
