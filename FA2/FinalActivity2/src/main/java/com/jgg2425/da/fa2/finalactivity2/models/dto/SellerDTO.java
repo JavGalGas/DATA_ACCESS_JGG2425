@@ -3,7 +3,7 @@ package com.jgg2425.da.fa2.finalactivity2.models.dto;
 import java.util.Optional;
 
 public class SellerDTO {
-    private Optional<String> cif;
+    private String cif;
     private String name;
     private String businessName;
     private String phone;
@@ -11,10 +11,10 @@ public class SellerDTO {
     private String plainPassword;
 
     public String getCif() {
-        return cif.orElse("");
+        return cif;
     }
     public void setCif(String cif) {
-        this.cif = Optional.ofNullable(cif);
+        this.cif = cif;
     }
 
     public String getName() {

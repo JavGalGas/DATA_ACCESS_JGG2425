@@ -1,9 +1,16 @@
 package com.jgg2425.da.fa2.finalactivity2.models.dto;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 
 public class SellerProductDTO {
     private int sellerId;
+    private int productId;
+    private BigDecimal price;
+    private BigDecimal offerPrice;
+    private LocalDate offerStartDate;
+    private LocalDate offerEndDate;
+    private int stock;
 
     public int getSellerId() {
         return sellerId;
@@ -29,6 +36,30 @@ public class SellerProductDTO {
         this.price = price;
     }
 
+    public BigDecimal getOfferPrice() {
+        return offerPrice;
+    }
+
+    public void setOfferPrice(BigDecimal offerPrice) {
+        this.offerPrice = offerPrice;
+    }
+
+    public LocalDate getOfferStartDate() {
+        return offerStartDate;
+    }
+
+    public void setOfferStartDate(LocalDate offerStartDate) {
+        this.offerStartDate = offerStartDate;
+    }
+
+    public LocalDate getOfferEndDate() {
+        return offerEndDate;
+    }
+
+    public void setOfferEndDate(LocalDate offerEndDate) {
+        this.offerEndDate = offerEndDate;
+    }
+
     public int getStock() {
         return stock;
     }
@@ -36,9 +67,4 @@ public class SellerProductDTO {
     public void setStock(int stock) {
         this.stock = stock;
     }
-
-    private int productId;
-    private BigDecimal price;
-    private int stock;
-
 }
