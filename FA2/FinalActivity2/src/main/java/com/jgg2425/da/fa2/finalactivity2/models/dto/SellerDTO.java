@@ -1,7 +1,5 @@
 package com.jgg2425.da.fa2.finalactivity2.models.dto;
 
-import java.util.Optional;
-
 public class SellerDTO {
     private String cif;
     private String name;
@@ -9,6 +7,7 @@ public class SellerDTO {
     private String phone;
     private String email;
     private String plainPassword;
+    private String url;
 
     public String getCif() {
         return cif;
@@ -55,5 +54,13 @@ public class SellerDTO {
 
     public void setPlainPassword(String plainPassword) {
         this.plainPassword = plainPassword;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
     }
 }

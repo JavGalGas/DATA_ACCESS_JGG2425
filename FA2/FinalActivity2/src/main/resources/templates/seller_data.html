@@ -10,7 +10,7 @@
 <div class="container">
     <div class="sidebar">
         <img src="/userImg1.png" alt="Icon 1">
-        <a href="/products"><img src="/productImg1.png" alt="Icon 2"></a>
+        <a th:href="@{/products}"><img src="/productImg1.png" alt="Icon 2"></a>
         <img src="/offerImg1.png" alt="Icon 3">
         <form th:action="@{/logout}" method="post">
             <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
@@ -19,7 +19,7 @@
     </div>
     <div class="form-section">
         <h2>Seller Data</h2>
-        <form th:object="${sellerDTO}">
+        <form th:action="@{/seller_data}" method="post" th:object="${sellerDTO}">
             <div class="form-group">
                 <label for="cif">CIF:</label>
                 <input type="text" id="cif" name="cif" th:value="${sellerDTO.getCif()}" readonly required>
@@ -29,8 +29,8 @@
                 <input type="text" id="name" name="name" th:value="${sellerDTO.getName()}" required>
             </div>
             <div class="form-group">
-                <label for="business">Business name:</label>
-                <input type="text" id="business" name="business" th:value="${sellerDTO.getBusinessName()}" required>
+                <label for="business_name">Business name:</label>
+                <input type="text" id="business_name" name="businessName" th:value="${sellerDTO.getBusinessName()}" required>
             </div>
             <div class="form-group">
                 <label for="phone">Phone:</label>
@@ -41,12 +41,16 @@
                 <input type="email" id="email" name="email" th:value="${sellerDTO.getEmail()}" required>
             </div>
             <div class="form-group">
-                <label for="password">Password:</label>
-                <input type="password" id="password" name="password" th:value="${sellerDTO.getPlainPassword()}" required>
+                <label for="url">URL:</label>
+                <input type="text" id="url" name="url" th:value="${sellerDTO.getUrl()}" required>
+            </div>
+            <div class="form-group">
+                <label for="plain_password">Password:</label>
+                <input type="password" id="plain_password" name="plainPassword" th:value="${sellerDTO.getPlainPassword()}" required>
             </div>
             <div class="form-group">
                 <label for="password-confirm">Repeat password:</label>
-                <input type="password" id="password-confirm" name="password-confirm" required>
+                <input type="password" id="password-confirm" name="password-confirm">
             </div>
             <div class="form-button">
                 <button type="submit">Ok</button>

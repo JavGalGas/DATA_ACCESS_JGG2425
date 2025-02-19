@@ -52,7 +52,7 @@ public class ViewController {
         if (error != null) {
             if (error.equals("true"))
                 model.addAttribute("error", "Wrong credentials. Please try again.");
-            model.addAttribute("error", error);
+            /*model.addAttribute("error", error);*/
         }
         if (logout != null) {
             model.addAttribute("logout", logout);
@@ -99,27 +99,33 @@ public class ViewController {
         if (user.isCredentialsNonExpired()) {
             Optional<Seller> optionalSeller = sellerDAO.findByCif(user.getUsername());
             if (optionalSeller.isPresent()) {
-                SellerDTO sellerDTO = new SellerDTO();
-                sellerDTO.setCif(optionalSeller.get().getCif());
-                sellerDTO.setName(optionalSeller.get().getName());
-                sellerDTO.setBusinessName(optionalSeller.get().getBusinessName());
-                sellerDTO.setEmail(optionalSeller.get().getEmail());
-                sellerDTO.setPhone(optionalSeller.get().getPhone());
-                sellerDTO.setPlainPassword(optionalSeller.get().getPlainPassword());
+                SellerDTO sellerDTO = getSellerDTO(optionalSeller);
 
                 model.addAttribute("sellerDTO", sellerDTO);
+                return "seller_data";
             } else {
                 model.addAttribute("error", "Seller not found. Please check your Username and password.");
                 return "redirect:/login";
             }
-            return "seller_data";
         } else {
             model.addAttribute("error", "Credentials are expired");
             return "redirect:/login";
         }
     }
 
-    @PutMapping("/seller_data")
+    private static SellerDTO getSellerDTO(Optional<Seller> optionalSeller) {
+        SellerDTO sellerDTO = new SellerDTO();
+        sellerDTO.setCif(optionalSeller.get().getCif());
+        sellerDTO.setName(optionalSeller.get().getName());
+        sellerDTO.setBusinessName(optionalSeller.get().getBusinessName());
+        sellerDTO.setEmail(optionalSeller.get().getEmail());
+        sellerDTO.setPhone(optionalSeller.get().getPhone());
+        sellerDTO.setUrl(optionalSeller.get().getUrl());
+        sellerDTO.setPlainPassword(optionalSeller.get().getPlainPassword());
+        return sellerDTO;
+    }
+
+    @PostMapping("/seller_data")
     public String updateSeller(
             @AuthenticationPrincipal UserDetails user,
             Model model,
@@ -127,13 +133,6 @@ public class ViewController {
             BindingResult binding,
             @RequestParam("password-confirm") String confirmPasswd) {
         if (user.isCredentialsNonExpired()) {
-            int sellerId = Integer.MIN_VALUE;
-            Optional<Seller> optionalSeller = sellerDAO.findByCif(user.getUsername());
-
-            if (optionalSeller.isPresent()) {
-                sellerId = optionalSeller.get().getId();
-            }
-
             if (binding.hasErrors()) {
                 StringBuilder errorMessage = new StringBuilder("\n");
                 for (ObjectError error : binding.getAllErrors()) {
@@ -142,6 +141,18 @@ public class ViewController {
                 model.addAttribute("message", "Binding Error: " + errorMessage);
                 model.addAttribute("theme", "error");
                 return "seller_data";
+            }
+
+            int sellerId = Integer.MIN_VALUE;
+            Optional<Seller> optionalSeller = sellerDAO.findByCif(user.getUsername());
+
+            if (optionalSeller.isPresent()) {
+                sellerId = optionalSeller.get().getId();
+                if (!sellerDTO.getPlainPassword().equals(optionalSeller.get().getPlainPassword()) && !sellerDTO.getPlainPassword().equals(confirmPasswd)) {
+                    model.addAttribute("message", "Error: The new password has not been repeated.");
+                    model.addAttribute("theme", "error");
+                    return "seller_data";
+                }
             }
 
             if (utilsService.checkSDTODtUpdt(sellerId, sellerDTO)) {
@@ -175,7 +186,9 @@ public class ViewController {
             if (optionalSeller.isPresent()) {
                 userId = optionalSeller.get().getId();
             }
+            System.out.println(userId);
             List<Category> categories = (userId != 0) ? categoryDAO.findAllCategWithProducts(userId) : null;
+            System.out.println(categories);
             model.addAttribute("categories", categories);
             if (category == null) {
                 products = productDAO.getNonAddedProducts(userId);
@@ -215,15 +228,28 @@ public class ViewController {
                 return "products";
             }
             Optional<Seller> seller_user = sellerDAO.findByCif(user.getUsername());
-            if (seller_user.isPresent()) {
-                if (sellerProductDAO.existsBySeller(seller_user.get())) {
+            Optional<Product> product = productDAO.findById(sellerProduct.getProductId());
+            if (seller_user.isPresent() && product.isPresent()) {
+                if (!sellerProductDAO.existsBySellerAndProduct(seller_user.get(), product.get())) {
                     sellerProdController.saveProduct(sellerProduct);
                 } else {
-
+                    model.addAttribute("error", "The product already exists for this seller");
+                    model.addAttribute("theme", "error");
+                    return "products";
                 }
             } else {
-                model.addAttribute("error", "User not found. Please check your Username and password. ");
-                return "redirect:/login";
+                if (seller_user.isEmpty() && product.isEmpty()) {
+                    model.addAttribute("error", "User not found. Please check your Username and password. ");
+                    return "redirect:/login";
+                } else if (seller_user.isEmpty()) {
+                    model.addAttribute("error", "User not found. Please check your Username and password. ");
+                    return "redirect:/login";
+                } else {
+                    model.addAttribute("error", "Product not found.");
+                    model.addAttribute("theme", "error");
+                    return "products";
+                }
+
             }
         } else {
             model.addAttribute("error", "Credentials are expired");

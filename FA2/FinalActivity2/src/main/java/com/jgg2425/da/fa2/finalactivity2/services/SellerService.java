@@ -45,6 +45,9 @@ public class SellerService {
             if (seller.getPhone() != null) {
                 optionalSeller.get().setPhone(seller.getPhone());
             }
+            if (seller.getUrl() != null) {
+                optionalSeller.get().setUrl(seller.getUrl());
+            }
             if (seller.getPlainPassword() != null &&
                 !seller.getPlainPassword().isEmpty() &&
                 seller.getPlainPassword().equals(passwdCheck)) {

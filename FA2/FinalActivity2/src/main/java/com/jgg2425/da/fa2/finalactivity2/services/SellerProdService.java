@@ -14,8 +14,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -28,37 +26,28 @@ public class SellerProdService {
     @Autowired
     private IProductDAO productDAO;
 
-    public ResponseEntity<?> saveSellerProduct(
-            @Valid @RequestBody SellerProductDTO sellerProduct
-    ) {
+    public ResponseEntity<?> saveSellerProduct(@Valid @RequestBody SellerProductDTO sellerProduct) {
         Optional<Seller> seller = sellerDAO.findById(sellerProduct.getSellerId());
         Optional<Product> product = productDAO.findById(sellerProduct.getProductId());
-        boolean isSellerPresent = seller.isPresent();
-        boolean isProductPresent = product.isPresent();
-        List<String> errors = new ArrayList<>();
-        if (!isSellerPresent) {
-            errors.add("seller");
-        } else if (!isProductPresent) {
-            errors.add("product");
+
+        if (seller.isEmpty() && product.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Associated seller and product not found");
+        } else if (seller.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Associated seller not found");
+        } else if (product.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Associated product not found");
         }
 
-        if (seller.isPresent() && product.isPresent()) {
-            if (sellerProdDAO.existsBySellerAndProduct(seller.get(), product.get())) {
-                return ResponseEntity.status(HttpStatus.CONFLICT).body("Seller product already exists.");
-            } else {
-                SellerProduct newSellerProduct = new SellerProduct();
-                newSellerProduct.setSeller(seller.get());
-                newSellerProduct.setProduct(product.get());
-                newSellerProduct.setPrice(sellerProduct.getPrice());
-                newSellerProduct.setStock(sellerProduct.getStock());
-                sellerProdDAO.save(newSellerProduct);
-                return ResponseEntity.status(HttpStatus.CREATED).body("Seller product saved successfully.");
-            }
-        } else {
-            if (errors.size() > 1) {
-                return ResponseEntity.status(HttpStatus.CONFLICT).body("Associated " + errors.getFirst() + " and " + errors.getLast() + " not found");
-            }
-            return ResponseEntity.status(HttpStatus.CONFLICT).body("Associated " + errors.getFirst() + " not found");
+        if (sellerProdDAO.existsBySellerAndProduct(seller.get(), product.get())) {
+            return ResponseEntity.status(HttpStatus.CONFLICT).body("Seller product already exists.");
         }
+
+        SellerProduct newSellerProduct = new SellerProduct();
+        newSellerProduct.setSeller(seller.get());
+        newSellerProduct.setProduct(product.get());
+        newSellerProduct.setPrice(sellerProduct.getPrice());
+        newSellerProduct.setStock(sellerProduct.getStock());
+        sellerProdDAO.save(newSellerProduct);
+        return ResponseEntity.status(HttpStatus.CREATED).body("Seller product saved successfully.");
     }
 }

@@ -42,7 +42,8 @@ public class UtilsService {
         if (sellerDTO.getName() == null || sellerDTO.getName().isBlank() ||
                 sellerDTO.getBusinessName() == null || sellerDTO.getBusinessName().isBlank() ||
                 sellerDTO.getPhone() == null || sellerDTO.getPhone().isBlank() ||
-                sellerDTO.getEmail() == null || sellerDTO.getEmail().isBlank()) {
+                sellerDTO.getEmail() == null || sellerDTO.getEmail().isBlank() ||
+                sellerDTO.getUrl() == null || sellerDTO.getUrl().isBlank()) {
             return false;
         }
 
@@ -57,6 +58,7 @@ public class UtilsService {
                 !Objects.equals(sellerDTO.getBusinessName(), seller.getBusinessName()) ||
                 !Objects.equals(sellerDTO.getPhone(), seller.getPhone()) ||
                 !Objects.equals(sellerDTO.getEmail(), seller.getEmail()) ||
-                !Objects.equals(sellerDTO.getPlainPassword(), seller.getPlainPassword());
+                !Objects.equals(sellerDTO.getPlainPassword(), seller.getPlainPassword()) ||
+                !Objects.equals(sellerDTO.getUrl(), seller.getUrl());
     }
 }

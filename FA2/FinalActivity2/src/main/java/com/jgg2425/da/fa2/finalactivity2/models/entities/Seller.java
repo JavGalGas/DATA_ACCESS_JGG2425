@@ -6,6 +6,7 @@ import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.Size;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
+import org.hibernate.validator.constraints.URL;
 
 import java.util.LinkedHashSet;
 import java.util.Set;
@@ -47,6 +48,14 @@ public class Seller {
     @Size(max = 100, message = "Password size must be less than 100")
     @Column(name = "password", nullable = false, length = 100)
     private String password;
+
+    @URL
+    @Size(max=200, message = "URL must be less than 200")
+    @Column(name = "url", nullable = false, length = 200)
+    private String url;
+
+    @Column(name="pro")
+    private boolean pro;
 
     @OneToMany(mappedBy = "seller")
     @JsonIgnoreProperties("seller")
@@ -114,6 +123,22 @@ public class Seller {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
+    public boolean isPro() {
+        return pro;
+    }
+
+    public void setPro(boolean pro) {
+        this.pro = pro;
     }
 
     public Set<SellerProduct> getSellerProducts() {

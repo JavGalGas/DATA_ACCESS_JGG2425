@@ -43,6 +43,7 @@ body {
 .form-section {
     width: 75%;
     padding: 0 40px;
+    overflow-y: auto;
 }
 
 .form-section h2 {
@@ -127,4 +128,33 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+#message-container {
+    background: linear-gradient(to bottom, #bbbbbb, #dddddd, #aaaaaa);
+    border-radius: 12px;
+    padding: 0 20px;
+    margin-top: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.error-theme{
+    background-image: linear-gradient(to bottom, #d12323, #850000);
+    color: transparent;
+    background-clip: text;
+    -webkit-background-clip: text;
+    font-weight: bold;
+}
+
+.success-theme{
+    background-image: linear-gradient(to bottom, #4CAF50, #4d8b52);
+    color: transparent;
+    background-clip: text;
+    -webkit-background-clip: text;
+    font-weight: bold;
 }
