@@ -19,21 +19,21 @@
     </div>
     <div class="form-section">
         <h2>Add to Store</h2>
-        <form th:object="${sellerProduct}" th:action="@{/product_discharge}">
+        <form th:object="${sellerProduct}" th:action="@{/products}" method="post">
             <div class="form-group">
                 <label for="category">Category:</label>
-                <select id="category">
-                    <option th:value="" th:selected="${selectedCategory != null}">Choose...</option>
+                <select id="category" onchange="changeCategory()">
+                    <option value="" th:selected="${selectedCategory != null}">Choose...</option>
                     <option th:each="category : ${categories}"
                             th:value="${category.id}"
                             th:text="${category.categoryName}"
-                            th:selected="${selectedCategory != null && selectedCategory.id == category.id}">
+                            th:selected="${selectedCategory != null and selectedCategory.id == category.id}">
                     </option>
                 </select>
             </div>
             <div class="form-group">
                 <label for="product">Product:</label>
-                <select id="product">
+                <select id="product" th:field="${sellerProduct.productId}">
                     <option value="">Choose...</option>
                     <option th:each="product : ${products}"
                             th:value="${product.id}"
@@ -45,16 +45,25 @@
                 <label for="stock">Stock:</label>
                 <div class="slider-container">
                     <span>Units</span>
-                    <input type="range" id="stock" min="1" max="25" step="1">
+                    <input type="range" id="stock" th:field="${sellerProduct.stock}" min="1" max="25" step="1">
                 </div>
             </div>
             <div class="form-group">
                 <label for="price">Price:</label>
-                <input type="text" id="price">
+                <input type="text" id="price" th:field="${sellerProduct.price}">
             </div>
             <button type="submit">Add</button>
         </form>
     </div>
 </div>
+<script>
+    function changeCategory() {
+        let category = document.getElementById("category").value;
+        if (!category || category === "")
+            window.location.href = "/products";
+        else
+            window.location.href = "/products?selectedCategory=" + category;
+    }
+</script>
 </body>
 </html>

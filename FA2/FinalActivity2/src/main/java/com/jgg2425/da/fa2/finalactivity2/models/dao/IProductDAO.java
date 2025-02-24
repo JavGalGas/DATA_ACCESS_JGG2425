@@ -21,7 +21,7 @@ public interface IProductDAO extends CrudRepository<Product, Integer> {
      *          SELECT p.*
      *          FROM products p
      *          WHERE p.product_id NOT IN (
-     *              SELECT s.id
+     *              SELECT s.product_id
      *              FROM seller_products s
      *              WHERE s.seller_id = seller_id_param
      *              );
@@ -46,7 +46,7 @@ public interface IProductDAO extends CrudRepository<Product, Integer> {
      *          SELECT p.*
      *          FROM products p
      *          WHERE p.product_id NOT IN (
-     *              SELECT s.id
+     *              SELECT s.product_id
      *              FROM seller_products s
      *              WHERE s.seller_id = seller_id_param
      *              )
