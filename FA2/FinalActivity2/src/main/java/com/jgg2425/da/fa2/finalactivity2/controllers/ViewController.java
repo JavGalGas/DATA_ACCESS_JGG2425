@@ -188,21 +188,18 @@ public class ViewController {
             }
             System.out.println(userId);
             List<Category> categories = (userId != 0) ? categoryDAO.findAllCategWithProducts(userId) : null;
+
             System.out.println(categories);
             model.addAttribute("categories", categories);
             if (category == null) {
                 products = productDAO.getNonAddedProducts(userId);
+                System.out.println(products);
             } else {
-                Optional<Category> optionalCategory = categoryDAO.findById(category);
-                if (optionalCategory.isPresent()) {
-                    selectedCategory = optionalCategory.get();
-                    model.addAttribute("selectedCategory", selectedCategory);
-                    products = productDAO.getNonAddedProductsByCategory(userId, selectedCategory.getId());
-                } else {
-                    products = productDAO.getNonAddedProducts(userId);
-                }
+                products = productDAO.getNonAddedProductsByCategory(userId, category);
+                selectedCategory = categoryDAO.findById(category).orElse(null);
             }
             model.addAttribute("products", products);
+            model.addAttribute("selectedCategory", selectedCategory);
             return "products";
         } else {
             model.addAttribute("error", "Credentials are expired");
