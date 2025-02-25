@@ -22,7 +22,22 @@ public class ViewController {
     @Autowired
     private IEmployeeEntityDAO employeeEntityDAO;
 
-    @GetMapping("/")
+    @GetMapping("/login")
+    public String login(
+            @RequestParam(value = "error", required = false) String error,
+            @RequestParam(value = "logout", required = false) String logout,
+            Model model) {
+        if (error != null) {
+            if (error.equals("true"))
+                model.addAttribute("error", "Wrong credentials. Please try again.");
+        }
+        if (logout != null) {
+            model.addAttribute("logout", logout);
+        }
+        return "login";
+    }
+
+    @GetMapping("/index")
     public String index() {
         return "index";
     }

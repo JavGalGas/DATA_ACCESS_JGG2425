@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" type="text/css" href="/employee-app/styles.css">
+  <title>Login View</title>
+</head>
+<body>
+<div id="container">
+  <div class="welcome-text"><h1>WELCOME</h1></div>
+  <form class="login-form" th:action="@{/login}" method="post">
+    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+    <label class="form-group">
+      <input id="username" type="text" name="username" placeholder="Username" maxlength="20" required>
+    </label>
+    <label class="form-group">
+      <input id="password" type="password" name="password" placeholder="Password" maxlength="50" required>
+    </label>
+    <button class="form_button" type="submit">Login</button>
+  </form>
+  <!-- Display login errors if authentication fails -->
+  <div th:if="${error}" class="message-container">
+    <p id="error" th:text="${error}"></p>
+  </div>
+
+  <!-- Show logout message if the user logged out -->
+  <div th:if="${logout}" class="message-container">
+    <p id="logout">You have been logged out.</p>
+  </div>
+</div>
+</body>
+</html>
