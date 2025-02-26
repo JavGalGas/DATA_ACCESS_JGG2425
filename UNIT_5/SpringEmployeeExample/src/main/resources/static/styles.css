@@ -88,7 +88,7 @@ h2 {
     background-color: #005bb5;
 }
 
-#message-container {
+.message-container {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -97,7 +97,7 @@ h2 {
     text-align: center;
 }
 
-#message-text {
+.message-text {
     padding: 0.8rem;
     font-size: 1rem;
     border-radius: 0.5rem;
@@ -109,11 +109,13 @@ h2 {
 .success-theme {
     background-color: #daffe2;
     color: #00620d;
+    font-weight: bold;
 }
 
 .error-theme {
     background-color: #ffdada;
     color: #9c0000;
+    font-weight: bold;
 }
 
 .confirm-theme {
@@ -287,6 +289,32 @@ h2 {
     color: #00006c;
     background-color: #ffffff;
     padding: 0.5rem;
+}
+
+#top-right-button {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background-image: linear-gradient(to bottom, #5a85ff, #005bb5);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 15px;
+    cursor: pointer;
+    font-size: 2rem;
+    z-index: 1000; /*Ensures it is above other elements*/
+}
+
+#top-right-button:hover {
+    background-image: linear-gradient(to bottom, #507ddc, #01519f);
+}
+
+.welcome-text {
+    background-image: linear-gradient(to right, #0080ff, #2e00d3);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    -webkit-text-fill-color: transparent;
 }
 
 

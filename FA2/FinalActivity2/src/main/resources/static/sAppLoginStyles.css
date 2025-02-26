@@ -82,7 +82,7 @@ body {
     margin-right: 50%;
 }
 .form-group input:checked{
-    background-color: #333333;
+    background-color: #304f34;
 }
 
 .message-container {

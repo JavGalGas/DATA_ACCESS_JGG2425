@@ -32,7 +32,7 @@ public class ViewController {
                 model.addAttribute("error", "Wrong credentials. Please try again.");
         }
         if (logout != null) {
-            model.addAttribute("logout", logout);
+            model.addAttribute("logout", "You have been logged out.");
         }
         return "login";
     }

@@ -17,16 +17,18 @@
     <label class="form-group">
       <input id="password" type="password" name="password" placeholder="Password" maxlength="50" required>
     </label>
-    <button class="form_button" type="submit">Login</button>
+    <label class="form-group">
+      <button class="form_button" type="submit">Login</button>
+    </label>
   </form>
   <!-- Display login errors if authentication fails -->
   <div th:if="${error}" class="message-container">
-    <p id="error" th:text="${error}"></p>
+    <p id="error" class="error-theme" th:text="${error}"></p>
   </div>
 
   <!-- Show logout message if the user logged out -->
   <div th:if="${logout}" class="message-container">
-    <p id="logout">You have been logged out.</p>
+    <p id="logout" class="success-theme" th:text="${logout}"></p>
   </div>
 </div>
 </body>

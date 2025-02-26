@@ -63,8 +63,8 @@ public class SecurityConfig {
             // Login form settings
             .formLogin(form -> form
                     .loginPage("/login") // Custom login page (Must create login HTML page)
+                    .failureUrl("/login?error=true")
                     .defaultSuccessUrl("/index", true) // Redirection after successful login
-                    .permitAll() // Allow access to the login form
             )
 
             // Logout settings

@@ -253,4 +253,39 @@ public class ViewController {
         }
         return "redirect:/login";
     }
+
+    @GetMapping("/offers")
+    public String showOffers(
+            @AuthenticationPrincipal UserDetails user,
+            Model model
+    ) {
+        if (user.isCredentialsNonExpired()) {
+            model.addAttribute("sellerProduct", new SellerProductDTO());
+            Category selectedCategory = null;
+            List<Product> products = null;
+            int userId = 0;
+            Optional<Seller> optionalSeller = sellerDAO.findByCif(user.getUsername());
+            if (optionalSeller.isPresent()) {
+                userId = optionalSeller.get().getId();
+            }
+            System.out.println(userId);
+            List<Category> categories = (userId != 0) ? categoryDAO.findAllCategWithProducts(userId) : null;
+
+            System.out.println(categories);
+            model.addAttribute("categories", categories);
+            if (category == null) {
+                products = productDAO.getNonAddedProducts(userId);
+                System.out.println(products);
+            } else {
+                products = productDAO.getNonAddedProductsByCategory(userId, category);
+                selectedCategory = categoryDAO.findById(category).orElse(null);
+            }
+            model.addAttribute("products", products);
+            model.addAttribute("selectedCategory", selectedCategory);
+            return "products";
+        } else {
+            model.addAttribute("error", "Credentials are expired");
+        }
+        return "redirect:/login";
+    }
 }
