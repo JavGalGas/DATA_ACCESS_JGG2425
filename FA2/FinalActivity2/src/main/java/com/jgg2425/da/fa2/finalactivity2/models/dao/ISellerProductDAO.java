@@ -7,8 +7,10 @@ import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 import org.springframework.data.repository.CrudRepository;
 
+import java.util.List;
 import java.util.Optional;
 
 public interface ISellerProductDAO extends CrudRepository<SellerProduct, Integer> {
     boolean existsBySellerAndProduct(Seller seller, Product product);
+    Optional<List<SellerProduct>> findBySeller(Seller seller);
 }

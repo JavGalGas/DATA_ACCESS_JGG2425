@@ -22,6 +22,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -186,14 +187,11 @@ public class ViewController {
             if (optionalSeller.isPresent()) {
                 userId = optionalSeller.get().getId();
             }
-            System.out.println(userId);
             List<Category> categories = (userId != 0) ? categoryDAO.findAllCategWithProducts(userId) : null;
 
-            System.out.println(categories);
             model.addAttribute("categories", categories);
             if (category == null) {
                 products = productDAO.getNonAddedProducts(userId);
-                System.out.println(products);
             } else {
                 products = productDAO.getNonAddedProductsByCategory(userId, category);
                 selectedCategory = categoryDAO.findById(category).orElse(null);
@@ -261,28 +259,57 @@ public class ViewController {
     ) {
         if (user.isCredentialsNonExpired()) {
             model.addAttribute("sellerProduct", new SellerProductDTO());
-            Category selectedCategory = null;
-            List<Product> products = null;
-            int userId = 0;
             Optional<Seller> optionalSeller = sellerDAO.findByCif(user.getUsername());
-            if (optionalSeller.isPresent()) {
-                userId = optionalSeller.get().getId();
-            }
-            System.out.println(userId);
-            List<Category> categories = (userId != 0) ? categoryDAO.findAllCategWithProducts(userId) : null;
-
-            System.out.println(categories);
-            model.addAttribute("categories", categories);
-            if (category == null) {
-                products = productDAO.getNonAddedProducts(userId);
-                System.out.println(products);
-            } else {
-                products = productDAO.getNonAddedProductsByCategory(userId, category);
-                selectedCategory = categoryDAO.findById(category).orElse(null);
-            }
+            Optional<List<SellerProduct>> products = sellerProductDAO.findBySeller(optionalSeller.get());
             model.addAttribute("products", products);
-            model.addAttribute("selectedCategory", selectedCategory);
             return "products";
+        } else {
+            model.addAttribute("error", "Credentials are expired");
+        }
+        return "redirect:/login";
+    }
+
+    @PostMapping("/offers")
+    public String saveOffers(
+            @AuthenticationPrincipal UserDetails user,
+            Model model,
+            @ModelAttribute SellerProductDTO sellerProduct,
+            BindingResult binding
+    ) {
+        if (user.isCredentialsNonExpired()) {
+            if (binding.hasErrors()) {
+                StringBuilder errorMessage = new StringBuilder("\n");
+                for (ObjectError error : binding.getAllErrors()) {
+                    errorMessage.append("\n").append(error.getDefaultMessage());
+                }
+                model.addAttribute("message", "Binding Error: " + errorMessage);
+                model.addAttribute("theme", "error");
+                return "products";
+            }
+            Optional<Seller> seller_user = sellerDAO.findByCif(user.getUsername());
+            Optional<Product> product = productDAO.findById(sellerProduct.getProductId());
+            if (seller_user.isPresent() && product.isPresent()) {
+                if (!sellerProductDAO.existsBySellerAndProduct(seller_user.get(), product.get())) {
+                    sellerProdController.saveProduct(sellerProduct);
+                } else {
+                    model.addAttribute("error", "The product already exists for this seller");
+                    model.addAttribute("theme", "error");
+                    return "products";
+                }
+            } else {
+                if (seller_user.isEmpty() && product.isEmpty()) {
+                    model.addAttribute("error", "User not found. Please check your Username and password. ");
+                    return "redirect:/login";
+                } else if (seller_user.isEmpty()) {
+                    model.addAttribute("error", "User not found. Please check your Username and password. ");
+                    return "redirect:/login";
+                } else {
+                    model.addAttribute("error", "Product not found.");
+                    model.addAttribute("theme", "error");
+                    return "products";
+                }
+
+            }
         } else {
             model.addAttribute("error", "Credentials are expired");
         }

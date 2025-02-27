@@ -19,35 +19,35 @@
     </div>
     <div class="form-section">
         <h2>Product Offer</h2>
-        <div class="content">
-            <div class="form-group">
-                <label for="product">Product:</label>
-                <select id="product" th:field="${sellerProduct.productId}">
-                    <option value=0>Choose...</option>
-                    <option th:each="product : ${products}"
-                            th:value="${product.id}"
-                            th:text="${product.productName}">
-                    </option>
-                </select>
+        <form th:object="${sellerProduct}" th:action="@{/products}" method="post">
+            <div class="content">
+                <div class="form-group">
+                    <label for="product">Product:</label>
+                    <select id="product" th:field="${sellerProduct.productId}">
+                        <option value=0>Choose...</option>
+                        <option th:each="product : ${products}"
+                                th:value="${product.id}"
+                                th:text="${product.productName}">
+                        </option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="from">From:</label>
+                    <input type="date" id="from" th:field="${sellerProduct.}">
+                </div>
+                <div class="form-group">
+                    <label for="to">To:</label>
+                    <input type="date" id="to">
+                </div>
+                <div class="form-group">
+                    <label for="discount">Discount:</label>
+                    <input type="number" id="discount">
+                </div>
+                <div class="button-container">
+                    <button type="button">Save</button>
+                </div>
             </div>
-            <div class="form-group">
-                <label for="category">Category</label>
-                <select id="category">
-                    <option>Choose...</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label for="stock">Stock</label>
-                <input type="number" id="stock" placeholder="Enter stock quantity">
-            </div>
-            <div class="form-group">
-                <label for="price">Price</label>
-                <input type="number" id="price" placeholder="Enter price">
-            </div>
-            <div class="button-container">
-                <button type="button">Save</button>
-            </div>
-        </div>
+        </form>
     </div>
 </div>
 </body>
