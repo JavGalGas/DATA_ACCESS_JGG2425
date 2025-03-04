@@ -19,4 +19,9 @@ public class SellerProdController {
         return sellerProdService.saveSellerProduct(sellerProduct);
     }
 
+    @PostMapping("")
+    public ResponseEntity<?> updateProduct(@RequestBody @Validated SellerProductDTO sellerProduct) {
+        return sellerProdService.updateSellerProduct(sellerProduct);
+    }
+
 }

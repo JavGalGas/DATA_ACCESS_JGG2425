@@ -11,7 +11,6 @@ import com.jgg2425.da.fa2.finalactivity2.models.entities.Product;
 import com.jgg2425.da.fa2.finalactivity2.models.entities.Seller;
 import com.jgg2425.da.fa2.finalactivity2.models.entities.SellerProduct;
 import com.jgg2425.da.fa2.finalactivity2.services.UtilsService;
-import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -22,7 +21,8 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDate;
+import java.math.BigDecimal;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -253,20 +253,47 @@ public class ViewController {
     }
 
     @GetMapping("/offers")
-    public String showOffers(
-            @AuthenticationPrincipal UserDetails user,
-            Model model
-    ) {
+    public String showOffers(@AuthenticationPrincipal UserDetails user, Model model,
+                             @RequestParam(name = "selectedProduct", required = false) Integer product) {
         if (user.isCredentialsNonExpired()) {
-            model.addAttribute("sellerProduct", new SellerProductDTO());
-            Optional<Seller> optionalSeller = sellerDAO.findByCif(user.getUsername());
-            Optional<List<SellerProduct>> products = sellerProductDAO.findBySeller(optionalSeller.get());
-            model.addAttribute("products", products);
-            return "products";
+            return handleValidCredentials(user, model, product);
         } else {
             model.addAttribute("error", "Credentials are expired");
+            return "redirect:/login";
         }
-        return "redirect:/login";
+    }
+
+    private String handleValidCredentials(UserDetails user, Model model, Integer product) {
+        model.addAttribute("sellerProduct", new SellerProductDTO());
+
+        return sellerDAO.findByCif(user.getUsername())
+                .map(seller -> {
+                    List<SellerProduct> products = sellerProductDAO.findBySeller(seller)
+                            .orElse(Collections.emptyList());
+                    model.addAttribute("products", products);
+
+                    if (product != null) {
+                        try {
+                            SellerProduct selectedProduct = sellerProductDAO.findById(product).orElse(null);
+                            BigDecimal price;
+                            if (selectedProduct != null) {
+                                price = selectedProduct.getPrice();
+                                model.addAttribute("selectedProduct", selectedProduct);
+                            } else {
+                                price = BigDecimal.ZERO;
+                            }
+
+                            model.addAttribute("price", price);
+                        } catch (Exception e) {
+                            model.addAttribute("price", BigDecimal.ZERO);
+                        }
+                    } else {
+                        model.addAttribute("price", BigDecimal.ZERO);
+                    }
+
+                    return "product_offer";
+                })
+                .orElse("redirect:/login");
     }
 
     @PostMapping("/offers")
@@ -284,17 +311,17 @@ public class ViewController {
                 }
                 model.addAttribute("message", "Binding Error: " + errorMessage);
                 model.addAttribute("theme", "error");
-                return "products";
+                return "product_offer";
             }
             Optional<Seller> seller_user = sellerDAO.findByCif(user.getUsername());
             Optional<Product> product = productDAO.findById(sellerProduct.getProductId());
             if (seller_user.isPresent() && product.isPresent()) {
                 if (!sellerProductDAO.existsBySellerAndProduct(seller_user.get(), product.get())) {
-                    sellerProdController.saveProduct(sellerProduct);
+                    sellerProdController.updateProduct(sellerProduct);
                 } else {
                     model.addAttribute("error", "The product already exists for this seller");
                     model.addAttribute("theme", "error");
-                    return "products";
+                    return "product_offer";
                 }
             } else {
                 if (seller_user.isEmpty() && product.isEmpty()) {
@@ -306,7 +333,7 @@ public class ViewController {
                 } else {
                     model.addAttribute("error", "Product not found.");
                     model.addAttribute("theme", "error");
-                    return "products";
+                    return "product_offer";
                 }
 
             }
