@@ -1,5 +1,6 @@
 package com.jgg.catchup.flights_jgg.models.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 
 import java.util.LinkedHashSet;
@@ -9,7 +10,6 @@ import java.util.Set;
 @Table(name = "passengers")
 public class Passenger {
     @Id
-    @SequenceGenerator(name = "passengers_id_gen", sequenceName = "contains_code_seq", allocationSize = 1)
     @Column(name = "passportno", nullable = false, length = 10)
     private String passportno;
 
@@ -29,6 +29,7 @@ public class Passenger {
     private String sex;
 
     @OneToMany(mappedBy = "passportno")
+    @JsonIgnoreProperties("passportno")
     private Set<com.jgg.catchup.flights_jgg.models.entities.Ticket> tickets = new LinkedHashSet<>();
 
     public String getPassportno() {

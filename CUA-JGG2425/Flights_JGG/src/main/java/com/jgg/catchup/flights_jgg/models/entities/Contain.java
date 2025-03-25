@@ -19,6 +19,7 @@ public class Contain {
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "airportid", nullable = false)
+    @JsonIgnoreProperties("contains")
     private Airport airportid;
 
     public Integer getId() {

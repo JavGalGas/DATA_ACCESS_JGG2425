@@ -1,6 +1,5 @@
 package com.jgg.catchup.flights_jgg.models.entities;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 
@@ -11,7 +10,6 @@ import java.util.Set;
 @Table(name = "airports")
 public class Airport {
     @Id
-    @SequenceGenerator(name = "airports_id_gen", sequenceName = "ticket1_ticket_number_seq", allocationSize = 1)
     @Column(name = "code", nullable = false, length = 4)
     private String code;
 
@@ -24,12 +22,15 @@ public class Airport {
     private com.jgg.catchup.flights_jgg.models.entities.City city;
 
     @OneToMany(mappedBy = "airportid")
+    @JsonIgnoreProperties("airportid")
     private Set<com.jgg.catchup.flights_jgg.models.entities.Contain> contains = new LinkedHashSet<>();
 
     @OneToMany(mappedBy = "source")
+    @JsonIgnoreProperties("source")
     private Set<com.jgg.catchup.flights_jgg.models.entities.Flight> departing_flights = new LinkedHashSet<>();
 
     @OneToMany(mappedBy = "destination")
+    @JsonIgnoreProperties("destination")
     private Set<com.jgg.catchup.flights_jgg.models.entities.Flight> incoming_flights = new LinkedHashSet<>();
 
     public String getCode() {

@@ -1,5 +1,6 @@
 package com.jgg.catchup.flights_jgg.models.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
@@ -24,10 +25,12 @@ public class Ticket {
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "passportno", nullable = false)
+    @JsonIgnoreProperties("tickets")
     private Passenger passportno;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "flight_code", nullable = false)
+    @JsonIgnoreProperties("tickets")
     private Flight flightCode;
 
     @Column(name = "price")

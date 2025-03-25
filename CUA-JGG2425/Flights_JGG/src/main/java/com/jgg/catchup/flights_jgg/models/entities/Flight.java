@@ -10,16 +10,17 @@ import java.util.Set;
 @Table(name = "flights")
 public class Flight {
     @Id
-    @SequenceGenerator(name = "flights_id_gen", sequenceName = "contains_code_seq", allocationSize = 1)
     @Column(name = "flight_code", nullable = false, length = 10)
     private String flightCode;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "source", nullable = false)
+    @JsonIgnoreProperties("departing_flights")
     private Airport source;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "destination", nullable = false)
+    @JsonIgnoreProperties("incoming_flights")
     private Airport destination;
 
     @Column(name = "arrival", nullable = false, length = 10)
@@ -52,6 +53,7 @@ public class Flight {
     private Integer seats;
 
     @OneToMany(mappedBy = "flightCode")
+    @JsonIgnoreProperties("flightCode")
     private Set<com.jgg.catchup.flights_jgg.models.entities.Ticket> tickets = new LinkedHashSet<>();
 
     public String getFlightCode() {
