@@ -7,7 +7,7 @@ import org.springframework.stereotype.Controller;
 public class ViewController {
 
     @Autowired
-    private FlightsController flightsController;
+    private FlightController flightController;
     @Autowired
     private PassengerController passengerController;
     @Autowired
