@@ -2,29 +2,38 @@ package com.jgg.catchup.flights_jgg.models.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Max;
+import org.hibernate.annotations.DynamicInsert;
 
 import java.util.LinkedHashSet;
 import java.util.Set;
 
+@DynamicInsert
 @Entity
 @Table(name = "passengers")
 public class Passenger {
     @Id
+    @Max(10)
     @Column(name = "passportno", nullable = false, length = 10)
     private String passportno;
 
+    @Max(20)
     @Column(name = "firstname", nullable = false, length = 20)
     private String firstname;
 
+    @Max(20)
     @Column(name = "lastname", nullable = false, length = 20)
     private String lastname;
 
+    @Max(100)
     @Column(name = "address", length = 100)
     private String address;
 
+    @Max(12)
     @Column(name = "phone", length = 12)
     private String phone;
 
+    @Max(1)
     @Column(name = "sex", length = 1)
     private String sex;
 

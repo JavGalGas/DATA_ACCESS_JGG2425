@@ -1,14 +1,18 @@
 package com.jgg.catchup.flights_jgg.services;
 
 import com.jgg.catchup.flights_jgg.models.dao.*;
+import com.jgg.catchup.flights_jgg.models.dto.FlightDTO;
 import com.jgg.catchup.flights_jgg.models.entities.*;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class FlightService {
@@ -31,8 +35,19 @@ public class FlightService {
         return destinations.isPresent() ? ResponseEntity.ok(destinations.get()) : ResponseEntity.notFound().build();
     }
 
-    public ResponseEntity<List<Flight>> findAllFlightsBySourceAndDestination(@Param("source") String source, @Param("destination") String destination) {
+    public ResponseEntity<List<FlightDTO>> findAllFlightsBySourceAndDestination(@Param("source") String source, @Param("destination") String destination) {
         Optional<List<Flight>> flights = flightDAO.findAllFlightsBySourceAndDestination(source, destination);
-        return flights.isPresent() ? ResponseEntity.ok(flights.get()) : ResponseEntity.notFound().build();
+
+        if (flights.isPresent()) {
+            ModelMapper mapper = new ModelMapper();
+            List<FlightDTO> flightDTOS = flights.get().stream()
+                    .map(flight -> mapper.map(flight, FlightDTO.class))
+                    .collect(Collectors.toList());
+
+            return ResponseEntity.ok(flightDTOS);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
+
 }

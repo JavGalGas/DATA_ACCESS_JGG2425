@@ -1,5 +1,6 @@
 package com.jgg.catchup.flights_jgg.controllers;
 
+import com.jgg.catchup.flights_jgg.models.dto.FlightDTO;
 import com.jgg.catchup.flights_jgg.models.entities.*;
 import com.jgg.catchup.flights_jgg.services.FlightService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,7 +35,7 @@ public class FlightController {
     }
 
     @GetMapping("/flights")
-    public ResponseEntity<List<Flight>> findAllFlightsBySourceAndDestination(
+    public ResponseEntity<List<FlightDTO>> findAllFlightsBySourceAndDestination(
             @RequestParam(value = "source") String source,
             @RequestParam(value = "destination") String destination
     ) {

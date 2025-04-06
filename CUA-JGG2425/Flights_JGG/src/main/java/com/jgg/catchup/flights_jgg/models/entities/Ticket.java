@@ -2,9 +2,12 @@ package com.jgg.catchup.flights_jgg.models.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
+import org.hibernate.annotations.DynamicInsert;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
 
+@DynamicInsert
 @Entity
 @Table(name = "tickets")
 public class Ticket {
@@ -14,12 +17,15 @@ public class Ticket {
     @Column(name = "ticket_number", nullable = false)
     private Integer id;
 
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     @Column(name = "date_of_booking", nullable = false)
     private LocalDate dateOfBooking;
 
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     @Column(name = "date_of_travel", nullable = false)
     private LocalDate dateOfTravel;
 
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     @Column(name = "date_of_cancellation")
     private LocalDate dateOfCancellation;
 

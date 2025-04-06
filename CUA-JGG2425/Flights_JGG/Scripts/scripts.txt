@@ -1,0 +1,29 @@
+CREATE OR REPLACE FUNCTION get_all_sources()
+RETURNS TABLE(source VARCHAR) AS $$
+BEGIN
+    RETURN QUERY
+    SELECT DISTINCT flights.source FROM flights;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE OR REPLACE FUNCTION get_destinations_by_source(source_input TEXT)
+RETURNS TABLE(destination VARCHAR) AS $$
+BEGIN
+    RETURN QUERY
+    SELECT DISTINCT flights.destination
+    FROM flights
+    WHERE flights.source = source_input;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE OR REPLACE FUNCTION get_flights_by_source_and_destination(source_input TEXT, destination_input TEXT)
+RETURNS SETOF flights AS $$
+BEGIN
+    RETURN QUERY
+    SELECT *
+    FROM flights
+    WHERE flights.source = source_input
+      AND flights.destination = destination_input;
+END;
+$$ LANGUAGE plpgsql;
+

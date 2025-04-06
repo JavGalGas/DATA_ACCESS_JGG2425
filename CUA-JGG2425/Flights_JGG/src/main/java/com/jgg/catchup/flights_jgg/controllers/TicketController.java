@@ -1,6 +1,5 @@
 package com.jgg.catchup.flights_jgg.controllers;
 
-import com.jgg.catchup.flights_jgg.models.entities.Passenger;
 import com.jgg.catchup.flights_jgg.models.entities.Ticket;
 import com.jgg.catchup.flights_jgg.services.TicketService;
 import org.springframework.beans.factory.annotation.Autowired;

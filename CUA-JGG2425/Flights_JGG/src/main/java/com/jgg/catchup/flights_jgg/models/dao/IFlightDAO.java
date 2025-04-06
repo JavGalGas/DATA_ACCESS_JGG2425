@@ -12,12 +12,12 @@ import java.util.Optional;
 @Repository
 public interface IFlightDAO extends CrudRepository<Flight, String> {
 
-    @Query(value = "SELECT DISTINCT (flights.source) from flights", nativeQuery = true)
+    @Query(value = "SELECT * FROM get_all_sources()", nativeQuery = true)
     Optional<List<String>> findAllSources();
 
-    @Query(value = "SELECT DISTINCT (flights.destination) from flights where flights.source = :source", nativeQuery = true)
+    @Query(value = "SELECT * FROM get_destinations_by_source(:source)", nativeQuery = true)
     Optional<List<String>> findAllDestinationsBySource(@Param("source") String source);
 
-    @Query(value = "SELECT * FROM flights where flights.source = :source and flights.destination = :destination", nativeQuery = true)
+    @Query(value = "SELECT * FROM get_flights_by_source_and_destination(:source, :destination)", nativeQuery = true)
     Optional<List<Flight>> findAllFlightsBySourceAndDestination(@Param("source") String source, @Param("destination") String destination);
 }
