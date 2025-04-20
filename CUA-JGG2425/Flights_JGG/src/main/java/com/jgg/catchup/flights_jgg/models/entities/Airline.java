@@ -1,32 +1,27 @@
 package com.jgg.catchup.flights_jgg.models.entities;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
-
-import java.util.LinkedHashSet;
-import java.util.Set;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 
 @Entity
 @Table(name = "airlines")
 public class Airline {
     @Id
+    @Size(max = 3)
+    @NotBlank
     @Column(name = "airlineid", nullable = false, length = 3)
     private String airlineid;
 
+    @Size(max = 50)
+    @NotBlank
     @Column(name = "name", nullable = false, length = 50)
     private String name;
 
+    @Size(max = 3)
     @Column(name = "shortcode", length = 3)
     private String shortcode;
-
-    @OneToMany(mappedBy = "airlineid")
-    @JsonIgnoreProperties("airlineid")
-    private Set<com.jgg.catchup.flights_jgg.models.entities.Contain> contains = new LinkedHashSet<>();
-
-    @OneToMany(mappedBy = "airlineid")
-    @JsonIgnoreProperties("airlineid")
-    private Set<com.jgg.catchup.flights_jgg.models.entities.Flight> flights = new LinkedHashSet<>();
 
     public String getAirlineid() {
         return airlineid;
@@ -50,22 +45,6 @@ public class Airline {
 
     public void setShortcode(String shortcode) {
         this.shortcode = shortcode;
-    }
-
-    public Set<com.jgg.catchup.flights_jgg.models.entities.Contain> getContains() {
-        return contains;
-    }
-
-    public void setContains(Set<com.jgg.catchup.flights_jgg.models.entities.Contain> contains) {
-        this.contains = contains;
-    }
-
-    public Set<com.jgg.catchup.flights_jgg.models.entities.Flight> getFlights() {
-        return flights;
-    }
-
-    public void setFlights(Set<com.jgg.catchup.flights_jgg.models.entities.Flight> flights) {
-        this.flights = flights;
     }
 
 }

@@ -1,60 +1,68 @@
 package com.jgg.catchup.flights_jgg.models.entities;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
-
-import java.util.LinkedHashSet;
-import java.util.Set;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 
 @Entity
 @Table(name = "flights")
 public class Flight {
     @Id
+    @Size(max = 10)
+    @NotBlank
     @Column(name = "flight_code", nullable = false, length = 10)
     private String flightCode;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "source", nullable = false)
-    @JsonIgnoreProperties("departing_flights")
-    private Airport source;
+    @Size(max = 4)
+    @NotBlank
+    @Column(name = "source", nullable = false)
+    private String source;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "destination", nullable = false)
-    @JsonIgnoreProperties("incoming_flights")
-    private Airport destination;
+    @Size(max = 4)
+    @NotBlank
+    @Column(name = "destination", nullable = false)
+    private String destination;
 
+    @Size(max = 10)
+    @NotBlank
     @Column(name = "arrival", nullable = false, length = 10)
     private String arrival;
 
+    @Size(max = 10)
+    @NotBlank
     @Column(name = "departure", nullable = false, length = 10)
     private String departure;
 
+    @Size(max = 10)
     @Column(name = "status", length = 10)
     private String status;
 
+    @Min(0)
     @Column(name = "duration")
     private Integer duration;
 
+    @Size(max = 10)
     @Column(name = "flight_type", length = 10)
     private String flightType;
 
+    @Min(0)
     @Column(name = "layover_time")
     private Integer layoverTime;
 
+    @Min(0)
     @Column(name = "no_of_stops")
     private Integer noOfStops;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "airlineid", nullable = false)
-    @JsonIgnoreProperties("flights")
-    private Airline airlineid;
+    @Size(max = 3)
+    @NotBlank
+    @Column(name = "airlineid", nullable = false)
+    private String airlineid;
 
+    @Min(0)
     @Column(name = "seats")
     private Integer seats;
-
-    @OneToMany(mappedBy = "flightCode")
-    @JsonIgnoreProperties("flightCode")
-    private Set<com.jgg.catchup.flights_jgg.models.entities.Ticket> tickets = new LinkedHashSet<>();
 
     public String getFlightCode() {
         return flightCode;
@@ -64,19 +72,19 @@ public class Flight {
         this.flightCode = flightCode;
     }
 
-    public Airport getSource() {
+    public String getSource() {
         return source;
     }
 
-    public void setSource(Airport source) {
+    public void setSource(String source) {
         this.source = source;
     }
 
-    public Airport getDestination() {
+    public String getDestination() {
         return destination;
     }
 
-    public void setDestination(Airport destination) {
+    public void setDestination(String destination) {
         this.destination = destination;
     }
 
@@ -136,11 +144,11 @@ public class Flight {
         this.noOfStops = noOfStops;
     }
 
-    public Airline getAirlineid() {
+    public String getAirlineid() {
         return airlineid;
     }
 
-    public void setAirlineid(Airline airlineid) {
+    public void setAirlineid(String airlineid) {
         this.airlineid = airlineid;
     }
 
@@ -150,14 +158,6 @@ public class Flight {
 
     public void setSeats(Integer seats) {
         this.seats = seats;
-    }
-
-    public Set<com.jgg.catchup.flights_jgg.models.entities.Ticket> getTickets() {
-        return tickets;
-    }
-
-    public void setTickets(Set<com.jgg.catchup.flights_jgg.models.entities.Ticket> tickets) {
-        this.tickets = tickets;
     }
 
 }

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Ticket Selling Point</title>
+</head>
+<body>
+    <div class="container">
+        <h1>Ticket Selling Point</h1>
+        <div class="ticket_form_container">
+            <form th:object="ticket" th:method="post" th:action="@{/ticket_sale}">
+                <div class="ticket_form">
+                    <label for="flight_passport">Ticket Number</label>
+                    <input type="text" name="flight_passport" id="flight_passport"
+                           th:field="${ticket.passportno}" required>
+                </div>
+                <div class="ticket_form">
+                    <label for="flight_date">Flight Date:</label>
+                    <input type="date" id="flight_date" name="flight_date"
+                           th:field="${ticket.dateOfTravel}" required>
+                </div>
+                <div class="ticket_form">
+                    <label for="flight_origin">Origin:</label>
+                    <select name="origin" id="flight_origin" onchange="changeOrigin()" required>
+                        <option value="" th:selected="${selected_origin != null}"></option>
+                        <option th:each="source : ${sources}"
+                                th:value="${source.code}"
+                                th:text="${source.title}"
+                                th:selected="${selected_origin != null and selected_origin == source.code}">
+                        </option>
+                    </select>
+                </div>
+                <div class="ticket_form">
+                    <label for="flight_destination">Destination:</label>
+                    <select name="destination" id="flight_destination" onchange="changeDestination()" required>
+                        <option value="" selected="selected"></option>
+                        <option th:each="destination : ${destinations}"
+                                th:value="${destination.code}"
+                                th:text="${destination.title}"
+                                th:selected="${selected_destination != null and selected_destination == destination.code}">
+                        </option>
+                    </select>
+                </div>
+                <div class="ticket_form">
+                    <label for="flight">Flight:</label>
+                    <select name="flight" id="flight" th:field="${ticket.flightCode}" required>
+                        <option value="" selected="selected"></option>
+                        <option th:each="flight : ${flights}"
+                                th:value="${flight.code}"
+                                th:text="${flight.title}">
+                        </option>
+                    </select>
+                </div>
+                <div class="ticket_button">
+                    <button type="submit" >Submit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

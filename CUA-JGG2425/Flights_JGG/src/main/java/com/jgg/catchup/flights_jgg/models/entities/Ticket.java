@@ -1,9 +1,8 @@
 package com.jgg.catchup.flights_jgg.models.entities;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import org.hibernate.annotations.DynamicInsert;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
 
@@ -17,27 +16,24 @@ public class Ticket {
     @Column(name = "ticket_number", nullable = false)
     private Integer id;
 
-    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+    @NotNull
     @Column(name = "date_of_booking", nullable = false)
     private LocalDate dateOfBooking;
 
-    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+    @NotNull
     @Column(name = "date_of_travel", nullable = false)
     private LocalDate dateOfTravel;
 
-    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     @Column(name = "date_of_cancellation")
     private LocalDate dateOfCancellation;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "passportno", nullable = false)
-    @JsonIgnoreProperties("tickets")
-    private Passenger passportno;
+    @NotNull
+    @Column(name = "passportno", nullable = false)
+    private String passportno;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "flight_code", nullable = false)
-    @JsonIgnoreProperties("tickets")
-    private Flight flightCode;
+    @NotNull
+    @Column(name = "flight_code", nullable = false)
+    private String flightCode;
 
     @Column(name = "price")
     private Integer price;
@@ -74,19 +70,19 @@ public class Ticket {
         this.dateOfCancellation = dateOfCancellation;
     }
 
-    public Passenger getPassportno() {
+    public String getPassportno() {
         return passportno;
     }
 
-    public void setPassportno(Passenger passportno) {
+    public void setPassportno(String passportno) {
         this.passportno = passportno;
     }
 
-    public Flight getFlightCode() {
+    public String getFlightCode() {
         return flightCode;
     }
 
-    public void setFlightCode(Flight flightCode) {
+    public void setFlightCode(String flightCode) {
         this.flightCode = flightCode;
     }
 

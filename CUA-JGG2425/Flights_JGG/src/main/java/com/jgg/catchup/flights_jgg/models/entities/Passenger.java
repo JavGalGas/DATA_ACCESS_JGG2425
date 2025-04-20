@@ -1,45 +1,45 @@
 package com.jgg.catchup.flights_jgg.models.entities;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Size;
 import org.hibernate.annotations.DynamicInsert;
-
-import java.util.LinkedHashSet;
-import java.util.Set;
 
 @DynamicInsert
 @Entity
 @Table(name = "passengers")
 public class Passenger {
     @Id
-    @Max(10)
+    @Size(max = 10)
+    @NotBlank
     @Column(name = "passportno", nullable = false, length = 10)
     private String passportno;
 
-    @Max(20)
+    @Size(max = 20)
+    @NotBlank
     @Column(name = "firstname", nullable = false, length = 20)
     private String firstname;
 
-    @Max(20)
+    @Size(max = 20)
+    @NotBlank
     @Column(name = "lastname", nullable = false, length = 20)
     private String lastname;
 
-    @Max(100)
+    @Size(max = 100)
     @Column(name = "address", length = 100)
     private String address;
 
-    @Max(12)
+    @Size(min = 7, max = 12)
+    @Pattern(regexp = "\\d{7,12}", message = "Phone must be between 7 and 12 digits")
     @Column(name = "phone", length = 12)
     private String phone;
 
-    @Max(1)
+    @Size(max = 1)
+    @Pattern(regexp = "[MF]", message = "Sex must be 'M' or 'F'")
     @Column(name = "sex", length = 1)
     private String sex;
-
-    @OneToMany(mappedBy = "passportno")
-    @JsonIgnoreProperties("passportno")
-    private Set<com.jgg.catchup.flights_jgg.models.entities.Ticket> tickets = new LinkedHashSet<>();
 
     public String getPassportno() {
         return passportno;
@@ -87,14 +87,6 @@ public class Passenger {
 
     public void setSex(String sex) {
         this.sex = sex;
-    }
-
-    public Set<com.jgg.catchup.flights_jgg.models.entities.Ticket> getTickets() {
-        return tickets;
-    }
-
-    public void setTickets(Set<com.jgg.catchup.flights_jgg.models.entities.Ticket> tickets) {
-        this.tickets = tickets;
     }
 
 }
