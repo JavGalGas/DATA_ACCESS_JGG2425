@@ -2,7 +2,9 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ticket Selling Point</title>
+    <link rel="stylesheet" type="text/css" href="/static/styles.css">
 </head>
 <body>
     <div class="container">
@@ -10,14 +12,18 @@
         <div class="ticket_form_container">
             <form th:object="ticket" th:method="post" th:action="@{/ticket_sale}">
                 <div class="ticket_form">
-                    <label for="flight_passport">Ticket Number</label>
+                    <label for="flight_passport">Passport:</label>
                     <input type="text" name="flight_passport" id="flight_passport"
-                           th:field="${ticket.passportno}" required>
+                           th:field="${ticket.passportno}"
+                           minlength="3"
+                           required>
                 </div>
                 <div class="ticket_form">
                     <label for="flight_date">Flight Date:</label>
                     <input type="date" id="flight_date" name="flight_date"
-                           th:field="${ticket.dateOfTravel}" required>
+                           th:field="${ticket.dateOfTravel}"
+                           th:attr="min=${#dates.format(#dates.createNow(), 'yyyy-MM-dd')}"
+                           required>
                 </div>
                 <div class="ticket_form">
                     <label for="flight_origin">Origin:</label>
@@ -32,8 +38,11 @@
                 </div>
                 <div class="ticket_form">
                     <label for="flight_destination">Destination:</label>
-                    <select name="destination" id="flight_destination" onchange="changeDestination()" required>
-                        <option value="" selected="selected"></option>
+                    <select name="destination" id="flight_destination"
+                            onchange="changeDestination()"
+                            th:disabled="${selected_origin == null}"
+                            required>
+                        <option value="" th:selected="${selected_destination != null}"></option>
                         <option th:each="destination : ${destinations}"
                                 th:value="${destination.code}"
                                 th:text="${destination.title}"
@@ -43,7 +52,10 @@
                 </div>
                 <div class="ticket_form">
                     <label for="flight">Flight:</label>
-                    <select name="flight" id="flight" th:field="${ticket.flightCode}" required>
+                    <select name="flight" id="flight"
+                            th:field="${ticket.flightCode}"
+                            th:disabled="${selected_destination == null}"
+                            required>
                         <option value="" selected="selected"></option>
                         <option th:each="flight : ${flights}"
                                 th:value="${flight.code}"
@@ -52,10 +64,44 @@
                     </select>
                 </div>
                 <div class="ticket_button">
-                    <button type="submit" >Submit</button>
+                    <button type="submit">Submit</button>
                 </div>
             </form>
+            <div th:if="${message}" id="message-container">
+                <p id="message-text" th:text="${message}" th:class="${theme != null ? theme + '-theme' : 'default-theme'}"></p>
+            </div>
         </div>
     </div>
+    <script>
+        window.onload = function () {
+            const origin = document.getElementById("flight_origin").value;
+            const destination = document.getElementById("flight_destination").value;
+            const destinationSelect = document.getElementById("flight_destination");
+            const flightSelect = document.getElementById("flight");
+
+            destinationSelect.disabled = (origin === "");
+            flightSelect.disabled = (origin === "" || destination === "");
+        };
+
+        function changeOrigin() {
+            const origin = document.getElementById("flight_origin").value;
+            if (origin === "") {
+                window.location.href = "/ticket_sale";
+            } else {
+                window.location.href = `/ticket_sale?selectedOrigin=${origin}`;
+            }
+        }
+
+        function changeDestination() {
+            const origin = document.getElementById("flight_origin").value;
+            const destination = document.getElementById("flight_destination").value;
+
+            if (destination === "") {
+                window.location.href = `/ticket_sale?selectedOrigin=${origin}`;
+            } else {
+                window.location.href = `/ticket_sale?selectedOrigin=${origin}&selectedDestination=${destination}`;
+            }
+        }
+    </script>
 </body>
 </html>

@@ -85,3 +85,67 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
+------------------------------------------------------------------------------------------------------------------------
+
+CREATE OR REPLACE FUNCTION public.can_buy_ticket(
+    passport_no_param VARCHAR,
+    flight_code_param VARCHAR,
+    travel_date_param DATE
+)
+RETURNS TABLE(can_buy BOOLEAN, reason VARCHAR) AS $$
+DECLARE
+    has_existing_ticket BOOLEAN;
+    available_seats INTEGER;
+    flight_exists BOOLEAN;
+    current_date_var DATE := CURRENT_DATE;
+    error_messages TEXT := '';
+BEGIN
+    -- 1. Check if the flight exists
+    SELECT EXISTS (
+        SELECT 1
+        FROM flights
+        WHERE flight_code = flight_code_param
+    ) INTO flight_exists;
+
+    IF NOT flight_exists THEN
+        error_messages := error_messages || 'Flight ' || flight_code_param || ' does not exist.' || E'\n';
+    END IF;
+
+    -- 2. Check if the travel date is in the future
+    IF travel_date_param <= current_date_var THEN
+        error_messages := error_messages || 'Travel date must be in the future (after ' || current_date_var || ').' || E'\n';
+    END IF;
+
+    -- 3. Check for existing ticket
+    IF travel_date_param > current_date_var THEN
+        SELECT EXISTS (
+            SELECT 1
+            FROM public.get_existing_tickets_for_passenger(passport_no_param, travel_date_param)
+        ) INTO has_existing_ticket;
+
+        IF has_existing_ticket THEN
+            error_messages := error_messages || 'Passenger already has a ticket for this date.' || E'\n';
+        END IF;
+    END IF;
+
+    -- 4. Check available seats
+    IF flight_exists THEN
+        available_seats := public.get_available_seats(flight_code_param);
+
+        IF available_seats <= 0 THEN
+            error_messages := error_messages || 'No available seats for this flight.' || E'\n';
+        END IF;
+    END IF;
+
+    -- Final decision
+    IF error_messages <> '' THEN
+        can_buy := FALSE;
+        reason := TRIM(TRAILING E'\n' FROM error_messages);
+    ELSE
+        can_buy := TRUE;
+        reason := 'Ticket can be purchased';
+    END IF;
+
+    RETURN NEXT;
+END;
+$$ LANGUAGE plpgsql;

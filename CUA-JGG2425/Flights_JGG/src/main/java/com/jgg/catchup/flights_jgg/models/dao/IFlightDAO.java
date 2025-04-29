@@ -1,6 +1,5 @@
 package com.jgg.catchup.flights_jgg.models.dao;
 
-import com.jgg.catchup.flights_jgg.models.dto.DropDownMenuOptionDTO;
 import com.jgg.catchup.flights_jgg.models.entities.Flight;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
@@ -21,4 +20,5 @@ public interface IFlightDAO extends CrudRepository<Flight, String> {
 
     @Query(value = "SELECT * FROM get_flights_by_source_and_destination(:source, :destination)", nativeQuery = true)
     Optional<List<Object[]>> findAllFlightsBySourceAndDestination(@Param("source") String source, @Param("destination") String destination);
+
 }

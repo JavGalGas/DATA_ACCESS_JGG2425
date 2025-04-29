@@ -1,0 +1,118 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(to bottom, #00006c, #0078f3, #5a85ff);
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 800px;
+    height: 500px;
+    background: #d7d7d7;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+.ticket_form {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.ticket_form label {
+    width: 30%;
+    font-size: 16px;
+    text-align: right;
+    margin-right: 10px;
+}
+
+.ticket_form select,
+.ticket_form input[type="text"],
+.ticket_form input[type="tel"],
+.ticket_form input[type="email"],
+.ticket_form input[type="date"]{
+    width: 65%;
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+.ticket_form select:focus,
+.ticket_form input[type="text"]:focus,
+.ticket_form input[type="tel"]:focus,
+.ticket_form input[type="email"]:focus,
+.ticket_form input[type="date"]:focus {
+    outline: 2px solid #5a85ff;
+}
+
+.ticket_form_container button {
+    width: 80%;
+    padding: 10px;
+    margin-top: 5px;
+    font-size: 16px;
+    font-weight: bold;
+    background-color: #0078f3;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.ticket_form_container button:hover {
+    background-color: #5a85ff;
+}
+
+.ticket_form_container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+.ticket_button {
+    display: flex;
+    justify-content: center;
+}
+
+#message-container {
+    background: linear-gradient(to bottom, #0078f3, #5a85ff, #0078f3);
+    border-radius: 12px;
+    padding: 0 20px;
+    margin-top: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-width: 100%;
+    min-width: min-content;
+}
+
+.error-theme{
+    background-image: linear-gradient(to bottom, #d12323, #850000);
+    color: transparent;
+    background-clip: text;
+    -webkit-background-clip: text;
+    font-weight: bold;
+}
+
+.success-theme{
+    background-image: linear-gradient(to bottom, #4CAF50, #4d8b52);
+    color: transparent;
+    background-clip: text;
+    -webkit-background-clip: text;
+    font-weight: bold;
+}

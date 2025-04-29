@@ -2,6 +2,7 @@ package com.jgg.catchup.flights_jgg.models.entities;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import org.hibernate.annotations.DynamicInsert;
 
 import java.time.LocalDate;
@@ -27,10 +28,12 @@ public class Ticket {
     @Column(name = "date_of_cancellation")
     private LocalDate dateOfCancellation;
 
+    @Size(max = 10)
     @NotNull
     @Column(name = "passportno", nullable = false)
     private String passportno;
 
+    @Size(max = 10)
     @NotNull
     @Column(name = "flight_code", nullable = false)
     private String flightCode;
