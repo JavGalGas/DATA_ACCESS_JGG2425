@@ -19,6 +19,7 @@ public interface IFlightDAO extends CrudRepository<Flight, String> {
     Optional<List<Object[]>> findAllDestinationsBySource(@Param("source") String source);
 
     @Query(value = "SELECT * FROM get_flights_by_source_and_destination(:source, :destination)", nativeQuery = true)
-    Optional<List<Object[]>> findAllFlightsBySourceAndDestination(@Param("source") String source, @Param("destination") String destination);
+    Optional<List<Object[]>> findAllFlightsBySourceAndDestination(@Param("source") String source,
+                                                                  @Param("destination") String destination);
 
 }
