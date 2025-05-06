@@ -4,18 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ticket Selling Point</title>
-    <link rel="stylesheet" type="text/css" href="/static/styles.css">
+    <link rel="stylesheet" type="text/css" href="/styles.css">
 </head>
 <body>
     <div class="container">
         <h1>Ticket Selling Point</h1>
         <div class="ticket_form_container">
-            <form th:object="ticket" th:method="post" th:action="@{/ticket_sale}">
+            <form th:object="${ticket}" th:method="post" th:action="@{/ticket_sale}">
                 <div class="ticket_form">
                     <label for="flight_passport">Passport:</label>
                     <input type="text" name="flight_passport" id="flight_passport"
                            th:field="${ticket.passportno}"
                            minlength="3"
+                           maxlength="10"
                            required>
                 </div>
                 <div class="ticket_form">
@@ -88,7 +89,7 @@
             if (origin === "") {
                 window.location.href = "/ticket_sale";
             } else {
-                window.location.href = `/ticket_sale?selectedOrigin=${origin}`;
+                window.location.href = `/ticket_sale?selected_origin=${origin}`;
             }
         }
 
@@ -97,9 +98,9 @@
             const destination = document.getElementById("flight_destination").value;
 
             if (destination === "") {
-                window.location.href = `/ticket_sale?selectedOrigin=${origin}`;
+                window.location.href = `/ticket_sale?selected_origin=${origin}`;
             } else {
-                window.location.href = `/ticket_sale?selectedOrigin=${origin}&selectedDestination=${destination}`;
+                window.location.href = `/ticket_sale?selected_origin=${origin}&selected_destination=${destination}`;
             }
         }
     </script>

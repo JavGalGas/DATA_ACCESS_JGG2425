@@ -1,6 +1,7 @@
 package com.jgg.catchup.flights_jgg.models.entities;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import org.hibernate.annotations.DynamicInsert;
@@ -38,6 +39,7 @@ public class Ticket {
     @Column(name = "flight_code", nullable = false)
     private String flightCode;
 
+    @Min(value = 0)
     @Column(name = "price")
     private Integer price;
 

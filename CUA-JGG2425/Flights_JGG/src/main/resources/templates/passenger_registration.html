@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Passenger Registration</title>
+    <link rel="stylesheet" type="text/css" href="/styles.css">
+</head>
+<body>
+<div class="container">
+    <h1>Passenger Registration</h1>
+    <div class="ticket_form_container">
+        <form th:object="${passenger}" th:method="post" th:action="@{/passenger_registration}">
+            <div class="ticket_form">
+                <label for="passportno">Passport Number:</label>
+                <input type="text" id="passportno" name="passportno"
+                       th:field="*{passportno}"
+                       minlength="3"
+                       maxlength="10"
+                       required>
+            </div>
+            <div class="ticket_form">
+                <label for="firstname">First Name:</label>
+                <input type="text" id="firstname" name="firstname"
+                       th:field="*{firstname}"
+                       required>
+            </div>
+            <div class="ticket_form">
+                <label for="lastname">Last Name:</label>
+                <input type="text" id="lastname" name="lastname"
+                       th:field="*{lastname}"
+                       required>
+            </div>
+            <div class="ticket_form">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email"
+                       th:field="*{email}"
+                       required>
+            </div>
+            <div class="ticket_button">
+                <button type="submit">Register</button>
+            </div>
+        </form>
+        <div th:if="${message}" id="message-container">
+            <p id="message-text" th:text="${message}" th:class="${theme != null ? theme + '-theme' : 'default-theme'}"></p>
+        </div>
+    </div>
+</div>
+</body>
+</html>

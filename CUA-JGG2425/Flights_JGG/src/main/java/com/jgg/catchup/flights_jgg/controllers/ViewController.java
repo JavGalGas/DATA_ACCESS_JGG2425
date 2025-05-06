@@ -1,6 +1,7 @@
 package com.jgg.catchup.flights_jgg.controllers;
 
 import com.jgg.catchup.flights_jgg.models.dto.DropDownMenuOptionDTO;
+import com.jgg.catchup.flights_jgg.models.entities.Passenger;
 import com.jgg.catchup.flights_jgg.models.entities.Ticket;
 import com.jgg.catchup.flights_jgg.services.FlightService;
 import com.jgg.catchup.flights_jgg.services.PassengerService;
@@ -15,7 +16,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Controller
 public class ViewController {
@@ -74,7 +77,46 @@ public class ViewController {
             return "index";
         }
 
+        Object result = ticketService.saveTicket(ticket);
+        List<String> stringList = new ArrayList<>();
+        if (result instanceof List<?>) {
+            List<?> tempList = (List<?>) result;
+            boolean allStrings = tempList.stream().allMatch(objectString -> objectString instanceof String);
+            if (allStrings) {
+                stringList = tempList.stream()
+                        .map(objectString -> (String) objectString)
+                        .collect(Collectors.toList());
+            }
+        }
 
+        if (stringList.size() == 1 && stringList.contains(TicketService.PASSENGER_DOES_NOT_EXIST)) {
+            return "redirect:/passenger_registration";
+        } else if (!stringList.isEmpty()) {
+            model.addAttribute("message", stringList);
+            model.addAttribute("theme", "error");
+        } else {
+            model.addAttribute("message", result.toString());
+            model.addAttribute("theme", "success");
+        }
         return "index";
     }
+
+//    @GetMapping("/passenger_registration")
+//    public String passengerRegistration(Model model) {
+//        model.addAttribute("passenger", new Passenger());
+//
+//        return "passenger_registration";
+//    }
+//
+//    @PostMapping("/passenger_registration")
+//    public String registerPassenger(
+//            Model model,
+//            @ModelAttribute Passenger passenger,
+//            BindingResult binding
+//    ){
+//        return "passenger_registration";
+//    }
+
+
+
 }
