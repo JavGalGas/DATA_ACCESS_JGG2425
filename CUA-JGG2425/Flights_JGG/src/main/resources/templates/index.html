@@ -14,15 +14,15 @@
                 <div class="ticket_form">
                     <label for="flight_passport">Passport:</label>
                     <input type="text" name="flight_passport" id="flight_passport"
-                           th:field="${ticket.passportno}"
-                           minlength="3"
+                           th:field="*{passportno}"
+                           minlength="6"
                            maxlength="10"
                            required>
                 </div>
                 <div class="ticket_form">
                     <label for="flight_date">Flight Date:</label>
                     <input type="date" id="flight_date" name="flight_date"
-                           th:field="${ticket.dateOfTravel}"
+                           th:field="*{dateOfTravel}"
                            th:attr="min=${#dates.format(#dates.createNow(), 'yyyy-MM-dd')}"
                            required>
                 </div>
@@ -54,7 +54,7 @@
                 <div class="ticket_form">
                     <label for="flight">Flight:</label>
                     <select name="flight" id="flight"
-                            th:field="${ticket.flightCode}"
+                            th:field="*{flightCode}"
                             th:disabled="${selected_destination == null}"
                             required>
                         <option value="" selected="selected"></option>
@@ -65,8 +65,22 @@
                     </select>
                 </div>
                 <div class="ticket_button">
-                    <button type="submit">Submit</button>
+                    <label for="confirm">
+                        <button type="button">Buy</button>
+                    </label>
                 </div>
+                <input type="checkbox" id="confirm">
+
+                <div class="modal">
+                    <div class="modal-content">
+                        <h2>Are you sure about it?</h2>
+                        <button type="submit">Confirm</button>
+                        <label for="confirm">
+                            <button type="button">Cancel</button>
+                        </label>
+                    </div>
+                </div>
+
             </form>
             <div th:if="${message}" id="message-container">
                 <p id="message-text" th:text="${message}" th:class="${theme != null ? theme + '-theme' : 'default-theme'}"></p>
@@ -74,6 +88,31 @@
         </div>
     </div>
     <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const buyButton = document.querySelector('.ticket_button button');
+            const confirmCheckbox = document.getElementById('confirm');
+            const cancelButton = document.querySelector('.modal-content label button');
+
+            if (buyButton && confirmCheckbox) {
+                buyButton.addEventListener('click', function(e) {
+                    const form = document.querySelector('form');
+                    if (form.checkValidity()) {
+                        e.preventDefault();
+                        confirmCheckbox.checked = true;
+                    } else {
+                        form.reportValidity();
+                    }
+                });
+            }
+
+            if (cancelButton && confirmCheckbox) {
+                cancelButton.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    confirmCheckbox.checked = false;
+                });
+            }
+        });
+
         window.onload = function () {
             const origin = document.getElementById("flight_origin").value;
             const destination = document.getElementById("flight_destination").value;
@@ -86,22 +125,61 @@
 
         function changeOrigin() {
             const origin = document.getElementById("flight_origin").value;
-            if (origin === "") {
-                window.location.href = "/ticket_sale";
-            } else {
-                window.location.href = `/ticket_sale?selected_origin=${origin}`;
+            const passportno = document.getElementById("flight_passport").value;
+            const date_of_travel = document.getElementById("flight_date").value;
+
+            let url = "/ticket_sale";
+            const params = [];
+
+            if (origin !== "") {
+                params.push(`selected_origin=${origin}`);
             }
+
+            if (passportno !== "") {
+                params.push(`passportno=${passportno}`);
+            }
+
+            if (date_of_travel !== "") {
+                params.push(`date_of_travel=${date_of_travel}`);
+            }
+
+            if (params.length > 0) {
+                url += "?" + params.join("&");
+            }
+
+            window.location.href = url;
         }
 
         function changeDestination() {
             const origin = document.getElementById("flight_origin").value;
             const destination = document.getElementById("flight_destination").value;
+            const passportno = document.getElementById("flight_passport").value;
+            const date_of_travel = document.getElementById("flight_date").value;
 
-            if (destination === "") {
-                window.location.href = `/ticket_sale?selected_origin=${origin}`;
-            } else {
-                window.location.href = `/ticket_sale?selected_origin=${origin}&selected_destination=${destination}`;
+            let url = "/ticket_sale";
+            const params = [];
+
+            if (origin !== "") {
+                params.push(`selected_origin=${origin}`);
             }
+
+            if (destination !== "") {
+                params.push(`selected_destination=${destination}`);
+            }
+
+            if (passportno !== "") {
+                params.push(`passportno=${passportno}`);
+            }
+
+            if (date_of_travel !== "") {
+                params.push(`date_of_travel=${date_of_travel}`);
+            }
+
+            if (params.length > 0) {
+                url += "?" + params.join("&");
+            }
+
+            window.location.href = url;
         }
     </script>
 </body>

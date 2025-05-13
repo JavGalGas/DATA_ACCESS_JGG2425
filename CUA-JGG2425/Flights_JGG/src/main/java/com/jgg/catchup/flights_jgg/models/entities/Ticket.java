@@ -3,8 +3,10 @@ package com.jgg.catchup.flights_jgg.models.entities;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 import org.hibernate.annotations.DynamicInsert;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
 
@@ -19,18 +21,22 @@ public class Ticket {
     private Integer id;
 
     @NotNull
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Column(name = "date_of_booking", nullable = false)
     private LocalDate dateOfBooking;
 
     @NotNull
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Column(name = "date_of_travel", nullable = false)
     private LocalDate dateOfTravel;
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Column(name = "date_of_cancellation")
     private LocalDate dateOfCancellation;
 
     @Size(max = 10)
     @NotNull
+    @Pattern(regexp = "^[A-Z0-9]{6,9}$\n", message = "Passport number must be in a valid format")
     @Column(name = "passportno", nullable = false)
     private String passportno;
 

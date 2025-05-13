@@ -2,7 +2,6 @@ package com.jgg.catchup.flights_jgg.models.entities;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 import org.hibernate.annotations.DynamicInsert;
@@ -14,6 +13,7 @@ public class Passenger {
     @Id
     @Size(max = 10)
     @NotBlank
+    @Pattern(regexp = "^[A-Z0-9]{6,9}$\n", message = "Passport number must be in a valid format")
     @Column(name = "passportno", nullable = false, length = 10)
     private String passportno;
 

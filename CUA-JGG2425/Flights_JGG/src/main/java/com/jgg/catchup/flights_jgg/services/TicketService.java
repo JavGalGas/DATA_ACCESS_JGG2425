@@ -55,11 +55,14 @@ public class TicketService {
             errors.add(PASSENGER_DOES_NOT_EXIST);
         }
 
-        Optional<Object[]> result = ticketDAO.canBuyTicket(ticket.getPassportno(), ticket.getFlightCode(), ticket.getDateOfTravel());
-        if (result.isPresent()) {
+        Optional<Object> result = ticketDAO.canBuyTicket(ticket.getPassportno(), ticket.getFlightCode(), ticket.getDateOfTravel());
+        if (result.isPresent() && result.get() instanceof Object[] && ((Object[]) result.get()).length == 2) {
+            Object[] resultArray = (Object[]) result.get();
+            boolean canBuy = (boolean) resultArray[0];
+            String reason = (String) resultArray[1];
             resultOptionDTO = new ResultOptionDTO(
-                    (boolean) result.get()[0],
-                    (String) result.get()[1]
+                    canBuy,
+                    reason
             );
             if(!resultOptionDTO.getCan_buy()) {
                 errors.add(TICKET_CHECKING_ERROR);

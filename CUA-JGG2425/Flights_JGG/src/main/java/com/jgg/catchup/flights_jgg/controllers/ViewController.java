@@ -7,6 +7,7 @@ import com.jgg.catchup.flights_jgg.services.FlightService;
 import com.jgg.catchup.flights_jgg.services.PassengerService;
 import com.jgg.catchup.flights_jgg.services.TicketService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -34,9 +36,19 @@ public class ViewController {
     public String index(
             Model model,
             @RequestParam(value = "selected_origin", required = false) String origin,
-            @RequestParam(value = "selected_destination", required = false) String destination
+            @RequestParam(value = "selected_destination", required = false) String destination,
+            @RequestParam(value = "passportno", required = false) String passportno,
+            @RequestParam(value = "date_of_travel", required = false)
+            @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate dateOfTravel
     ) {
-        model.addAttribute("ticket", new Ticket());
+        Ticket ticket = new Ticket();
+        if (passportno != null && !passportno.isEmpty()) {
+            ticket.setPassportno(passportno);
+        }
+        if (dateOfTravel != null) {
+            ticket.setDateOfTravel(dateOfTravel);
+        }
+        model.addAttribute("ticket", ticket);
         model.addAttribute("sources", flightService.findAllSources());
         String selected_origin = null;
         String selected_destination = null;
@@ -90,7 +102,7 @@ public class ViewController {
         }
 
         if (stringList.size() == 1 && stringList.contains(TicketService.PASSENGER_DOES_NOT_EXIST)) {
-            return "redirect:/passenger_registration";
+            return "redirect:/passenger_registration?passportno=" + ticket.getPassportno();
         } else if (!stringList.isEmpty()) {
             model.addAttribute("message", stringList);
             model.addAttribute("theme", "error");
@@ -101,21 +113,27 @@ public class ViewController {
         return "index";
     }
 
-//    @GetMapping("/passenger_registration")
-//    public String passengerRegistration(Model model) {
-//        model.addAttribute("passenger", new Passenger());
-//
-//        return "passenger_registration";
-//    }
-//
-//    @PostMapping("/passenger_registration")
-//    public String registerPassenger(
-//            Model model,
-//            @ModelAttribute Passenger passenger,
-//            BindingResult binding
-//    ){
-//        return "passenger_registration";
-//    }
+    @GetMapping("/passenger_registration")
+    public String passengerRegistration(
+            Model model,
+            @RequestParam(value = "passportno", required = true) String passportno) {
+        Passenger passenger = new Passenger();
+        if (passportno != null && !passportno.isEmpty()) {
+            passenger.setPassportno(passportno);
+        }
+        model.addAttribute("passenger", passenger);
+
+        return "passenger_registration";
+    }
+
+    @PostMapping("/passenger_registration")
+    public String registerPassenger(
+            Model model,
+            @ModelAttribute Passenger passenger,
+            BindingResult binding
+    ){
+        return "passenger_registration";
+    }
 
 
 
