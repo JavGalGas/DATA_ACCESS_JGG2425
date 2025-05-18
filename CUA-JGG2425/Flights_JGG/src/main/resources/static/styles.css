@@ -26,7 +26,7 @@ h1 {
     height: 500px;
     background: #d7d7d7;
     border-radius: 10px;
-    overflow: hidden;
+    overflow-y: auto;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
 }
 
@@ -110,11 +110,12 @@ h1 {
 }
 
 .error-theme{
-    background-image: linear-gradient(to bottom, #d12323, #850000);
+    background-image: linear-gradient(to bottom, #ff4444, #d12323);
     color: transparent;
     background-clip: text;
     -webkit-background-clip: text;
     font-weight: bold;
+    white-space: pre-line;
 }
 
 .success-theme{
@@ -122,6 +123,11 @@ h1 {
     color: transparent;
     background-clip: text;
     -webkit-background-clip: text;
+    font-weight: bold;
+    white-space: pre-line;
+}
+
+.default-theme {
     font-weight: bold;
 }
 

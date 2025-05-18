@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Passenger Registration</title>
-    <link rel="stylesheet" type="text/css" href="/styles.css">
+    <link rel="stylesheet" type="text/css" href="/flights-api-rest/styles.css">
 </head>
 <body>
 <div class="container">
@@ -15,7 +15,7 @@
                 <label for="passportno">Passport Number:</label>
                 <input type="text" id="passportno" name="passportno"
                        th:field="*{passportno}"
-                       minlength="3"
+                       minlength="6"
                        maxlength="10"
                        required readonly>
             </div>
@@ -23,24 +23,29 @@
                 <label for="firstname">First Name:</label>
                 <input type="text" id="firstname" name="firstname"
                        th:field="*{firstname}"
+                       maxlength="20"
                        required>
             </div>
             <div class="ticket_form">
                 <label for="lastname">Last Name:</label>
                 <input type="text" id="lastname" name="lastname"
                        th:field="*{lastname}"
+                       maxlength="20"
                        required>
             </div>
             <div class="ticket_form">
                 <label for="address">Address:</label>
                 <input type="text" id="address" name="address"
                        th:field="*{address}"
+                       maxlength="100"
                        required>
             </div>
             <div class="ticket_form">
                 <label for="phone">Phone:</label>
                 <input type="text" id="phone" name="phone"
                        th:field="*{phone}"
+                       minlength="7"
+                       maxlength="12"
                        required>
             </div>
             <div class="ticket_button">

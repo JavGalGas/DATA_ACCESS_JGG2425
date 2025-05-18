@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ticket Selling Point</title>
-    <link rel="stylesheet" type="text/css" href="/styles.css">
+    <link rel="stylesheet" type="text/css" href="/flights-api-rest/styles.css">
 </head>
 <body>
     <div class="container">
@@ -26,6 +26,9 @@
                            th:attr="min=${#dates.format(#dates.createNow(), 'yyyy-MM-dd')}"
                            required>
                 </div>
+
+                <input type="hidden" th:field="*{dateOfBooking}" />
+
                 <div class="ticket_form">
                     <label for="flight_origin">Origin:</label>
                     <select name="origin" id="flight_origin" onchange="changeOrigin()" required>
@@ -57,13 +60,19 @@
                             th:field="*{flightCode}"
                             th:disabled="${selected_destination == null}"
                             required>
-                        <option value="" selected="selected"></option>
+                        <option value="" th:selected="${selected_flight != null}"></option>
                         <option th:each="flight : ${flights}"
                                 th:value="${flight.code}"
-                                th:text="${flight.title}">
+                                th:text="${flight.title}"
+                                th:selected="${selected_flight != null and selected_flight == flight.code}">
                         </option>
                     </select>
                 </div>
+
+                <input type="hidden" name="origin_code" id="origin_code" th:value="${selected_origin}" />
+                <input type="hidden" name="destination_code" id="destination_code" th:value="${selected_destination}" />
+                <input type="hidden" name="flight_code" id="flight_code" th:value="${selected_flight}" />
+
                 <div class="ticket_button">
                     <label for="confirm">
                         <button type="button">Buy</button>
@@ -111,6 +120,31 @@
                     confirmCheckbox.checked = false;
                 });
             }
+
+            const originSelect = document.getElementById('flight_origin');
+            const destinationSelect = document.getElementById('flight_destination');
+            const flightSelect = document.getElementById('flight');
+            const originCodeInput = document.getElementById('origin_code');
+            const destinationCodeInput = document.getElementById('destination_code');
+            const flightCodeInput = document.getElementById('flight_code');
+
+            if (originSelect && originCodeInput) {
+                originSelect.addEventListener('change', function() {
+                    originCodeInput.value = this.value;
+                });
+            }
+
+            if (destinationSelect && destinationCodeInput) {
+                destinationSelect.addEventListener('change', function() {
+                    destinationCodeInput.value = this.value;
+                });
+            }
+
+            if (flightSelect && flightCodeInput) {
+                flightSelect.addEventListener('change', function() {
+                    flightCodeInput.value = this.value;
+                });
+            }
         });
 
         window.onload = function () {
@@ -128,7 +162,7 @@
             const passportno = document.getElementById("flight_passport").value;
             const date_of_travel = document.getElementById("flight_date").value;
 
-            let url = "/ticket_sale";
+            let url = "/flights-api-rest/ticket_sale";
             const params = [];
 
             if (origin !== "") {
@@ -156,7 +190,7 @@
             const passportno = document.getElementById("flight_passport").value;
             const date_of_travel = document.getElementById("flight_date").value;
 
-            let url = "/ticket_sale";
+            let url = "/flights-api-rest/ticket_sale";
             const params = [];
 
             if (origin !== "") {
