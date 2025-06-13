@@ -8,12 +8,13 @@
     <property name="connection.driver_class">org.postgresql.Driver</property>
     <property name="connection.username">postgres</property>
     <property name="connection.password">postgres</property>
-    <mapping class="com.jgg.catchup.flights_jgg.models.entities.Airline"/>
-    <mapping class="com.jgg.catchup.flights_jgg.models.entities.Airport"/>
-    <mapping class="com.jgg.catchup.flights_jgg.models.entities.City"/>
-    <mapping class="com.jgg.catchup.flights_jgg.models.entities.Flight"/>
-    <mapping class="com.jgg.catchup.flights_jgg.models.entities.Passenger"/>
-    <mapping class="com.jgg.catchup.flights_jgg.models.entities.Ticket"/>
+    <mapping class="com.jgg.catchup.flights_jgg_javafx.models.entities.Airline"/>
+      <mapping class="com.jgg.catchup.flights_jgg_javafx.models.entities.Airport"/>
+      <mapping class="com.jgg.catchup.flights_jgg_javafx.models.entities.City"/>
+      <mapping class="com.jgg.catchup.flights_jgg_javafx.models.entities.Flight"/>
+      <mapping class="com.jgg.catchup.flights_jgg_javafx.models.entities.Passenger"/>
+      <mapping class="com.jgg.catchup.flights_jgg_javafx.models.entities.Ticket"/>
+
     <!-- DB schema will be updated if needed -->
     <!-- <property name="hibernate.hbm2ddl.auto">update</property> -->
   </session-factory>

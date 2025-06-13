@@ -1,5 +1,8 @@
 package com.jgg.catchup.flights_jgg.controllers;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.jgg.catchup.flights_jgg.models.dto.DropDownMenuOptionDTO;
 import com.jgg.catchup.flights_jgg.models.entities.Flight;
 import com.jgg.catchup.flights_jgg.models.entities.Passenger;
@@ -36,6 +39,8 @@ public class ViewController {
     private PassengerService passengerService;
     @Autowired
     private TicketService ticketService;
+    @Autowired
+    private ObjectMapper objectMapper;
 
     @GetMapping("/ticket_sale")
     public String index(
@@ -125,6 +130,15 @@ public class ViewController {
             }
 
             if (stringList.size() == 1 && stringList.contains(TicketService.PASSENGER_DOES_NOT_EXIST)) {
+                String ticketJSON;
+                try {
+                    ticketJSON = objectMapper.writeValueAsString(ticket);
+                } catch (JsonProcessingException exception) {
+                    String errorMessage = String.join("Error while handling ticket: ", exception.getMessage());
+                    redirectAttributes.addFlashAttribute("message", errorMessage);
+                    return redirectTicketAttrib(redirectAttributes, passportno, dateOfTravel, origin, destination, flightCode);
+                }
+                redirectAttributes.addFlashAttribute("ticket", ticketJSON);
                 return "redirect:/passenger_registration?passportno=" + passportno;
             } else if (!stringList.isEmpty()) {
                 String errorMessage = String.join("\n", stringList);
@@ -170,10 +184,30 @@ public class ViewController {
     @GetMapping("/passenger_registration")
     public String passengerRegistration(
             Model model,
-            @RequestParam(value = "passportno", required = true) String passportno) {
+            @RequestParam(value = "passportno", required = false) String passportno,
+            @RequestParam(value = "firstname", required = false) String firstname,
+            @RequestParam(value = "lastname", required = false) String lastname,
+            @RequestParam(value = "address", required = false) String address,
+            @RequestParam(value = "phone", required = false) String phone
+            ) {
         Passenger passenger = new Passenger();
         if (passportno != null && !passportno.isEmpty()) {
             passenger.setPassportno(passportno);
+        }
+        if (firstname != null && !firstname.isEmpty()) {
+            passenger.setFirstname(firstname);
+        }
+        if (lastname != null && !lastname.isEmpty()) {
+            passenger.setLastname(lastname);
+        }
+        if (address != null && !address.isEmpty()) {
+            passenger.setAddress(address);
+        }
+        if (phone != null && !phone.isEmpty()) {
+            passenger.setPhone(phone);
+        }
+        if (!model.containsAttribute("ticket")) {
+            model.addAttribute("ticket", "{}");
         }
         model.addAttribute("passenger", passenger);
 
@@ -182,11 +216,51 @@ public class ViewController {
 
     @PostMapping("/passenger_registration")
     public String registerPassenger(
-            Model model,
             @ModelAttribute Passenger passenger,
-            BindingResult binding
-    ){
-        return "passenger_registration";
+            @RequestParam("ticketJson") String ticketJson,
+            BindingResult binding,
+            RedirectAttributes redirectAttributes
+            ){
+        if (binding.hasErrors()) {
+            StringBuilder errorMessage = new StringBuilder();
+            for (ObjectError error : binding.getAllErrors()) {
+                if (!errorMessage.isEmpty()) {
+                    errorMessage.append("\n");
+                }
+                errorMessage.append(error.getDefaultMessage());
+            }
+            redirectAttributes.addFlashAttribute("ticket", ticketJson );
+            redirectAttributes.addFlashAttribute("message", "Error de validación:\n" + errorMessage);
+            redirectAttributes.addFlashAttribute("theme", "error");
+            return "redirect:/passenger_registration?passportno=" + passenger.getPassportno();
+        }
+        if (passenger.getAddress() == null || passenger.getAddress().isEmpty()) {
+            passenger.setAddress(null);
+        }
+        if (passenger.getPhone() == null || passenger.getPhone().isEmpty()) {
+            passenger.setPhone(null);
+        }
+        passengerService.savePassenger(passenger);
+        Ticket ticket;
+        try {
+            ticket = objectMapper.readValue(ticketJson, Ticket.class);
+        } catch (JsonProcessingException exception) {
+            redirectAttributes.addFlashAttribute("ticket", ticketJson );
+            redirectAttributes.addFlashAttribute("message", "Error while parsing ticket: " + exception.getMessage());
+            redirectAttributes.addFlashAttribute("theme", "error");
+            return "redirect:/passenger_registration?passportno=" + passenger.getPassportno();
+        }
+        if (ticket != null) {
+            Object result = ticketService.saveTicket(ticket);
+            redirectAttributes.addFlashAttribute("message", result.toString());
+            redirectAttributes.addFlashAttribute("theme", "success");
+            return "redirect:/ticket_sale";
+        } else {
+            redirectAttributes.addFlashAttribute("ticket", ticketJson );
+            redirectAttributes.addFlashAttribute("message", "Ticket hasn't been parsed correctly.");
+            redirectAttributes.addFlashAttribute("theme", "error");
+            return "redirect:/passenger_registration?passportno=" + passenger.getPassportno();
+        }
     }
 
 

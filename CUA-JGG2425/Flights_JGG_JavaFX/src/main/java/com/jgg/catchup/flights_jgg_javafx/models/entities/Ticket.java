@@ -1,51 +1,32 @@
-package com.jgg.catchup.flights_jgg.models.entities;
+package com.jgg.catchup.flights_jgg_javafx.models.entities;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Pattern;
-import jakarta.validation.constraints.Size;
-import org.hibernate.annotations.DynamicInsert;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
 
-@DynamicInsert
 @Entity
 @Table(name = "tickets")
 public class Ticket {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "tickets_id_gen")
-    @SequenceGenerator(name = "tickets_id_gen", sequenceName = "ticket1_ticket_number_seq", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ticket_number", nullable = false)
     private Integer id;
 
-    @NotNull
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Column(name = "date_of_booking", nullable = false)
     private LocalDate dateOfBooking;
 
-    @NotNull
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Column(name = "date_of_travel", nullable = false)
     private LocalDate dateOfTravel;
 
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Column(name = "date_of_cancellation")
     private LocalDate dateOfCancellation;
 
-    @Size(max = 10)
-    @NotNull
-    @Pattern(regexp = "^[A-Z0-9]{6,9}$", message = "Passport number must be in a valid format")
     @Column(name = "passportno", nullable = false)
     private String passportno;
 
-    @Size(max = 10)
-    @NotNull
     @Column(name = "flight_code", nullable = false)
     private String flightCode;
 
-    @Min(value = 0)
     @Column(name = "price")
     private Integer price;
 

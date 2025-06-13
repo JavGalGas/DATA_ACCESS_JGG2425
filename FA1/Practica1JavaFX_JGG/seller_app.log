@@ -1,10 +1,4 @@
-ene 04, 2025 1:35:57 P. M. com.jgg.unit4.practica1javafx_jgg.SellerApplication main
+may 29, 2025 2:15:12 P. M. com.jgg.unit4.practica1javafx_jgg.SellerApplication main
 INFORMACIÓN: Program beginning
-ene 04, 2025 1:36:09 P. M. com.jgg.unit4.practica1javafx_jgg.GenericClassCRUD openSession
-INFORMACIÓN: Opening session
-ene 04, 2025 1:36:09 P. M. com.jgg.unit4.practica1javafx_jgg.controllers.LoginController handleSuccessfulLogin
-INFORMACIÓN: Login Successful!
-ene 04, 2025 1:36:09 P. M. com.jgg.unit4.practica1javafx_jgg.controllers.LoginController loadNextScene
-INFORMACIÓN: Loading screen...
-ene 04, 2025 1:36:09 P. M. com.jgg.unit4.practica1javafx_jgg.GenericClassCRUD openSession
-INFORMACIÓN: Opening session
+may 29, 2025 2:15:22 P. M. com.jgg.unit4.practica1javafx_jgg.controllers.LoginController logAndShowError
+GRAVE: User and Password are Empty!
