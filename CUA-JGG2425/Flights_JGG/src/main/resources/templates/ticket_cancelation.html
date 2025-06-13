@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Cancel Ticket</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="/flights-api-rest/styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Ticket Cancelation</h1>
+        <div class="ticket_form_container">
+            <form th:method="post" th:action="@{/ticket_cancelation}">
+                <div class="ticket_form">
+                    <label for="passportno">Passport Number:</label>
+                    <input type="text" id="passportno" name="passportno"
+                           th:value="${passportno}"
+                           pattern="^[A-Z0-9]{6,9}$"
+                           title="Must have between 6 and 9 characters, only uppercase and numbers."
+                           minlength="6"
+                           maxlength="10"
+                           required>
+                </div>
+                <div class="ticket_form">
+                    <label for="flight_date">Flight Date:</label>
+                    <input type="date" id="flight_date" name="flight_date"
+                           th:value="${dateOfTravel}"
+                           th:attr="min=${#dates.format(#dates.createNow(), 'yyyy-MM-dd')}"
+                           required>
+                </div>
+
+                <div class="ticket_button">
+                    <label for="confirm">
+                        <button type="button">Cancel Ticket</button>
+                    </label>
+                </div>
+                <input type="checkbox" id="confirm">
+
+                <div class="modal">
+                    <div class="modal-content">
+                        <h2>Are you sure about it?</h2>
+                        <button type="submit">Confirm</button>
+                        <label for="confirm">
+                            <button type="button">Cancel</button>
+                        </label>
+                    </div>
+                </div>
+            </form>
+
+            <div th:if="${message}" id="message-container">
+                <p id="message-text" th:text="${message}" th:class="${theme != null ? theme + '-theme' : 'default-theme'}"></p>
+            </div>
+        </div>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const addButton = document.querySelector('.ticket_button button');
+            const confirmCheckbox = document.getElementById('confirm');
+            const cancelButton = document.querySelector('.modal-content label button');
+
+            if (addButton && confirmCheckbox) {
+                addButton.addEventListener('click', function(e) {
+                    const form = document.querySelector('form');
+                    if (form.checkValidity()) {
+                        e.preventDefault();
+                        confirmCheckbox.checked = true;
+                    } else {
+                        form.reportValidity();
+                    }
+                });
+            }
+
+            if (cancelButton && confirmCheckbox) {
+                cancelButton.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    confirmCheckbox.checked = false;
+                });
+            }
+        });
+    </script>
+</body>
+</html>

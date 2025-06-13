@@ -230,7 +230,7 @@ public class ViewController {
                 errorMessage.append(error.getDefaultMessage());
             }
             redirectAttributes.addFlashAttribute("ticket", ticketJson );
-            redirectAttributes.addFlashAttribute("message", "Error de validación:\n" + errorMessage);
+            redirectAttributes.addFlashAttribute("message", "Validation error:\n" + errorMessage);
             redirectAttributes.addFlashAttribute("theme", "error");
             return "redirect:/passenger_registration?passportno=" + passenger.getPassportno();
         }
@@ -261,6 +261,48 @@ public class ViewController {
             redirectAttributes.addFlashAttribute("theme", "error");
             return "redirect:/passenger_registration?passportno=" + passenger.getPassportno();
         }
+    }
+
+    @GetMapping("/ticket_cancelation")
+    public String ticketCancelation(
+            @RequestParam(value = "passportno", required = false) String passportno,
+            @RequestParam(value = "flight_date", required = false)
+            @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate flight_date,
+            Model model
+    ) {
+        if (passportno != null && !passportno.isEmpty()) {
+            model.addAttribute("passportno", passportno);
+        }
+        if (flight_date != null) {
+            model.addAttribute("flight_date", flight_date.format(DateTimeFormatter.ISO_DATE));
+        }
+        return "ticket_cancelation";
+    }
+
+    @PostMapping("/ticket_cancelation")
+    public String cancelTicket(
+            @RequestParam(value = "passportno") String passportno,
+            @RequestParam(value = "flight_date")
+            @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate flight_date,
+            BindingResult binding,
+            RedirectAttributes redirectAttributes
+    ) {
+        if (binding.hasErrors()) {
+            StringBuilder errorMessage = new StringBuilder();
+            for (ObjectError error : binding.getAllErrors()) {
+                if (!errorMessage.isEmpty()) {
+                    errorMessage.append("\n");
+                }
+                errorMessage.append(error.getDefaultMessage());
+            }
+            redirectAttributes.addFlashAttribute("passportno", passportno );
+            redirectAttributes.addFlashAttribute("flight_date", flight_date);
+            redirectAttributes.addFlashAttribute("message", "Error while parsing ticket: " + errorMessage);
+            redirectAttributes.addFlashAttribute("theme", "error");
+            return "redirect:/ticket_cancelation" ;
+        }
+
+        return "redirect:/ticket_cancelation";
     }
 
 

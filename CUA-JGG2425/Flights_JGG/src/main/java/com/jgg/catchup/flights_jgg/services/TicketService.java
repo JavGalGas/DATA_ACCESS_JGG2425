@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PathVariable;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -24,6 +25,8 @@ public class TicketService {
     public static final String TICKET_PASSPORT_NUMBER_REQUIRED = "Ticket passport number is required";
     public static final String PASSENGER_DOES_NOT_EXIST = "Passenger does not exist";
     public static final String TICKET_CHECKING_ERROR = "Error while handling ticket checking:";
+    public static final String TICKET_DOES_NOT_EXIST = "Ticket does not exist";
+    private static final String INCORRECT_FLIGHT_CODE = "Flight code is before current local time";
 
     @Autowired
     private ITicketDAO ticketDAO;
@@ -76,5 +79,33 @@ public class TicketService {
 
         ticketDAO.save(ticket);
         return "Ticket saved successfully.";
+    }
+
+    public Object cancelTicket(String passportno, LocalDate flight_date) {
+        List<String> errors = new ArrayList<>();
+
+        if (passportno == null || passportno.isEmpty()) {
+            errors.add(TICKET_PASSPORT_NUMBER_REQUIRED);
+        }
+        if (flight_date == null) {
+            errors.add(TICKET_FLIGHT_CODE_REQUIRED);
+        }
+        if (flight_date.isBefore(LocalDate.now())) {
+            errors.add(INCORRECT_FLIGHT_CODE);
+        }
+        if (passportno != null) {
+            Optional<List<Ticket>> tickets = ticketDAO.getTicketsByPassportnoAndDateOfTravel(passportno, flight_date);
+
+            if (tickets.isEmpty()) {
+                errors.add(TICKET_DOES_NOT_EXIST);
+            }
+        }
+
+        if (!errors.isEmpty()) {
+            return errors;
+        }
+
+        ticketDAO.cancelTicket(passportno, flight_date, LocalDate.now());
+        return "Ticket updated successfully.";
     }
 }
