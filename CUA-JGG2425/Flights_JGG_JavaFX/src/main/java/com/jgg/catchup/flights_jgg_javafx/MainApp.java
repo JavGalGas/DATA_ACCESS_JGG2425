@@ -8,8 +8,16 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class MainApp extends Application {
+    private static Stage appStage;
+
+    public static Stage getAppStage() {
+        return appStage;
+    }
+
     @Override
     public void start(Stage stage) throws IOException {
+        appStage = stage;
+
         FXMLLoader fxmlLoader = new FXMLLoader(MainApp.class.getResource("ticket_sale_point-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
         stage.setTitle("Ticket Sale Point");

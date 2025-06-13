@@ -1,9 +1,100 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.layout.AnchorPane?>
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="com.jgg.catchup.flights_jgg_javafx.controllers.AddPassengerView"
-            prefHeight="400.0" prefWidth="600.0">
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" stylesheets="@../../../../css/styles.css" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.jgg.catchup.flights_jgg_javafx.controllers.AddPassengerView">
+    <children>
+        <VBox alignment="CENTER" prefHeight="550.0" prefWidth="600.0" spacing="20.0" styleClass="root" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <padding>
+                <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+            </padding>
+
+            <Label fx:id="title" styleClass="title" text="ADD PASSENGER" textFill="WHITE">
+                <font>
+                    <Font name="Lucida Handwriting Italic" size="28.0" />
+                </font>
+            </Label>
+            <VBox alignment="CENTER" maxWidth="560.0" minHeight="300.0" minWidth="560.0" prefHeight="300.0" prefWidth="560.0" spacing="10.0" styleClass="container">
+                <children>
+                    <Label contentDisplay="RIGHT" graphicTextGap="120.0" text="Passport: ">
+                        <graphic>
+                            <TextField editable="false" prefWidth="250.0" promptText="Passenger passport number">
+                                <font>
+                                    <Font name="Montserrat Thin" size="14.0" />
+                                </font>
+                            </TextField>
+                        </graphic>
+                        <font>
+                            <Font name="Montserrat SemiBold Italic" size="24.0" />
+                        </font>
+                    </Label>
+               <Label contentDisplay="RIGHT" graphicTextGap="100.0" layoutX="59.0" layoutY="19.0" text="First Name:">
+                  <graphic>
+                     <TextField prefWidth="250.0" promptText="Passenger first name">
+                        <font>
+                           <Font name="Montserrat Thin" size="14.0" />
+                        </font>
+                     </TextField>
+                  </graphic>
+                  <font>
+                     <Font name="Montserrat SemiBold Italic" size="24.0" />
+                  </font>
+               </Label>
+               <Label contentDisplay="RIGHT" graphicTextGap="105.0" layoutX="59.0" layoutY="292.0" text="Last Name:">
+                  <graphic>
+                     <TextField prefWidth="250.0" promptText="Passenger last name">
+                        <font>
+                           <Font name="Montserrat Thin" size="14.0" />
+                        </font>
+                     </TextField>
+                  </graphic>
+                  <font>
+                     <Font name="Montserrat SemiBold Italic" size="24.0" />
+                  </font>
+               </Label>
+               <Label contentDisplay="RIGHT" graphicTextGap="140.0" layoutX="59.0" layoutY="312.0" text="Address:">
+                  <graphic>
+                     <TextField prefWidth="250.0" promptText="Passenger address">
+                        <font>
+                           <Font name="Montserrat Thin" size="14.0" />
+                        </font>
+                     </TextField>
+                  </graphic>
+                  <font>
+                     <Font name="Montserrat SemiBold Italic" size="24.0" />
+                  </font>
+               </Label>
+               <Label contentDisplay="RIGHT" graphicTextGap="160.0" layoutX="67.0" layoutY="167.0" text="Phone:">
+                  <graphic>
+                     <TextField prefWidth="250.0" promptText="Passenger phone number">
+                        <font>
+                           <Font name="Montserrat Thin" size="14.0" />
+                        </font>
+                     </TextField>
+                  </graphic>
+                  <font>
+                     <Font name="Montserrat SemiBold Italic" size="24.0" />
+                  </font>
+               </Label>
+                    <Button contentDisplay="CENTER" graphicTextGap="10.0" minWidth="60.0" onAction="#onButtonClick" prefHeight="46.0" prefWidth="60.0" text="Add" textAlignment="CENTER">
+                        <font>
+                            <Font size="16.0" />
+                        </font>
+                        <VBox.margin>
+                            <Insets top="20.0" />
+                        </VBox.margin></Button>
+                </children>
+                <VBox.margin>
+                    <Insets />
+                </VBox.margin>
+                <padding>
+                    <Insets left="10.0" />
+                </padding>
+            </VBox>
+        </VBox>
+    </children>
 
 </AnchorPane>

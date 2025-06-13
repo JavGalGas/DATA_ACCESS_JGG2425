@@ -1,14 +1,32 @@
 package com.jgg.catchup.flights_jgg_javafx.controllers;
 
+import com.jgg.catchup.flights_jgg_javafx.models.entities.Ticket;
 import javafx.fxml.FXML;
-import javafx.scene.control.Label;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.DatePicker;
+import javafx.scene.control.TextField;
+
+import java.time.LocalDate;
 
 public class TicketSalePointView {
     @FXML
-    private Label welcomeText;
+    private TextField passportno;
+    @FXML
+    private DatePicker flight_date;
+    @FXML
+    private ComboBox<String> origin;
+    @FXML
+    private ComboBox<String> destination;
+    @FXML
+    private ComboBox<String> flight;
 
     @FXML
     protected void onButtonClick() {
-        welcomeText.setText("Welcome to JavaFX Application!");
+        Ticket ticket = new Ticket();
+        ticket.setPassportno(passportno.getText());
+        ticket.setDateOfBooking(LocalDate.now());
+        ticket.setDateOfTravel(flight_date.getValue());
+        ticket.setFlightCode(flight.getSelectionModel().getSelectedItem());
+
     }
 }

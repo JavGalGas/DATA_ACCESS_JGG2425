@@ -8,62 +8,68 @@
 <AnchorPane stylesheets="@../../../../css/styles.css" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.jgg.catchup.flights_jgg_javafx.controllers.TicketSalePointView">
    <children>
       <VBox alignment="CENTER" prefHeight="550.0" prefWidth="600.0" spacing="20.0" styleClass="root" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-          <padding>
-              <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-          </padding>
-      
-          <Label fx:id="title" styleClass="title" text="TICKET SELLING POINT" textFill="WHITE">
+         <padding>
+            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+         </padding>
+
+         <Label fx:id="title" styleClass="title" text="TICKET SELLING POINT" textFill="WHITE">
             <font>
                <Font name="Lucida Handwriting Italic" size="28.0" />
             </font>
          </Label>
-         <VBox alignment="CENTER" maxWidth="560.0" spacing="10.0" styleClass="container">
+         <VBox alignment="CENTER" maxWidth="560.0" minHeight="300.0" minWidth="560.0" prefHeight="300.0" prefWidth="560.0" spacing="10.0" styleClass="container">
             <children>
-               <Label contentDisplay="RIGHT" graphicTextGap="92.0" text="Passport: ">
+               <Label contentDisplay="RIGHT" graphicTextGap="100.0" text="Passport: ">
                   <graphic>
-                     <TextField prefWidth="250.0" promptText="Ticket passport number" styleClass="input-field">
+                     <TextField fx:id="passportno" prefWidth="250.0" promptText="Ticket passport number">
                         <font>
                            <Font name="Montserrat Thin" size="14.0" />
                         </font>
                      </TextField>
                   </graphic>
                   <font>
-                     <Font name="Montserrat SemiBold Italic" size="18.0" />
+                     <Font name="Montserrat SemiBold Italic" size="24.0" />
                   </font>
                </Label>
-               <Label contentDisplay="RIGHT" graphicTextGap="70.0" text="Flight Date: ">
+               <Label contentDisplay="RIGHT" graphicTextGap="75.0" text="Flight Date: ">
                   <graphic>
-                     <DatePicker prefWidth="250.0" styleClass="input-field" />
+                     <DatePicker fx:id="flight_date" prefWidth="250.0" />
                   </graphic>
                   <font>
-                     <Font name="Montserrat SemiBold Italic" size="18.0" />
+                     <Font name="Montserrat SemiBold Italic" size="24.0" />
                   </font>
                </Label>
-               <Label contentDisplay="RIGHT" graphicTextGap="118.0" text="Origin: ">
+               <Label contentDisplay="RIGHT" graphicTextGap="138.0" text="Origin: ">
                   <graphic>
-                     <ComboBox prefWidth="250.0" styleClass="input-field" visibleRowCount="5" />
+                     <ComboBox fx:id="origin" prefWidth="250.0" visibleRowCount="5" />
                   </graphic>
                   <font>
-                     <Font name="Montserrat SemiBold Italic" size="18.0" />
+                     <Font name="Montserrat SemiBold Italic" size="24.0" />
                   </font>
                </Label>
                <Label contentDisplay="RIGHT" graphicTextGap="68.0" text="Destination: ">
                   <graphic>
-                     <ComboBox prefWidth="250.0" styleClass="input-field" visibleRowCount="5" />
+                     <ComboBox fx:id="destination" prefWidth="250.0" visibleRowCount="5" />
                   </graphic>
                   <font>
-                     <Font name="Montserrat SemiBold Italic" size="18.0" />
+                     <Font name="Montserrat SemiBold Italic" size="24.0" />
                   </font>
                </Label>
-               <Label contentDisplay="RIGHT" graphicTextGap="122.0" text="Flight: ">
+               <Label contentDisplay="RIGHT" graphicTextGap="140.0" text="Flight: ">
                   <graphic>
-                     <ComboBox prefWidth="250.0" styleClass="input-field" visibleRowCount="5" />
+                     <ComboBox fx:id="flight" prefWidth="250.0" visibleRowCount="5" />
                   </graphic>
                   <font>
-                     <Font name="Montserrat SemiBold Italic" size="18.0" />
+                     <Font name="Montserrat SemiBold Italic" size="24.0" />
                   </font>
                </Label>
-                <Button onAction="#onButtonClick" text="Buy" />
+               <Button contentDisplay="CENTER" graphicTextGap="10.0" minWidth="60.0" onAction="#onButtonClick" prefHeight="46.0" prefWidth="60.0" text="Buy" textAlignment="CENTER">
+                  <font>
+                     <Font size="16.0" />
+                  </font>
+                  <VBox.margin>
+                     <Insets top="20.0" />
+                  </VBox.margin></Button>
             </children>
             <VBox.margin>
                <Insets />
