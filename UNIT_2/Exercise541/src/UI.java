@@ -6,17 +6,19 @@ public class UI {
     public static final String UNRECOGNIZED_ANSWER = "Unrecognized answer. Please try again.";
     public static final String NAME_OF_THE_FILE = "Specify the name of the file: ";
     public static final String WRITE_A_LINE = "Write a line: ";
+    public static final String CONFIRMATION = "Y";
+    public static final String NEGATION = "N";
 
     public static Boolean askForOverwrite() {
         Scanner scanner = new Scanner(System.in);
         System.out.println(OVERWRITE_IT);
         System.out.println(YES_NO);
         String answer = scanner.next();
-        while(!(answer.equals("Y") || answer.equals("N"))) {
+        while(!(answer.equals(CONFIRMATION) || answer.equals(NEGATION))) {
             System.out.println(UNRECOGNIZED_ANSWER);
             answer = scanner.next();
         }
-        return answer.equals("N");
+        return answer.equals(NEGATION);
     }
 
     public static String askForFileName() {
