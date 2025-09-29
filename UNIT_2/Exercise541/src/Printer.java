@@ -2,10 +2,15 @@ import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.stream.Stream;
 
 public class Printer {
-        public void executePrinter() {
-            String name = UI.askForFileName() + ".txt";
+
+    public static final String TXT = ".txt";
+    public static final String NEW_LINE = "\\n";
+
+    public void executePrinter() {
+            String name = UI.askForFileName() + TXT;
             boolean overwrite = true;
 
             if(new File (name).exists()) {
@@ -15,12 +20,13 @@ public class Printer {
             try (PrintWriter printWriter =
                          new PrintWriter(new BufferedWriter(new FileWriter(name, overwrite)))) {
                 String line = UI.askForLine();
-                long numLine = Files.lines(Paths.get(name)).count();
-
-                while (!line.equals("\\n")) {
-                    numLine++;
-                    printWriter.println(numLine + "     " + line);
-                    line = UI.askForLine();
+                try(Stream<String> lines = Files.lines(Paths.get(name))) {
+                    long numLines = lines.count();
+                    while (!line.equals(NEW_LINE)) {
+                        numLines++;
+                        printWriter.println(numLines + "     " + line);
+                        line = UI.askForLine();
+                    }
                 }
             }
             catch ( IOException exception) {

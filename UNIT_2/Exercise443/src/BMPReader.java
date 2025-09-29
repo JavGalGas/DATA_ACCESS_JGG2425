@@ -3,20 +3,6 @@ import java.io.IOException;
 
 public class BMPReader {
 
-    private final String filePath;
-    private int fileSize;
-    private int bitMapInfoHeaderSize;
-    private int width;
-    private int height;
-    private int numPlanes;
-    private int numBitsPixel;
-    private String compressionType;
-    private int imgSize;
-    private int horizontalResolution;
-    private int verticalResolution;
-    private int numColors;
-    private int numImportantColors;
-
     private static final byte[] BMP_SIGNATURE = {(byte) 0x42, (byte) 0x4D};
     private static final int FILE_SIZE_OFFSET = 2;
     private static final int BITMAP_INFO_HEADER_SIZE_OFFSET = 14;
@@ -31,9 +17,22 @@ public class BMPReader {
     private static final int NUM_COLORS_OFFSET = 46;
     private static final int NUM_IMPORTANT_COLORS_OFFSET = 50;
 
+    private final String filePath;
+    private int fileSize;
+    private int bitMapInfoHeaderSize;
+    private int width;
+    private int height;
+    private int numPlanes;
+    private int numBitsPixel;
+    private String compressionType;
+    private int imgSize;
+    private int horizontalResolution;
+    private int verticalResolution;
+    private int numColors;
+    private int numImportantColors;
+
     BMPReader(String filePath) {
         this.filePath = filePath;
-
     }
 
     public int getFileSize() {
