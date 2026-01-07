@@ -3,13 +3,14 @@ package com.jgg2425.da.unit5.springemployeeexample.config;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+import org.apache.commons.codec.digest.DigestUtils;
+
 
 import static org.springframework.security.config.Customizer.withDefaults;
 
@@ -38,10 +39,19 @@ public class SecurityConfig {
         return manager;
     }
 
-    // Bean for password hacker
     @Bean
     public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
+        return new PasswordEncoder() {
+            @Override
+            public String encode(CharSequence rawPassword) {
+                return DigestUtils.md5Hex(rawPassword.toString()).toUpperCase();
+            }
+
+            @Override
+            public boolean matches(CharSequence rawPassword, String encodedPassword) {
+                return encode(rawPassword).equals(encodedPassword);
+            }
+        };
     }
 
     // Setting up the safety chain
@@ -72,8 +82,7 @@ public class SecurityConfig {
                     .logoutRequestMatcher(new AntPathRequestMatcher("/logout", "POST"))
                     .logoutSuccessUrl("/login?logout") // Redirection after logout (Must control that with ViewController)
                     .invalidateHttpSession(true) // Invalidate session
-                    .deleteCookies("JSESSIONID") // Clear session cookies
-                    .permitAll()
+                    .clearAuthentication(true)  // Clears session's authentication
             )
 
             // Enable Basic Authentication (Optional)
